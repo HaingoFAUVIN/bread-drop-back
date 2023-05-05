@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ScheduleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,16 @@ class Schedule
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bakery::class, mappedBy="schedule")
+     */
+    private $bakeries;
+
+    public function __construct()
+    {
+        $this->bakeries = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +149,36 @@ class Schedule
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Bakery>
+     */
+    public function getBakeries(): Collection
+    {
+        return $this->bakeries;
+    }
+
+    public function addBakery(Bakery $bakery): self
+    {
+        if (!$this->bakeries->contains($bakery)) {
+            $this->bakeries[] = $bakery;
+            $bakery->setSchedule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBakery(Bakery $bakery): self
+    {
+        if ($this->bakeries->removeElement($bakery)) {
+            // set the owning side to null (unless already changed)
+            if ($bakery->getSchedule() === $this) {
+                $bakery->setSchedule(null);
+            }
+        }
 
         return $this;
     }

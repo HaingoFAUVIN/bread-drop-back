@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,28 @@ class Product
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Bakery::class, mappedBy="product")
+     */
+    private $bakeries;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Order::class, inversedBy="products")
+     */
+    private $order_;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="product")
+     */
+    private $categories;
+
+    public function __construct()
+    {
+        $this->bakeries = new ArrayCollection();
+        $this->order_ = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,4 +164,86 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Bakery>
+     */
+    public function getBakeries(): Collection
+    {
+        return $this->bakeries;
+    }
+
+    public function addBakery(Bakery $bakery): self
+    {
+        if (!$this->bakeries->contains($bakery)) {
+            $this->bakeries[] = $bakery;
+            $bakery->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBakery(Bakery $bakery): self
+    {
+        if ($this->bakeries->removeElement($bakery)) {
+            $bakery->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrder(): Collection
+    {
+        return $this->order_;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->order_->contains($order)) {
+            $this->order_[] = $order;
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        $this->order_->removeElement($order);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getProduct() === $this) {
+                $category->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -67,6 +67,11 @@ class User
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="users")
+     */
+    private $order_;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +193,18 @@ class User
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getOrder(): ?Order
+    {
+        return $this->order_;
+    }
+
+    public function setOrder(?Order $order_): self
+    {
+        $this->order_ = $order_;
 
         return $this;
     }

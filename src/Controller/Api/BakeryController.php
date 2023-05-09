@@ -32,6 +32,6 @@ class BakeryController extends AbstractController
 
         if ($bakery === null){return $this->json("message d'erreur",Response::HTTP_NOT_FOUND);}
 
-        return $this->json($bakery, 200, [], ["groups" => ["bakery_read", "product_show"]]);
+        return $this->json($bakery, 200, [], ["groups" => ["bakery_read", "product_show", "categorie_show"]]);
     }
 }

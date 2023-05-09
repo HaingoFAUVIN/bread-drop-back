@@ -20,6 +20,7 @@ class Bakery
      * 
      * @Groups({"bakery_list"})
      * @Groups({"bakery_read"})
+     * @Groups({"bakery_show"})
      */
     private $id;
 
@@ -27,6 +28,7 @@ class Bakery
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"bakery_list"})
+     * @Groups({"bakery_show"})
      */
     private $name;
 
@@ -38,7 +40,7 @@ class Bakery
     private $adress;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=25 )
      */
     private $phone;
 

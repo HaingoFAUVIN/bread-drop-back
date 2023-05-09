@@ -19,6 +19,8 @@ class Product
      * @ORM\Column(type="integer")
      * 
      * @Groups({"product_show"})
+     * @Groups({"product_list"})
+     * @Groups({"product_read"})
      */
     private $id;
 
@@ -26,6 +28,8 @@ class Product
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"product_show"})
+     * @Groups({"product_list"})
+     * @Groups({"product_read"})
      */
     private $name;
 
@@ -33,6 +37,7 @@ class Product
      * @ORM\Column(type="float")
      * 
      * @Groups({"product_show"})
+     * @Groups({"product_list"})
      */
     private $price;
 
@@ -44,7 +49,8 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"product_show"})
+     * @Groups({"product_list"})
+     * @Groups({"product_read"})
      */
     private $description;
 
@@ -52,6 +58,7 @@ class Product
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"product_show"})
+     * @Groups({"product_list"})
      */
     private $picture;
 
@@ -67,6 +74,8 @@ class Product
 
     /**
      * @ORM\ManyToMany(targetEntity=Bakery::class, mappedBy="product")
+     * 
+     * @Groups({"product_list"})
      */
     private $bakeries;
 
@@ -76,15 +85,17 @@ class Product
     private $order_;
 
     /**
-     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="product")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * 
+     * @Groups({"product_show"})
+     * @Groups({"product_list"})
      */
-    private $categories;
+    private $category;
 
     public function __construct()
     {
         $this->bakeries = new ArrayCollection();
         $this->order_ = new ArrayCollection();
-        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,32 +238,14 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategories(): Collection
+    public function getCategory(): ?Category
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function addCategory(Category $category): self
+    public function setCategory(?Category $category): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getProduct() === $this) {
-                $category->setProduct(null);
-            }
-        }
+        $this->category = $category;
 
         return $this;
     }

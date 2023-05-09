@@ -55,11 +55,6 @@ class Bakery
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Schedule::class, inversedBy="bakeries")
-     */
-    private $schedule;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="bakeries")
      */
     private $product;
@@ -69,9 +64,15 @@ class Bakery
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
+     */
+    private $schedule;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
+        $this->schedule = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,18 +164,6 @@ class Bakery
         return $this;
     }
 
-    public function getSchedule(): ?Schedule
-    {
-        return $this->schedule;
-    }
-
-    public function setSchedule(?Schedule $schedule): self
-    {
-        $this->schedule = $schedule;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Product>
      */
@@ -207,6 +196,36 @@ class Bakery
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Schedule>
+     */
+    public function getSchedule(): Collection
+    {
+        return $this->schedule;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedule->contains($schedule)) {
+            $this->schedule[] = $schedule;
+            $schedule->setBakery($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedule->removeElement($schedule)) {
+            // set the owning side to null (unless already changed)
+            if ($schedule->getBakery() === $this) {
+                $schedule->setBakery(null);
+            }
+        }
 
         return $this;
     }

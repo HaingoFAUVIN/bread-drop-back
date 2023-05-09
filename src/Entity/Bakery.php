@@ -30,7 +30,7 @@ class Bakery
     private $adress;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=25)
      */
     private $phone;
 

@@ -77,7 +77,10 @@ Voici quelques captures et contenus fournis, pour entrevoir les fonctionnalités
       - composer require fzaninotto/faker
 
     g- Installation de la bibliothèque bundle Faker pour gégérer de fausses données de photos
-     - composer require bluemmb/faker-picsum-photos-provider
+     - composer require bluemmb/faker-picsum-photos-provider ^2.0
+
+    h- On installe FakerPHP avec Composer
+     - composer require fakerphp/faker
 
 
 ### Base de données

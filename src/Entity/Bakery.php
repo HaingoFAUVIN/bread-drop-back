@@ -6,6 +6,7 @@ use App\Repository\BakeryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BakeryRepository::class)
@@ -16,31 +17,40 @@ class Bakery
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"bakery_list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"bakery_list"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $adress;
 
     /**
      * @ORM\Column(type="integer")
+     * 
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"bakery_list"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
      */
     private $distance;
 
@@ -56,11 +66,14 @@ class Bakery
 
     /**
      * @ORM\ManyToOne(targetEntity=Schedule::class, inversedBy="bakeries")
+     * 
+     * @Groups({"bakery_list"})
      */
     private $schedule;
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="bakeries")
+     * 
      */
     private $product;
 

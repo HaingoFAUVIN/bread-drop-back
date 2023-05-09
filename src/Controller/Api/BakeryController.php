@@ -14,24 +14,70 @@ use Symfony\Component\Routing\Annotation\Route;
 class BakeryController extends AbstractController
 {
     /**
+     * renvoit la liste des boulangerie
+     * 
      * @Route("", name="browse", methods={"GET"})
      */
     public function browse(BakeryRepository $bakeryRepository): JsonResponse
     {
         $allBakeries = $bakeryRepository->findAll();
 
-        return $this->json($allBakeries, 200, [], ["groups" => ["bakery_list", "schedule_show"]] );
+        return $this->json(
+            // les donnée a renvoyer : la transformation en json est automatique
+            $allBakeries,
+            // code HTTP
+            200,
+            //pas d'entêtes particulière
+            [],
+            // contexte
+            [
+                "groups" =>
+                [
+                    //je veut les propriété de ses groupes
+                    "bakery_list", 
+                    "schedule_show"
+                ]
+            ] 
+        );
     }
 
     /**
+     * renvoit une boulangerie spécifique
+     * 
      * @Route("/{id}", name="read", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function read($id, BakeryRepository $bakeryRepository): JsonResponse
     {
         $bakery = $bakeryRepository->find($id);
 
-        if ($bakery === null){return $this->json("message d'erreur",Response::HTTP_NOT_FOUND);}
+        //gestion de la 404
+        if ($bakery === null)
+        {   //renvoi du json
+            return $this->json(
+                //les données à renvoyer : la transformation en json est automatique
+                "Boulangerie non trouvé",
+                // 2. code HTTP : 404
+                Response::HTTP_NOT_FOUND
+            );
+        }
 
-        return $this->json($bakery, 200, [], ["groups" => ["bakery_read", "product_show", "categorie_show"]]);
+        return $this->json(
+            // les données à renvoyer : la transformation en json est automatique
+            $bakery,
+            // code HTTP
+            200, 
+            // 3. pas d'entêtes particulière
+            [], 
+            //le contexte
+            [
+                "groups" => 
+                [
+                    //je veut les propriété de ses groupes
+                    "bakery_read", 
+                    "product_show", 
+                    "categorie_show"
+                ]
+            ]
+        );
     }
 }

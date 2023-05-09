@@ -73,6 +73,9 @@ Voici quelques captures et contenus fournis, pour entrevoir les fonctionnalités
     e- Démarrage du serveur
       - php -S 0.0.0.0:8000 -t public : le serveur démarré et site accessible
 
+    d- Installation de la bibliothèque bundle Faker pour gégérer de fausses données
+    - composer require fzaninotto/faker
+
 ### Base de données
 
    - Nom de la base : bread_drop

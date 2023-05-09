@@ -6,6 +6,7 @@ use App\Repository\ScheduleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ScheduleRepository::class)
@@ -16,31 +17,45 @@ class Schedule
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"schedule_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=8, nullable=true)
+     * 
+     * @Groups({"schedule_show"})
      */
     private $day;
 
     /**
      * @ORM\Column(type="time", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
+     * 
      */
     private $openMorning;
 
     /**
      * @ORM\Column(type="time", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
+     * 
      */
     private $closeMorning;
 
     /**
      * @ORM\Column(type="time", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
      */
     private $openAfternoon;
 
     /**
      * @ORM\Column(type="time", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
      */
     private $closeAfternoon;
 
@@ -55,14 +70,10 @@ class Schedule
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Bakery::class, mappedBy="schedule")
+     * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="schedule")
+     * 
      */
-    private $bakeries;
-
-    public function __construct()
-    {
-        $this->bakeries = new ArrayCollection();
-    }
+    private $bakery;
 
     public function getId(): ?int
     {
@@ -153,32 +164,14 @@ class Schedule
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bakery>
-     */
-    public function getBakeries(): Collection
+    public function getBakery(): ?Bakery
     {
-        return $this->bakeries;
+        return $this->bakery;
     }
 
-    public function addBakery(Bakery $bakery): self
+    public function setBakery(?Bakery $bakery): self
     {
-        if (!$this->bakeries->contains($bakery)) {
-            $this->bakeries[] = $bakery;
-            $bakery->setSchedule($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBakery(Bakery $bakery): self
-    {
-        if ($this->bakeries->removeElement($bakery)) {
-            // set the owning side to null (unless already changed)
-            if ($bakery->getSchedule() === $this) {
-                $bakery->setSchedule(null);
-            }
-        }
+        $this->bakery = $bakery;
 
         return $this;
     }

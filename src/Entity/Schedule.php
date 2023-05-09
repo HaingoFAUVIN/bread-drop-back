@@ -55,14 +55,9 @@ class Schedule
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Bakery::class, mappedBy="schedule")
+     * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="schedule")
      */
-    private $bakeries;
-
-    public function __construct()
-    {
-        $this->bakeries = new ArrayCollection();
-    }
+    private $bakery;
 
     public function getId(): ?int
     {
@@ -153,32 +148,14 @@ class Schedule
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bakery>
-     */
-    public function getBakeries(): Collection
+    public function getBakery(): ?Bakery
     {
-        return $this->bakeries;
+        return $this->bakery;
     }
 
-    public function addBakery(Bakery $bakery): self
+    public function setBakery(?Bakery $bakery): self
     {
-        if (!$this->bakeries->contains($bakery)) {
-            $this->bakeries[] = $bakery;
-            $bakery->setSchedule($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBakery(Bakery $bakery): self
-    {
-        if ($this->bakeries->removeElement($bakery)) {
-            // set the owning side to null (unless already changed)
-            if ($bakery->getSchedule() === $this) {
-                $bakery->setSchedule(null);
-            }
-        }
+        $this->bakery = $bakery;
 
         return $this;
     }

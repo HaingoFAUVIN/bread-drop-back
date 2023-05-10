@@ -17,7 +17,7 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
 
         // si on veut toujours le même hasard (valeur numérique !)
-        // $faker->seed(2023);
+        $faker->seed(2023);
 
         // on donne à Faker le nouveau Provider qu'on a requis pour les images random
         $faker->addProvider(new PicsumPhotosProvider($faker));
@@ -44,39 +44,35 @@ class AppFixtures extends Fixture
 
         }
 
+        $allAdmins = [];
+        // Création de 20 gérants de boulangerie
+        for ($j = 0; $j < 20; $j++) {
+            $userAdmin = new User();
+            $userAdmin->setFirstname($faker->firstNameMale);
+            $userAdmin->setLastname($faker->lastName);                                  
+            // admin, via bin/console security:hash-password
+            $userAdmin->setPassword($faker->password);
+            $userAdmin->setRole("ROLE_ADMIN"); // PHP => JSON
+            $userAdmin->setAdress($faker->address);
+            $userAdmin->setEmail($faker->email);
+            $userAdmin->setPhone($faker->unique()->numerify('##########'));
+            $userAdmin->setPicture($faker->imageUrl(450, 300, true));
+            $userAdmin->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+            $manager->persist($userAdmin);
+
+            // On ajoute l'entité à sa liste
+            $allAdmins[] = $userAdmin;
+        }
+
+        // on mélange les gérants
+        // et on ira piocher la 1, 2, 3, 4 etc.
+        // afin de ne pas avoir de doublon !
+        shuffle($allAdmins);
+
         // Création de 20 boulangeries
         $allBakeries = [];
-        for ($i = 0; $i < 20; $i++) {
-
-            $allAdmins = [];
-            // Création de 20 gérants de boulangerie
-            for ($j = 0; $j < 20; $j++) {
-                $userAdmin = new User();
-                $userAdmin->setFirstname($faker->firstNameMale);
-                $userAdmin->setLastname($faker->lastName);                                  
-                // admin, via bin/console security:hash-password
-                $userAdmin->setPassword($faker->password);
-                $userAdmin->setRole("ROLE_ADMIN"); // PHP => JSON
-                $userAdmin->setAdress($faker->address);
-                $userAdmin->setEmail($faker->email);
-                $userAdmin->setPhone($faker->unique()->numerify('##########'));
-                $userAdmin->setPicture($faker->imageUrl(450, 300, true));
-                $userAdmin->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
-
-                // Affecter un utilisateur à une boulangerie en récupérant les informations passées dans addReference
-                // $bakery->setUser($this->getReference('bakery'. $i));
-                // $bakery->setUser($this->getReference('bakery'. $i));
-
-                $manager->persist($userAdmin);
-                // On ajoute l'entité à sa liste
-                $allAdmins[] = $userAdmin;
-            }
-
-            // on mélange les gérants
-            // et on ira piocher la 1, 2, 3, 4 etc.
-            // afin de ne pas avoir de doublon !
-            // shuffle($allAdmins);
-
+        for ($k = 0; $k < 20; $k++) {
            // Bakery
            $bakery = new Bakery();
            $bakery->setName($faker->company);
@@ -87,20 +83,10 @@ class AppFixtures extends Fixture
            $bakery->setDistance(mt_rand(0, 25)); // Distance de recherche entre 0 et 25km
            $bakery->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            // la personne à l'index $c, pas de doublon grâce au shuffle plus haut
-            // $bakery->setUser($allAdmins[$i]);
-            $bakery->setUser($allAdmins[$i]);
+            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            $bakery->setUser($allAdmins[$k]);
 
            $manager->persist($bakery);
-
-            // Récupérer un des objets de la fixture
-            // Cette méthode attend deux paramètres
-            // Le premier est un nom qui doit être unique ! 
-            // Sinon, il écraserait l'ancienne donnée et la remplacerait par la nouvelle. 
-            // On va concaténer le mot bakery à ma variable "$i" de manière à être sûr d'avoir des noms différents : "bakery-0, bakery-1, bakery-2, ...". 
-            // En second paramètre, on ajoute l'objet à enregistrer.
-        //    $this->addReference('bakery'. $i, $bakery);
-
 
         }
 

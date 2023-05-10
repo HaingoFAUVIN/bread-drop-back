@@ -61,26 +61,27 @@ Voici quelques captures et contenus fournis, pour entrevoir les fonctionnalités
         - rmdir ./bread-drop/
         - composer require webapp
 
-    b- Installation de la gestion d'authentification
-      - composer require "lexik/jwt-authentication-bundle"
-    
-    c- Installation de la gestion de sécurité
-      - composer require symfony/security-bundle
-
-    d- Installation de la gestion de fausses données
-      - composer require --dev orm-fixtures
-
-    e- Démarrage du serveur
+    b- Démarrage du serveur
       - php -S 0.0.0.0:8000 -t public : le serveur démarré et site accessible
 
-    f- Installation de la bibliothèque bundle Faker pour gégérer de fausses données
+    c- Installation de la bibliothèque bundle Faker pour gégérer de fausses données
       - composer require fzaninotto/faker
 
-    g- Installation de la bibliothèque bundle Faker pour gégérer de fausses données de photos
-     - composer require bluemmb/faker-picsum-photos-provider ^2.0
+    d- Installation de la bibliothèque bundle Faker pour gégérer de fausses données de photos
+     - composer require bluemmb/faker-picsum-photos-provider
 
-    h- On installe FakerPHP avec Composer
+    e- On installe FakerPHP avec Composer
      - composer require fakerphp/faker
+
+    f- Installation de la gestion d'authentification
+      - composer require "lexik/jwt-authentication-bundle"
+      - bin/console lexik:jwt:generate-keypair
+    
+    g- Installation de la gestion de sécurité
+      - composer require symfony/security-bundle
+
+    h- Installation de la gestion de fausses données
+      - composer require --dev orm-fixtures
 
 
 ### Base de données

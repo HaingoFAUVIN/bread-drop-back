@@ -5,12 +5,15 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            # user de type Doctrine
+            entity:
+                # classe qui correspond au user
+                class: App\Entity\User
+                # identifiant de connexion
+                property: email
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
         login:
             pattern: ^/api/login
             stateless: true
@@ -24,9 +27,13 @@ security:
             stateless: true
             jwt: ~
 
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
 
             # custom_authenticator: App\Security\LoginApiAuthenticator
             
@@ -47,9 +54,7 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/boulangerie, roles: ROLE_ADMIN }
-        - { path: ^/api/produit, roles: ROLE_ADMIN }
-
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

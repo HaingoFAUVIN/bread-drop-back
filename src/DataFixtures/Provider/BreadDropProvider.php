@@ -97,14 +97,14 @@ class BreadDropProvider
         'Photo' => 'https://assets.afcdn.com/recipe/20160928/21224_w1024h768c1cx2128cy1416.jpg'],
         ['Nom'=>'Sandwich Jambon-Beurre',
         'Photo' => 'https://img.plusdebonsplans.com/2017/03/prix-moyen-sandwich-jambon-beurre.jpg'],
-        ['Nom'=>'',
-        'Photo' => ''],
-        ['Nom'=>'',
-        'Photo' => ''],
-        ['Nom'=>'',
-        'Photo' => ''],
-        ['Nom'=>'',
-        'Photo' => ''],
+        ['Nom'=>'Sandwich baguette au prosciutto et brie',
+        'Photo' => 'https://bing.com/th?id=AMMS_235fa95c5e599f1c1ce20eba10e81b2c'],
+        ['Nom'=>'Sandwich français à la brique pressée',
+        'Photo' => 'https://th.bing.com/th/id/R.8922558fd29920fb7f3ef7433b29970d?rik=HswYPDPD7ORjqw&pid=ImgRaw&r=0'],
+        ['Nom'=>'Sandwich à la trempette française',
+        'Photo' => 'https://bing.com/th?id=AMMS_c0b962bd6a67c0329f204ff9363959fc'],
+        ['Nom'=>'Croissants au Gruyère',
+        'Photo' => 'https://bing.com/th?id=OSK.0c6c48218a8df5ac42842c91ed63f052'],
     ];
 
     /**

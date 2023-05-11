@@ -82,12 +82,9 @@ class Bakery
 
     /**
      * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
-<<<<<<< HEAD
-=======
      * 
      * @Groups({"bakery_list"})
      * 
->>>>>>> api
      */
     private $schedule;
 

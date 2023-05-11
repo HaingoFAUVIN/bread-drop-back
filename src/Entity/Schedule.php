@@ -71,10 +71,6 @@ class Schedule
 
     /**
      * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="schedule")
-<<<<<<< HEAD
-=======
-     * 
->>>>>>> api
      */
     private $bakery;
 

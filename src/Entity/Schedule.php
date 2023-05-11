@@ -25,22 +25,22 @@ class Schedule
     private $day;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $openMorning;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $closeMorning;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $openAfternoon;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $closeAfternoon;
 
@@ -72,54 +72,6 @@ class Schedule
     public function setDay(?string $day): self
     {
         $this->day = $day;
-
-        return $this;
-    }
-
-    public function getOpenMorning(): ?\DateTimeInterface
-    {
-        return $this->openMorning;
-    }
-
-    public function setOpenMorning(?\DateTimeInterface $openMorning): self
-    {
-        $this->openMorning = $openMorning;
-
-        return $this;
-    }
-
-    public function getCloseMorning(): ?\DateTimeInterface
-    {
-        return $this->closeMorning;
-    }
-
-    public function setCloseMorning(?\DateTimeInterface $closeMorning): self
-    {
-        $this->closeMorning = $closeMorning;
-
-        return $this;
-    }
-
-    public function getOpenAfternoon(): ?\DateTimeInterface
-    {
-        return $this->openAfternoon;
-    }
-
-    public function setOpenAfternoon(?\DateTimeInterface $openAfternoon): self
-    {
-        $this->openAfternoon = $openAfternoon;
-
-        return $this;
-    }
-
-    public function getCloseAfternoon(): ?\DateTimeInterface
-    {
-        return $this->closeAfternoon;
-    }
-
-    public function setCloseAfternoon(?\DateTimeInterface $closeAfternoon): self
-    {
-        $this->closeAfternoon = $closeAfternoon;
 
         return $this;
     }

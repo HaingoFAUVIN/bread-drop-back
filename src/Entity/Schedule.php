@@ -30,7 +30,7 @@ class Schedule
     private $day;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
      * 
@@ -38,7 +38,7 @@ class Schedule
     private $openMorning;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
      * 
@@ -46,14 +46,14 @@ class Schedule
     private $closeMorning;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
      */
     private $openAfternoon;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
      */
@@ -91,48 +91,48 @@ class Schedule
         return $this;
     }
 
-    public function getOpenMorning(): ?\DateTimeInterface
+    public function getOpenMorning(): ?int
     {
         return $this->openMorning;
     }
 
-    public function setOpenMorning(?\DateTimeInterface $openMorning): self
+    public function setOpenMorning(?int $openMorning): self
     {
         $this->openMorning = $openMorning;
 
         return $this;
     }
 
-    public function getCloseMorning(): ?\DateTimeInterface
+    public function getCloseMorning(): ?int
     {
         return $this->closeMorning;
     }
 
-    public function setCloseMorning(?\DateTimeInterface $closeMorning): self
+    public function setCloseMorning(?int $closeMorning): self
     {
         $this->closeMorning = $closeMorning;
 
         return $this;
     }
 
-    public function getOpenAfternoon(): ?\DateTimeInterface
+    public function getOpenAfternoon(): ?int
     {
         return $this->openAfternoon;
     }
 
-    public function setOpenAfternoon(?\DateTimeInterface $openAfternoon): self
+    public function setOpenAfternoon(?int $openAfternoon): self
     {
         $this->openAfternoon = $openAfternoon;
 
         return $this;
     }
 
-    public function getCloseAfternoon(): ?\DateTimeInterface
+    public function getCloseAfternoon(): ?int
     {
         return $this->closeAfternoon;
     }
 
-    public function setCloseAfternoon(?\DateTimeInterface $closeAfternoon): self
+    public function setCloseAfternoon(?int $closeAfternoon): self
     {
         $this->closeAfternoon = $closeAfternoon;
 

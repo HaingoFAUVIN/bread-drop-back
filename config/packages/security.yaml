@@ -58,7 +58,7 @@ security:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
 
         # on peut maintenant utiliser les ROLE pour les routes API
-        - { path: ^/api,       roles: PUBLIC_ACCESS }
+        - { path: ^/api,       roles: ROLE_ADMIN }
 
 when@test:
     security:

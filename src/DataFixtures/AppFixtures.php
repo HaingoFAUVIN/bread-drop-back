@@ -10,6 +10,10 @@ use Bluemmb\Faker\PicsumPhotosProvider;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\DataFixtures\Provider\BreadDropProvider;
+use App\Entity\Order;
+use App\Entity\Product;
+use App\Entity\Schedule;
+use Symfony\Component\Validator\Constraints\Unique;
 
 class AppFixtures extends Fixture
 {
@@ -26,7 +30,8 @@ class AppFixtures extends Fixture
         // on lui donne aussi le nôtre
         $faker->addProvider(new BreadDropProvider());
 
-        // 1- Création de 50 personnes : table user
+        // 1 - USER
+        // Création de 50 personnes : table user
         $allPersons = [];
         for ($i = 0; $i < 50; $i++) {
             $user = new User();
@@ -73,10 +78,10 @@ class AppFixtures extends Fixture
         // afin de ne pas avoir de doublon !
         shuffle($allAdmins);
 
+        // 2 - BAKERY
         // Création de 20 boulangeries : table bakery
         $allBakeries = [];
         for ($k = 0; $k < 20; $k++) {
-           // Bakery
            $bakery = new Bakery();
            $bakery->setName($faker->company);
            $bakery->setAdress($faker->address);
@@ -93,14 +98,125 @@ class AppFixtures extends Fixture
 
         }
 
+        // 3- CATEGORY
         // Création des 4 catégories de produits : table category
+        $allCategories = [];
         for ($l = 0; $l < 4; $l++) {
-            // Category
+
             $category = new Category();
             $category->setName($faker->categoriesList[$l]);
             $category->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
             $manager->persist($category);
+
+            // On ajoute l'entité à sa liste
+            $allCategories[] = $category;
         }
+
+        // 4- PRODUCT
+        // Création de 9 produits de catégorie pain : table product
+        $allBread = [];
+        for ($k = 0; $k < 10; $k++) {
+           $breadProduct = new Product();
+           $breadProduct->setName($faker->breadProductName());
+           $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+           $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            $breadProduct->setCategory($allCategories[0]);
+
+           $manager->persist($breadProduct);
+
+        }
+
+        // Création de 5 produits de catégorie viennoiserie : table product
+        $allBread = [];
+        for ($k = 0; $k < 5; $k++) {
+           $breadProduct = new Product();
+           $breadProduct->setName($faker->Unique()->pastriesProductName());
+           $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+           $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            $breadProduct->setCategory($allCategories[1]);
+
+           $manager->persist($breadProduct);
+
+        }
+
+        // Création de 5 produits de catégorie patisserie : table product
+        $allBread = [];
+        for ($k = 0; $k < 5; $k++) {
+           $breadProduct = new Product();
+           $breadProduct->setName($faker->Unique()->pastryProductName());
+           $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+           $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            $breadProduct->setCategory($allCategories[2]);
+
+           $manager->persist($breadProduct);
+
+        }
+
+        // Création de 5 produits de catégorie sandwitch : table product
+        $allBread = [];
+        for ($k = 0; $k < 5; $k++) {
+            $breadProduct = new Product();
+            $breadProduct->setName($faker->Unique()->sandwitchProductName());
+            $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+            $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+            $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            $breadProduct->setCategory($allCategories[3]);
+
+            $manager->persist($breadProduct);
+        
+        }
+
+        // 5- ORDER
+        // Création de 5 commandes : table order
+        for ($k = 0; $k < 5; $k++) {
+            $orderProduct = new Order();
+            $orderProduct->setDate($faker->dateTimeBetween('-1week', 'now'));
+            $orderProduct->setPrice(mt_rand(5, 100)); //  entre 5 et 100€
+            $orderProduct->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
+            $orderProduct->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0
+            $orderProduct->setSchedule($faker->dateTimeBetween('-1week', 'now')); 
+            $orderProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+            $manager->persist($orderProduct);
+        
+        }
+
+        // 6- SCHEDULE : horaires d'ouverture de 20 boulangeries
+        // Pour chaque jour de la semaine, on crée les horaires de chaque boulangerie
+        for ($d = 0; $d < 7; $d++) {
+            for ($l = 0; $l < 20; $l++) {
+                $bakerySchedule = new Schedule();
+                $bakerySchedule->setDay($faker->daysList[$d]);
+                $bakerySchedule->setOpenMorning(mt_rand(7, 8)); //  entre 7 et 8h
+                $bakerySchedule->setCloseMorning(mt_rand(12, 13)); 
+                $bakerySchedule->setOpenAfternoon(mt_rand(13, 14)); 
+                $bakerySchedule->setCloseAfternoon(mt_rand(19, 20));
+                $bakerySchedule->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+
+                // Associer un une boulangerie à un horaire par jour
+                $bakerySchedule->setBakery($allBakeries[$l]);
+
+                $manager->persist($orderProduct);
+
+            }
+        }
+
+        // 7- BAKERY_PRODUCT
+
+        
+        // 8- PRODUCT_ORDER
+
 
         $manager->flush();
     }

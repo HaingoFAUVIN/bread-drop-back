@@ -126,4 +126,27 @@ class Schedule
 
         return $this;
     }
+
+	/**
+	 * Get the value of openMorning
+	 *
+	 * @return mixed
+	 */
+	public function getOpenMorning()
+	{
+		return $this->openMorning;
+	}
+
+	/**
+	 * Set the value of openMorning
+	 *
+	 * @param   mixed  $openMorning  
+	 * @return  self
+	 */
+	public function setOpenMorning($openMorning)
+	{
+		$this->openMorning = $openMorning;
+
+		return $this;
+	}
 }

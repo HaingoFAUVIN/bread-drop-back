@@ -6,6 +6,7 @@ use App\Repository\ScheduleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ScheduleRepository::class)
@@ -16,31 +17,45 @@ class Schedule
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"schedule_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=8, nullable=true)
+     * 
+     * @Groups({"schedule_show"})
      */
     private $day;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
+     * 
      */
     private $openMorning;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
+     * 
      */
     private $closeMorning;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
      */
     private $openAfternoon;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"schedule_show"})
      */
     private $closeAfternoon;
 
@@ -72,6 +87,54 @@ class Schedule
     public function setDay(?string $day): self
     {
         $this->day = $day;
+
+        return $this;
+    }
+
+    public function getOpenMorning(): ?int
+    {
+        return $this->openMorning;
+    }
+
+    public function setOpenMorning(?int $openMorning): self
+    {
+        $this->openMorning = $openMorning;
+
+        return $this;
+    }
+
+    public function getCloseMorning(): ?int
+    {
+        return $this->closeMorning;
+    }
+
+    public function setCloseMorning(?int $closeMorning): self
+    {
+        $this->closeMorning = $closeMorning;
+
+        return $this;
+    }
+
+    public function getOpenAfternoon(): ?int
+    {
+        return $this->openAfternoon;
+    }
+
+    public function setOpenAfternoon(?int $openAfternoon): self
+    {
+        $this->openAfternoon = $openAfternoon;
+
+        return $this;
+    }
+
+    public function getCloseAfternoon(): ?int
+    {
+        return $this->closeAfternoon;
+    }
+
+    public function setCloseAfternoon(?int $closeAfternoon): self
+    {
+        $this->closeAfternoon = $closeAfternoon;
 
         return $this;
     }

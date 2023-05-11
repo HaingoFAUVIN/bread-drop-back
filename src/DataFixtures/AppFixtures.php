@@ -96,6 +96,9 @@ class AppFixtures extends Fixture
 
            $manager->persist($bakery);
 
+            // On ajoute l'entité à sa liste
+            $allBakeries[] = $bakery;
+
         }
 
         // 3- CATEGORY
@@ -126,55 +129,64 @@ class AppFixtures extends Fixture
             $breadProduct->setCategory($allCategories[0]);
 
            $manager->persist($breadProduct);
+           
+            // On ajoute l'entité à sa liste
+            $allBread[] = $breadProduct;
 
         }
 
         // Création de 5 produits de catégorie viennoiserie : table product
-        $allBread = [];
+        $allPastries = [];
         for ($k = 0; $k < 5; $k++) {
-           $breadProduct = new Product();
-           $breadProduct->setName($faker->Unique()->pastriesProductName());
-           $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
-           $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
-           $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+           $pastriesProduct = new Product();
+           $pastriesProduct->setName($faker->Unique()->pastriesProductName());
+           $pastriesProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+           $pastriesProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $pastriesProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
-            $breadProduct->setCategory($allCategories[1]);
+            $pastriesProduct->setCategory($allCategories[1]);
 
-           $manager->persist($breadProduct);
+           $manager->persist($pastriesProduct);
 
+            // On ajoute l'entité à sa liste
+            $allPastries[] = $pastriesProduct;
         }
 
         // Création de 5 produits de catégorie patisserie : table product
-        $allBread = [];
+        $allPastry = [];
         for ($k = 0; $k < 5; $k++) {
-           $breadProduct = new Product();
-           $breadProduct->setName($faker->Unique()->pastryProductName());
-           $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
-           $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
-           $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+           $pastryProduct = new Product();
+           $pastryProduct->setName($faker->Unique()->pastryProductName());
+           $pastryProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+           $pastryProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $pastryProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
-            $breadProduct->setCategory($allCategories[2]);
+            $pastryProduct->setCategory($allCategories[2]);
 
-           $manager->persist($breadProduct);
+           $manager->persist($pastryProduct);
 
+            // On ajoute l'entité à sa liste
+            $allPastry[] = $pastryProduct;
         }
 
         // Création de 5 produits de catégorie sandwitch : table product
-        $allBread = [];
+        $allSandwitch = [];
         for ($k = 0; $k < 5; $k++) {
-            $breadProduct = new Product();
-            $breadProduct->setName($faker->Unique()->sandwitchProductName());
-            $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
-            $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
-            $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+            $sandwitchProduct = new Product();
+            $sandwitchProduct->setName($faker->Unique()->sandwitchProductName());
+            $sandwitchProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
+            $sandwitchProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+            $sandwitchProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
-            $breadProduct->setCategory($allCategories[3]);
+            $sandwitchProduct->setCategory($allCategories[3]);
 
-            $manager->persist($breadProduct);
+            $manager->persist($sandwitchProduct);
         
+            // On ajoute l'entité à sa liste
+            $allSandwitch[] = $sandwitchProduct;
         }
 
         // 5- ORDER
@@ -207,7 +219,7 @@ class AppFixtures extends Fixture
                 // Associer un une boulangerie à un horaire par jour
                 $bakerySchedule->setBakery($allBakeries[$l]);
 
-                $manager->persist($orderProduct);
+                $manager->persist($bakerySchedule);
 
             }
         }

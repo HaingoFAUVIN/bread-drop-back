@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
             $user->setFirstname($faker->firstNameMale);
             $user->setLastname($faker->lastName);         
             $user->setPassword($faker->password);
-            $user->setRole("ROLE_USER"); // PHP => JSON
+            $user->setRoles("ROLE_USER"); // PHP => JSON
             $user->setAdress($faker->address);
             $user->setEmail($faker->email);
             $user->setPhone($faker->unique()->numerify('##########'));
@@ -60,7 +60,7 @@ class AppFixtures extends Fixture
             $admin->setLastname($faker->lastName);                                  
             // admin, via bin/console security:hash-password
             $admin->setPassword($faker->password);
-            $admin->setRole("ROLE_ADMIN"); // PHP => JSON
+            $admin->setRoles("ROLE_ADMIN"); // PHP => JSON
             $admin->setAdress($faker->address);
             $admin->setEmail($faker->email);
             $admin->setPhone($faker->unique()->numerify('##########'));

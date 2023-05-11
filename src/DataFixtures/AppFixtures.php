@@ -125,7 +125,7 @@ class AppFixtures extends Fixture
            $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
            $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            // On associe une catégorie à un produit
             $breadProduct->setCategory($allCategories[0]);
 
            $manager->persist($breadProduct);
@@ -144,7 +144,7 @@ class AppFixtures extends Fixture
            $pastriesProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
            $pastriesProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            // On associe une catégorie à un produit
             $pastriesProduct->setCategory($allCategories[1]);
 
            $manager->persist($pastriesProduct);
@@ -162,7 +162,7 @@ class AppFixtures extends Fixture
            $pastryProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
            $pastryProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            // On associe une catégorie à un produit
             $pastryProduct->setCategory($allCategories[2]);
 
            $manager->persist($pastryProduct);
@@ -180,7 +180,7 @@ class AppFixtures extends Fixture
             $sandwitchProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
             $sandwitchProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
+            // On associe une catégorie à un produit
             $sandwitchProduct->setCategory($allCategories[3]);
 
             $manager->persist($sandwitchProduct);
@@ -225,7 +225,14 @@ class AppFixtures extends Fixture
         }
 
         // 7- BAKERY_PRODUCT
-
+        foreach ($allBakeries as $bakery) {
+            // On mélange les Sandwitch et on en récupère 0 à 4 au hasard
+            shuffle($allSandwitch);
+            $sandwitchCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $sandwitchCount; $i++) {
+                $bakery->addProduct($allSandwitch[$i]);
+            }
+        }
         
         // 8- PRODUCT_ORDER
 

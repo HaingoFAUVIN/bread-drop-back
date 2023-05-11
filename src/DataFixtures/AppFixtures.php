@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
             $user->setFirstname($faker->firstNameMale);
             $user->setLastname($faker->lastName);         
             $user->setPassword($faker->password);
-            $user->setRoles("ROLE_USER"); // PHP => JSON
+            $user->setRoles(["ROLE_USER"]); // PHP => JSON
             $user->setAdress($faker->address);
             $user->setEmail($faker->email);
             $user->setPhone($faker->unique()->numerify('##########'));
@@ -52,31 +52,42 @@ class AppFixtures extends Fixture
 
         }
 
-        $allAdmins = [];
+         // 3 utilisateurs
+         $admin = new User();
+         $admin->setEmail('admin@admin.com');
+         $admin->setRoles(['ROLE_ADMIN']); // PHP => JSON
+         // admin, via bin/console security:hash-password
+         $admin->setPassword('$2y$13$.PJiDK3kq2C4owW5RW6Z3ukzRc14TJZRPcMfXcCy9AyhhA9OMK3Li');
+         $admin->setAdress($faker->address);
+         $admin->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+         $manager->persist($admin);
+
+
+        $allProfessionals = [];
         // Création de 20 gérants de boulangerie : table user
         for ($j = 0; $j < 20; $j++) {
-            $admin = new User();
-            $admin->setFirstname($faker->firstNameMale);
-            $admin->setLastname($faker->lastName);                                  
-            // admin, via bin/console security:hash-password
-            $admin->setPassword($faker->password);
-            $admin->setRoles("ROLE_ADMIN"); // PHP => JSON
-            $admin->setAdress($faker->address);
-            $admin->setEmail($faker->email);
-            $admin->setPhone($faker->unique()->numerify('##########'));
-            $admin->setPicture($faker->imageUrl(450, 300, true));
-            $admin->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+            $professional = new User();
+            $professional->setFirstname($faker->firstNameMale);
+            $professional->setLastname($faker->lastName);                                  
+            // manager, via bin/console security:hash-password
+            $professional->setPassword($faker->password);
+            $professional->setRoles(["ROLE_MANAGER"]); // PHP => JSON
+            $professional->setAdress($faker->address);
+            $professional->setEmail($faker->email);
+            $professional->setPhone($faker->unique()->numerify('##########'));
+            $professional->setPicture($faker->imageUrl(450, 300, true));
+            $professional->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            $manager->persist($admin);
+            $manager->persist($professional);
 
             // On ajoute l'entité à sa liste
-            $allAdmins[] = $admin;
+            $allProfessionals[] = $professional;
         }
 
         // on mélange les gérants
         // et on ira piocher la 1, 2, 3, 4 etc.
         // afin de ne pas avoir de doublon !
-        shuffle($allAdmins);
+        shuffle($allProfessionals);
 
         // 2 - BAKERY
         // Création de 20 boulangeries : table bakery
@@ -91,8 +102,8 @@ class AppFixtures extends Fixture
            $bakery->setDistance(mt_rand(0, 25)); // Distance de recherche entre 0 et 25km
            $bakery->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            // On récupère l'admin à l'index $k, pas de doublon grâce au shuffle plus haut
-            $bakery->setUser($allAdmins[$k]);
+            // On récupère l'manager à l'index $k, pas de doublon grâce au shuffle plus haut
+            $bakery->setUser($allProfessionals[$k]);
 
            $manager->persist($bakery);
 

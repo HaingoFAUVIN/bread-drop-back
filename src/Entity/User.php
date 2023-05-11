@@ -256,4 +256,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+	/**
+	 * Set the value of roles
+	 *
+	 * @param   mixed  $roles  
+	 * @return  self
+	 */
+	public function setRoles($roles)
+	{
+		$this->roles = $roles;
+
+		return $this;
+	}
 }

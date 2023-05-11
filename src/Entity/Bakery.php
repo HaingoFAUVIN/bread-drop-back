@@ -6,6 +6,7 @@ use App\Repository\BakeryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BakeryRepository::class)
@@ -16,31 +17,44 @@ class Bakery
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"bakery_list"})
+     * @Groups({"bakery_read"})
+     * @Groups({"bakery_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"bakery_list"})
+     * @Groups({"bakery_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"bakery_list"})
      */
     private $adress;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=25 )
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"bakery_list"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @Groups({"bakery_list"})
      */
     private $distance;
 
@@ -56,6 +70,8 @@ class Bakery
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="bakeries")
+     * 
+     * @Groups({"bakery_read"})
      */
     private $product;
 
@@ -66,6 +82,12 @@ class Bakery
 
     /**
      * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
+<<<<<<< HEAD
+=======
+     * 
+     * @Groups({"bakery_list"})
+     * 
+>>>>>>> api
      */
     private $schedule;
 

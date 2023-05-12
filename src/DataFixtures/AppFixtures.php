@@ -227,7 +227,7 @@ class AppFixtures extends Fixture
                 $bakerySchedule->setDay($faker->daysList[$d]);
                 $bakerySchedule->setOpenMorning("0" . mt_rand(7, 8) . "h" . "00"); //  entre 7 et 8h
                 $bakerySchedule->setCloseMorning(mt_rand(12, 13) . "h" . "00"); 
-                $bakerySchedule->setOpenAfternoon(mt_rand(13, 14) . "h" ."00"); 
+                $bakerySchedule->setOpenAfternoon(mt_rand(14, 15) . "h" ."00"); 
                 $bakerySchedule->setCloseAfternoon(mt_rand(19, 20) . "h" ."00");
                 $bakerySchedule->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 

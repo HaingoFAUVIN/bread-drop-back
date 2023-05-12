@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ScheduleController extends AbstractController
 {
     /**
-     * renvoit la liste des boulangerie
+     * renvoit la liste des horaires
      * 
      * @Route("", name="browse", methods={"GET"})
      */
@@ -42,7 +42,7 @@ class ScheduleController extends AbstractController
     }
 
     /**
-     * renvoit une horraire spécifique a une boualngerie
+     * renvoit une horraire spécifique a une boulangerie
      * 
      * @Route("/{id}", name="read", requirements={"id"="\d+"}, methods={"GET"})
      */

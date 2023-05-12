@@ -18,4 +18,3 @@ nelmio_cors:
             allow_headers: ['X-Custom-Auth']
             allow_methods: ['POST', 'PUT', 'PATCH', 'GET', 'DELETE']
             max_age: 3600
-    hosts: ['^api.']

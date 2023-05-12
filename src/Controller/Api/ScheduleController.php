@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
-     * @Route("/api/horraires", name="app_api_schedule_")
+     * @Route("/api/horaires", name="app_api_schedule_")
 */
 class ScheduleController extends AbstractController
 {

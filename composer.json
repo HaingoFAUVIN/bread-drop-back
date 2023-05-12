@@ -10,6 +10,7 @@
         "bluemmb/faker-picsum-photos-provider": "^1.0",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.9",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
         "fakerphp/faker": "^1.9",
@@ -101,7 +102,6 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "5.4.*",
         "symfony/css-selector": "5.4.*",

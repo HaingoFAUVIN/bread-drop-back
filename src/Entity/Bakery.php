@@ -21,6 +21,7 @@ class Bakery
      * @Groups({"bakery_list"})
      * @Groups({"bakery_read"})
      * @Groups({"bakery_show"})
+     * @Groups({"bakery_show_id"})
      */
     private $id;
 
@@ -82,9 +83,6 @@ class Bakery
 
     /**
      * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
-     * 
-     * @Groups({"bakery_list"})
-     * 
      */
     private $schedule;
 

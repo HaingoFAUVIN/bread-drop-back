@@ -19,6 +19,7 @@ class Schedule
      * @ORM\Column(type="integer")
      * 
      * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      */
     private $id;
 
@@ -26,6 +27,7 @@ class Schedule
      * @ORM\Column(type="string", length=8, nullable=true)
      * 
      * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      */
     private $day;
 
@@ -33,6 +35,7 @@ class Schedule
      * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      * 
      */
     private $openMorning;
@@ -41,6 +44,7 @@ class Schedule
      * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      * 
      */
     private $closeMorning;
@@ -49,6 +53,7 @@ class Schedule
      * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      */
     private $openAfternoon;
 
@@ -56,6 +61,7 @@ class Schedule
      * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      */
     private $closeAfternoon;
 
@@ -71,6 +77,9 @@ class Schedule
 
     /**
      * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="schedule")
+     * 
+     * @Groups({"schedule_show"})
+     * @Groups({"schedule_read"})
      */
     private $bakery;
 

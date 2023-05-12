@@ -30,7 +30,7 @@ class Schedule
     private $day;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=11, nullable=true)
      * 
      * @Groups({"schedule_show"})
      * 
@@ -38,7 +38,7 @@ class Schedule
     private $openMorning;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=11, nullable=true)
      * 
      * @Groups({"schedule_show"})
      * 
@@ -46,14 +46,14 @@ class Schedule
     private $closeMorning;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=11, nullable=true)
      * 
      * @Groups({"schedule_show"})
      */
     private $openAfternoon;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=11, nullable=true)
      * 
      * @Groups({"schedule_show"})
      */
@@ -91,48 +91,48 @@ class Schedule
         return $this;
     }
 
-    public function getOpenMorning(): ?int
+    public function getOpenMorning(): ?string
     {
         return $this->openMorning;
     }
 
-    public function setOpenMorning(?int $openMorning): self
+    public function setOpenMorning(?string $openMorning): self
     {
         $this->openMorning = $openMorning;
 
         return $this;
     }
 
-    public function getCloseMorning(): ?int
+    public function getCloseMorning(): ?string
     {
         return $this->closeMorning;
     }
 
-    public function setCloseMorning(?int $closeMorning): self
+    public function setCloseMorning(?string $closeMorning): self
     {
         $this->closeMorning = $closeMorning;
 
         return $this;
     }
 
-    public function getOpenAfternoon(): ?int
+    public function getOpenAfternoon(): ?string
     {
         return $this->openAfternoon;
     }
 
-    public function setOpenAfternoon(?int $openAfternoon): self
+    public function setOpenAfternoon(?string $openAfternoon): self
     {
         $this->openAfternoon = $openAfternoon;
 
         return $this;
     }
 
-    public function getCloseAfternoon(): ?int
+    public function getCloseAfternoon(): ?string
     {
         return $this->closeAfternoon;
     }
 
-    public function setCloseAfternoon(?int $closeAfternoon): self
+    public function setCloseAfternoon(?string $closeAfternoon): self
     {
         $this->closeAfternoon = $closeAfternoon;
 

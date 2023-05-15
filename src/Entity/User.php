@@ -22,6 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $id;
 
@@ -29,6 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $firstname;
 
@@ -36,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $lastname;
 
@@ -44,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      * 
      * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $password;
 
@@ -59,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $adress;
 
@@ -68,11 +73,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * 
      * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="bigint", nullable=true)
+     * @Groups({"user_read"})
      */
     private $phone;
 
@@ -80,16 +87,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({"user_read"})
      */
     private $updatedAt;
 

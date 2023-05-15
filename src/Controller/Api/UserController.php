@@ -38,7 +38,7 @@ class UserController extends AbstractController
 
         if ($user === null){return $this->json("message d'erreur",Response::HTTP_NOT_FOUND);}
 
-        return $this->json($user, 200, [], ["groups" => [""]]);
+        return $this->json($user, 200, [], ["groups" => ["user_read"]]);
     }
 
     /**
@@ -73,7 +73,7 @@ class UserController extends AbstractController
 
         $userRepository->add($user, true);
         
-        return $this->json($user, 200, [], ["groups" => []]);
+        return $this->json($user, 200, [], ["groups" => ["user_read"]]);
     }
 
     /**

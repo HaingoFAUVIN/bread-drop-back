@@ -26,22 +26,73 @@ class UserController extends AbstractController
     {
         $allUser = $userRepository->findAll();
 
-        return $this->json($allUser, 200, [], ["groups" => ["user_list"]]);
+        return $this->json(
+            //les données à renvoyer : la transformation en json est automatique
+            $allUser, 
+            //code HTTP
+            200, 
+            //pas d'entêtes particulière
+            [], 
+            //le contexte
+            // dans le contexte on précise le nom du/des groupes de serialisation
+            [
+                "groups" => 
+                [
+                    // je veux les propriétés de ce groupe
+                    "user_list"
+                ]
+            ]
+        );
     }
 
      /**
+     *
+     * renvoit un utilisateur spécifique
+     *  
      * @Route("/{id}", name="read", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function read($id, UserRepository $userRepository): JsonResponse
     {
         $user = $userRepository->find($id);
 
-        if ($user === null){return $this->json("message d'erreur",Response::HTTP_NOT_FOUND);}
+        if ($user === null)
+        {
+            // ! on ne doit pas renvoyer du HTML
+            // * le front s'attend à avoir du JSON
+            return $this->json(
+                //les données à renvoyer : la transformation en json est automatique
+                "message d'erreur",
+                //code HTTP : 404,
+                Response::HTTP_NOT_FOUND
+                //pas d'entêtes particulière
+                [],
+                // pas de contexte
+                []     
+            );
+        }
 
-        return $this->json($user, 200, [], ["groups" => ["user_read"]]);
+        return $this->json(
+            //les données à renvoyer : la transformation en json est automatique
+            $user, 
+            //code HTTP
+            200, 
+            //pas d'entêtes particulière
+            [], 
+            //le contexte
+            // dans le contexte on précise le nom du/des groupes de serialisation
+            [
+                "groups" => 
+                [
+                    // je veux les propriétés de ce groupe
+                    "user_read"
+                ]
+            ]
+        );
     }
 
     /**
+     * modifie un utilisateur
+     * 
      * @Route("/{id}", name="edit", requirements={"id"="\d+"}, methods={"PUT", "PATCH"})
      */
     public function edit(
@@ -52,31 +103,64 @@ class UserController extends AbstractController
         ValidatorInterface $validatorInterface
         ): JsonResponse
     {
+        //on récupère en BDD l'objet à modifier
         $user = $userRepository->find($id);
         
         if ($user === null){return $this->json("message d'erreur",Response::HTTP_NOT_FOUND);}
 
+        //on récupère les informations de la requetes
         $jsonContent = $request->getContent();
 
+        // on transforme notre json en objet
         $serializerInterface->deserialize(
+            // les données de la requete
             $jsonContent,
+            // le type d'objet
             User::class, 
-            'json', 
+            // le format des données
+            'json',
+            //le contexte : l'objet que l'on veux mettre à jour avec les données
+            // on modifie le comportement de la deserialisation
+            // au lieur de nous créer un nouvel objet
+            // il remplit l'objet qu'on lui fournit 
             [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
         // ici la fusion entre l'objet BDD et l'objet JSON a été faites
-        // dd($Person);
 
+        // on valide que les informations sont valides
+        // ! Si on veux modifier qu'une seule propriété
+        // * la validation valide TOUTE les propriétés
         $errors = $validatorInterface->validate($user);
         if (count($errors) > 0) {
             return $this->json($errors,Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        //on fait la mise à jour
+        // les propriétés ont été mise à jour par le deserialise
+        // les propriétés ont été validées par le validator
         $userRepository->add($user, true);
         
-        return $this->json($user, 200, [], ["groups" => ["user_read"]]);
+        return $this->json(
+            //les données à renvoyer : la transformation en json est automatique
+            $user, 
+            //code HTTP
+            200, 
+            //pas d'entêtes particulière
+            [], 
+            //le contexte
+            // dans le contexte on précise le nom du/des groupes de serialisation
+            [
+                "groups" => 
+                [
+                    // je veux les propriétés de ce groupe
+                    "user_read"
+                ]
+            ]
+        );
     }
 
     /**
+     * creer un utilisateur
+     * 
      * @Route("", name="add", methods={"POST"})
      */
     public function add(
@@ -87,19 +171,62 @@ class UserController extends AbstractController
     {
         $jsonContent = $request->getContent();
         // on reçoit aucun JSON
-        if ($jsonContent === ""){return $this->json("Le contenu de la requete est invalide", Response::HTTP_BAD_REQUEST);}
+        if ($jsonContent === ""){
+            return $this->json(
+                "Le contenu de la requete est invalide",
+                 Response::HTTP_BAD_REQUEST);
+        }
 
-        $user = $serializerInterface->deserialize($jsonContent, User::class, 'json');
+        // on a besoin du SerializerInterface
+        $user = $serializerInterface->deserialize(
+            // la chaine de caractère reçu dans la requete
+            $jsonContent, 
+            // le type d'objet dans lequel on veux transformer le contenu
+            User::class,
+            // le format du contenu
+            'json');
 
+        // on a un service qui s'occupe de ça : validatorInterface
         $errors = $validatorInterface->validate($user);
-        if (count($errors) > 0) {return $this->json($errors,Response::HTTP_UNPROCESSABLE_ENTITY);}
+        // on regarde si on a des erreurs dans le tableau d'erreurs en sortie de la validation
+        if (count($errors) > 0) {
+            // $apiError = new ApiError($errors);
+            // on renvoit $apiError->getAllMessage()
+
+            // on renvoit le tableau d'erreurs au format JSON
+            // on y ajoute un code HTTP d'erreur : 422 UNPROCESSABLE_ENTITY
+            return $this->json(
+                //les données
+                $errors,
+                //le code d'erreur
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
 
         $userRepository->add($user, true);
 
-        return $this->json($user, 200, [], ["groups" => ["user_add"]]);
+        return $this->json(
+            //les données à renvoyer : la transformation en json est automatique
+            $user, 
+            //code HTTP
+            200, 
+            //pas d'entêtes particulière
+            [], 
+            //le contexte
+            // dans le contexte on précise le nom du/des groupes de serialisation
+            [
+                "groups" => 
+                [
+                    // je veux les propriétés de ce groupe
+                    "user_add"
+                ]
+            ]
+        );
     }
 
     /**
+     * supprime un utilisateur
+     * 
      * @Route("/{id}", name="delete", requirements={"id"="\d+"}, methods={"DELETE"})
      *
      * @return JsonResponse

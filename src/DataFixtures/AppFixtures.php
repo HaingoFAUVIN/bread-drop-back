@@ -65,8 +65,8 @@ class AppFixtures extends Fixture
 
 
         $allProfessionals = [];
-        // Création de 1000 gérants de boulangerie : table user
-        for ($j = 0; $j < 1000; $j++) {
+        // Création de 20 gérants de boulangerie : table user
+        for ($j = 0; $j < 20; $j++) {
             $professional = new User();
             $professional->setFirstname($faker->firstNameMale);
             $professional->setLastname($faker->lastName);                                  
@@ -91,9 +91,9 @@ class AppFixtures extends Fixture
         shuffle($allProfessionals);
 
         // 2 - BAKERY
-        // Création de 1000 boulangeries : table bakery
+        // Création de 20 boulangeries : table bakery
         $allBakeries = [];
-        for ($k = 0; $k < 1000; $k++) {
+        for ($k = 0; $k < 20; $k++) {
            $bakery = new Bakery();
            $bakery->setName($faker->company);
            $bakery->setAdress($faker->addressBakeriesList[$k]);
@@ -219,10 +219,10 @@ class AppFixtures extends Fixture
             $allOrder[] = $orderProduct;
         }
 
-        // 6- SCHEDULE : horaires d'ouverture de 1000 boulangeries
+        // 6- SCHEDULE : horaires d'ouverture de 20 boulangeries
         // Pour chaque jour de la semaine, on crée les horaires de chaque boulangerie
         for ($d = 0; $d < 7; $d++) {
-            for ($l = 0; $l < 1000; $l++) {
+            for ($l = 0; $l < 20; $l++) {
                 $bakerySchedule = new Schedule();
                 $bakerySchedule->setDay($faker->daysList[$d]);
                 $bakerySchedule->setOpenMorning("0" . mt_rand(7, 8) . "h" . "00"); //  entre 7 et 8h

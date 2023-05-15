@@ -96,7 +96,7 @@ class AppFixtures extends Fixture
         for ($k = 0; $k < 20; $k++) {
            $bakery = new Bakery();
            $bakery->setName($faker->company);
-           $bakery->setAdress($faker->address);
+           $bakery->setAdress($faker->addressBakeriesList[$k]);
            // https://stackoverflow.com/questions/74580435/how-to-generate-mobile-phone-number-with-faker
            $bakery->setPhone($faker->unique()->numerify('##########'));
            $bakery->setPicture($faker->imageUrl(450, 300, true));

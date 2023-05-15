@@ -1251,13 +1251,20 @@ class BreadDropProvider
     }
 
     /**
+     * Retourne une liste d'adresse de boulangerie
+     */
+    public function addressBakeriesList()
+    {
+        return $this->addressBakeries;
+    }
+
+    /**
      * Retourne une liste de catégorie
      */
     public function categoriesList()
     {
         return $this->categories;
     }
-
     /**
      * Retourne un pain au hasard
      */

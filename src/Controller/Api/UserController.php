@@ -2,9 +2,10 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class UserController extends AbstractController
     {
         $allUser = $userRepository->findAll();
 
-        return $this->json($allUser, 200, [], ["groups" => [""]]);
+        return $this->json($allUser, 200, [], ["groups" => ["user_list"]]);
     }
 
      /**
@@ -59,7 +60,7 @@ class UserController extends AbstractController
 
         $serializerInterface->deserialize(
             $jsonContent,
-            Person::class, 
+            User::class, 
             'json', 
             [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
         // ici la fusion entre l'objet BDD et l'objet JSON a été faites
@@ -72,7 +73,7 @@ class UserController extends AbstractController
 
         $userRepository->add($user, true);
         
-        return $this->json($user, 200, [], ["groups" => [""]]);
+        return $this->json($user, 200, [], ["groups" => []]);
     }
 
     /**
@@ -88,14 +89,14 @@ class UserController extends AbstractController
         // on reçoit aucun JSON
         if ($jsonContent === ""){return $this->json("Le contenu de la requete est invalide", Response::HTTP_BAD_REQUEST);}
 
-        $user = $serializerInterface->deserialize($jsonContent, Person::class, 'json');
+        $user = $serializerInterface->deserialize($jsonContent, User::class, 'json');
 
         $errors = $validatorInterface->validate($user);
         if (count($errors) > 0) {return $this->json($errors,Response::HTTP_UNPROCESSABLE_ENTITY);}
 
         $userRepository->add($user, true);
 
-        return $this->json($user, 200, [], ["groups" => [""]]);
+        return $this->json($user, 200, [], ["groups" => ["user_add"]]);
     }
 
     /**

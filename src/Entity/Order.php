@@ -19,17 +19,23 @@ class Order
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
+     * @Groups({"order_show"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
      * 
+     * @Groups({"order_show"})
+     * 
      */
     private $date;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Groups({"order_show"})
      * 
      */
     private $price;
@@ -46,6 +52,8 @@ class Order
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"order_show"})
      */
     private $schedule;
 
@@ -62,7 +70,7 @@ class Order
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="order_")
      * 
-     * 
+     * @Groups({"order_show"})
      */
     private $users;
 

@@ -15,11 +15,13 @@ use App\Entity\Product;
 use App\Entity\Schedule;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Unique;
+use Doctrine\DBAL\Connection;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
         // On instancie Faker
         $faker = Factory::create('fr_FR');
 
@@ -215,6 +217,7 @@ class AppFixtures extends Fixture
         for ($k = 0; $k < 5; $k++) {
             $orderProduct = new Order();
             $orderProduct->setDate($faker->dateTimeBetween('-1week', 'now'));
+            $orderProduct->setUser($allPersons[$k]);
             $orderProduct->setPrice(mt_rand(5, 100)); //  entre 5 et 100€
             $orderProduct->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
             $orderProduct->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0

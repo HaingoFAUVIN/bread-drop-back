@@ -56,18 +56,17 @@ class Order
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="order_")
-     */
-    private $users;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="order_")
      */
     private $products;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     */
+    private $user;
+
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -161,41 +160,23 @@ class Order
     }
 
     /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getOrder() === $this) {
-                $user->setOrder(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Product>
      */
     public function getProducts(): Collection
     {
         return $this->products;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function addProduct(Product $product): self
@@ -216,4 +197,5 @@ class Order
 
         return $this;
     }
+
 }

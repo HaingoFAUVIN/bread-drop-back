@@ -34,9 +34,7 @@ class DoctrineDenormalizer implements DenormalizerInterface
         //? je sais traiter le cas où $data est un ID
         //? je sais traiter le cas où $type est un entity
         $dataIsID = is_numeric($data);
-        // $type : App\Entity\Genre,  App\Entity\Person, etc ...
         // @link https://www.php.net/manual/fr/function.strpos.php
-        // je cherche dans $type (App\Entity\Genre) si on trouve 'App\Entity' au début (=== 0)
         $typeIsEntity = strpos($type, 'App\Entity') === 0;
 
         // je réponds Oui si les DEUX sont vrai
@@ -52,11 +50,11 @@ class DoctrineDenormalizer implements DenormalizerInterface
      * @param array $context
      * @return mixed
      */
-    public function denormalize($data, string $type, ?string $format = null, array $context = []): mixed
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): object
     {
         //? ici on veut faire appel à Doctrine
         // pour faire un find() avec l'ID fournit
-        // $type = App\Entity\Genre
+        // $type = App\Entity\User
         // $data = 2
         $denormalizedEntity = $this->entityManagerInterface->find($type, $data);
         

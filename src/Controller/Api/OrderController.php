@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/api/orders", name="app_api_order_")
@@ -153,7 +155,9 @@ class OrderController extends AbstractController
                 "groups" => 
                 [
                     // je veux les propriétés de ce groupe
-                    "order_add"
+                    "order_read",
+                    "product_show",
+                    "user_show"
                 ]
             ]
         );

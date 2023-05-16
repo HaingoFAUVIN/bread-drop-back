@@ -15,11 +15,13 @@ use App\Entity\Product;
 use App\Entity\Schedule;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Unique;
+use Doctrine\DBAL\Connection;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
         // On instancie Faker
         $faker = Factory::create('fr_FR');
 
@@ -96,7 +98,7 @@ class AppFixtures extends Fixture
         for ($k = 0; $k < 20; $k++) {
            $bakery = new Bakery();
            $bakery->setName($faker->company);
-           $bakery->setAdress($faker->address);
+           $bakery->setAdress($faker->addressBakeriesList[$k]);
            // https://stackoverflow.com/questions/74580435/how-to-generate-mobile-phone-number-with-faker
            $bakery->setPhone($faker->unique()->numerify('##########'));
            $bakery->setPicture($faker->imageUrl(450, 300, true));
@@ -134,7 +136,9 @@ class AppFixtures extends Fixture
            $breadProduct = new Product();
            $breadProduct->setName($faker->breadProductName());
            $breadProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
-           $breadProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $breadProduct->setStock(mt_rand(10, 20)); //  entre 10 et 20€
+           $breadProduct->setPicture($faker->imageUrl(450, 300, true));
+           $breadProduct->setDescription($faker->text());
            $breadProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On associe une catégorie à un produit
@@ -154,6 +158,8 @@ class AppFixtures extends Fixture
            $pastriesProduct->setName($faker->Unique()->pastriesProductName());
            $pastriesProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
            $pastriesProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $pastriesProduct->setPicture($faker->imageUrl(450, 300, true));
+           $pastriesProduct->setDescription($faker->text());
            $pastriesProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On associe une catégorie à un produit
@@ -172,6 +178,8 @@ class AppFixtures extends Fixture
            $pastryProduct->setName($faker->Unique()->pastryProductName());
            $pastryProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
            $pastryProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+           $pastryProduct->setPicture($faker->imageUrl(450, 300, true));
+           $pastryProduct->setDescription($faker->text());
            $pastryProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On associe une catégorie à un produit
@@ -190,6 +198,8 @@ class AppFixtures extends Fixture
             $sandwitchProduct->setName($faker->Unique()->sandwitchProductName());
             $sandwitchProduct->setPrice(mt_rand(5, 10)); //  entre 5 et 10€
             $sandwitchProduct->setStock(mt_rand(10, 20)); //  entre 5 et 10€
+            $sandwitchProduct->setPicture($faker->imageUrl(450, 300, true));
+            $sandwitchProduct->setDescription($faker->text());
             $sandwitchProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
             // On associe une catégorie à un produit
@@ -207,6 +217,7 @@ class AppFixtures extends Fixture
         for ($k = 0; $k < 5; $k++) {
             $orderProduct = new Order();
             $orderProduct->setDate($faker->dateTimeBetween('-1week', 'now'));
+            $orderProduct->setUser($allPersons[$k]);
             $orderProduct->setPrice(mt_rand(5, 100)); //  entre 5 et 100€
             $orderProduct->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
             $orderProduct->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0

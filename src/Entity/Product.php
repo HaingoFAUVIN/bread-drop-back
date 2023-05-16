@@ -82,7 +82,7 @@ class Product
     /**
      * @ORM\ManyToMany(targetEntity=Order::class, inversedBy="products")
      */
-    private $order_;
+    private $orders;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
@@ -95,7 +95,7 @@ class Product
     public function __construct()
     {
         $this->bakeries = new ArrayCollection();
-        $this->order_ = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,30 +214,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Order>
-     */
-    public function getOrder(): Collection
-    {
-        return $this->order_;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->order_->contains($order)) {
-            $this->order_[] = $order;
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        $this->order_->removeElement($order);
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -250,4 +226,27 @@ class Product
         return $this;
     }
 
+        /**
+     * @return Collection<int, Order>
+     */
+    public function getOrder(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        $this->orders->removeElement($order);
+
+        return $this;
+    }
 }

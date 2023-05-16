@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -107,11 +109,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="users")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
      * 
      * @Groups({"user_list"})
      */
-    private $order_;
+    private $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
+
 
     /**
      * A visual identifier that represents this user.
@@ -281,18 +289,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getOrder(): ?Order
-    {
-        return $this->order_;
-    }
-
-    public function setOrder(?Order $order_): self
-    {
-        $this->order_ = $order_;
-
-        return $this;
-    }
-
 	/**
 	 * Set the value of roles
 	 *
@@ -300,9 +296,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return  self
 	 */
 	public function setRoles($roles)
-	{
-		$this->roles = $roles;
+                        	{
+                        		$this->roles = $roles;
+                        
+                        		return $this;
+                        	}
 
-		return $this;
-	}
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

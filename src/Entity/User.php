@@ -23,6 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * @Groups({"user_add"})
      * @Groups({"user_read"})
+     * @Groups({"user_show"})
      */
     private $id;
 
@@ -107,6 +108,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="users")
+     * 
+     * @Groups({"user_list"})
      */
     private $order_;
 

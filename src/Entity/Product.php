@@ -86,12 +86,9 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-<<<<<<< HEAD
      * 
      * @Groups({"product_show"})
      * @Groups({"product_list"})
-=======
->>>>>>> feature/fixture
      */
     private $category;
 

@@ -20,6 +20,7 @@ class Order
      * @ORM\Column(type="integer")
      * 
      * @Groups({"order_show"})
+     * @Groups({"order_list"})
      * 
      */
     private $id;
@@ -28,6 +29,7 @@ class Order
      * @ORM\Column(type="datetime")
      * 
      * @Groups({"order_show"})
+     * @Groups({"order_list"})
      * 
      */
     private $date;
@@ -36,6 +38,7 @@ class Order
      * @ORM\Column(type="float")
      * 
      * @Groups({"order_show"})
+     * @Groups({"order_list"})
      * 
      */
     private $price;
@@ -47,6 +50,7 @@ class Order
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"order_list"})
      */
     private $delivery;
 
@@ -54,6 +58,7 @@ class Order
      * @ORM\Column(type="datetime")
      * 
      * @Groups({"order_show"})
+     * @Groups({"order_list"})
      */
     private $schedule;
 
@@ -69,11 +74,15 @@ class Order
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="orders")
+     * 
+     * @Groups({"order_list"})
      */
     private $products;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     * 
+     * @Groups({"order_list"})
      */
     private $user;
 

@@ -21,8 +21,11 @@
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
-                {# <td>{% for product in 0..count(order.products) %}{% endfor %}</td> #}
-                {# order.products[0]|u.truncate(30, '...', false)  #}
+                {# <td>{% for product in order.products %}{{product}}{% endfor %}</td> #}
+                {# |u.truncate(30, '...', false) #}
+                <td>Produits</td>
+                {# {{dump(order)}} #}
+
                 <td>{% if order.status == '1' %}En cours{% endif %}</td>
                 <td>{% if order.delivery == '1' %}A livrer{% endif %}</td>
             

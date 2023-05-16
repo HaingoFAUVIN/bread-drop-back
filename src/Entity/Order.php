@@ -56,7 +56,7 @@ class Order
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="order_")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="orders")
      */
     private $products;
 

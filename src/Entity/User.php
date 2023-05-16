@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -18,57 +19,89 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"user_list"})
+     * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $lastname;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * 
+     * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="json")
+     * 
+     * @Groups({"user_add"})
      */
     private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"user_list"})
+     * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * 
+     * @Groups({"user_list"})
+     * 
+     * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="bigint", nullable=true)
+     * @Groups({"user_read"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({"user_read"})
      */
     private $updatedAt;
 

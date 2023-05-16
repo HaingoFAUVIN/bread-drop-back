@@ -112,6 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
      * 
      * @Groups({"user_list"})
+     * @Groups({"user_read"})
      */
     private $orders;
 

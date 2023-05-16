@@ -85,7 +85,8 @@ class UserController extends AbstractController
                 "groups" => 
                 [
                     // je veux les propriétés de ce groupe
-                    "user_read"
+                    "user_read",
+                    "order_show"
                 ]
             ]
         );

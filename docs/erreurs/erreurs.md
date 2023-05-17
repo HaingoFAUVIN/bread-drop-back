@@ -18,3 +18,13 @@ J'essaie de formatter la date de livraison pour afficher en format date et heure
 https://twig.symfony.com/doc/2.x/filters/format_datetime.html
 
 L'erreur me dit d'installer : composer require twig/intl-extra" in "back/order/index.html.twig
+
+### {"message":"Error thrown while running command "'d:f:l'". Message: "Property App\Entity\Order::$users does not exist"","context":{"exception":{"class":"ReflectionException","message":"Property App\Entity\Order::$users does not exist","code":0,"file":"/var/www/html/projet-07-bread-drop-back/vendor/doctrine/persistence/src/Persistence/Reflection/RuntimeReflectionProperty.php:28"},"command":"'d:f:l'","message":"Property App\Entity\Order::$users does not exist"},"level":500,"level_name":"CRITICAL","channel":"console","datetime":"2023-05-17T09:27:41.476113+02:00","extra":{}}
+09:27:41 CRITICAL  [console] Error thrown while running command "'d:f:l'". Message: "Property App\Entity\Order::$users does not exist" ["exception" => ReflectionException { …},"command" => "'d:f:l'","message" => "Property App\Entity\Order::$users does not exist"]
+{"message":"Command "'d:f:l'" exited with code "1"","context":{"command":"'d:f:l'","code":1},"level":100,"level_name":"DEBUG","channel":"console","datetime":"2023-05-17T09:27:41.486802+02:00","extra":{}}
+
+On a corrigé la relation entre Order et User en dev. Tout fonctionne sauf en prod
+
+La solution :
+https://stackoverflow.com/questions/26187097/doctrine-reflectionexception-property-does-not-exist
+bin/console clear:cache

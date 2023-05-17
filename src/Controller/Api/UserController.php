@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * @Route("/api/users", name="app_api_user_")
+ * @Route("/api/utilisateurs", name="app_api_user_")
  */
 class UserController extends AbstractController
 {
@@ -39,7 +39,8 @@ class UserController extends AbstractController
                 "groups" => 
                 [
                     // je veux les propriétés de ce groupe
-                    "user_list"
+                    "user_list",
+                    "order_show"
                 ]
             ]
         );
@@ -84,7 +85,8 @@ class UserController extends AbstractController
                 "groups" => 
                 [
                     // je veux les propriétés de ce groupe
-                    "user_read"
+                    "user_read",
+                    "order_show"
                 ]
             ]
         );

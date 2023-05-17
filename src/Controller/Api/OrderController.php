@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * @Route("/api/orders", name="app_api_order_")
+ * @Route("/api/commandes", name="app_api_order_")
  */
 class OrderController extends AbstractController
 {

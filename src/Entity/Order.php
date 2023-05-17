@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -17,36 +18,59 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"order_show"})
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"order_show"})
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
+     * 
      */
     private $date;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Groups({"order_show"})
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
+     * 
      */
     private $price;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"order_read"})
      */
     private $status;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
      */
     private $delivery;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"order_show"})
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
      */
     private $schedule;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"order_read"})
      */
     private $createdAt;
 
@@ -62,6 +86,9 @@ class Order
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     * 
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
      */
     private $user;
 

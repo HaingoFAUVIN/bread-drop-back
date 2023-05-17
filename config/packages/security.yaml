@@ -55,7 +55,7 @@ security:
     access_control:
         ## Pour l'API
         # la route pour s'authentifier DOIT être publique
-        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/login_check, roles: PUBLIC_ACCESS }
 
         # on peut maintenant utiliser les ROLE pour les routes API
         - { path: ^/api,       roles: PUBLIC_ACCESS }

@@ -81,9 +81,6 @@ class Order
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="orders")
-     * 
-     * @Groups({"order_list"})
-     * @Groups({"order_read"})
      */
     private $products;
 

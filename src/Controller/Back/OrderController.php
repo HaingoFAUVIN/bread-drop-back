@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrderController extends AbstractController
 {
     /**
-     * @Route("/", name="app_back_order", methods={"GET"})
+     * @Route("/", name="app_back_order_index", methods={"GET"})
      */
     public function index(OrderRepository $orderRepository): Response
     {

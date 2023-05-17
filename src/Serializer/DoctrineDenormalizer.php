@@ -54,8 +54,6 @@ class DoctrineDenormalizer implements DenormalizerInterface
     {
         //? ici on veut faire appel à Doctrine
         // pour faire un find() avec l'ID fournit
-        // $type = App\Entity\User
-        // $data = 2
         $denormalizedEntity = $this->entityManagerInterface->find($type, $data);
         
         return $denormalizedEntity;

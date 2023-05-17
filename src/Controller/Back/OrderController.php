@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/back/order")
+ * @Route("/back/commandes")
  */
 class OrderController extends AbstractController
 {

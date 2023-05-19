@@ -36,14 +36,14 @@ class BakeryController extends AbstractController
     }
 
     /**
-     * @Route("/new/{id}", name="app_back_bakery_new", methods={"GET", "POST"})
+     * @Route("/ajouter/{id}", name="app_back_bakery_new", methods={"GET", "POST"})
      */
-    public function create(User $user = null, Request $request, BakeryRepository $bakeryRepository): Response
+    public function create(User $user, Request $request, BakeryRepository $bakeryRepository): Response
     {
-        // 404 ?
+        /* // 404 ?
         if ($user === null) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
-        }
+        } */
 
         $bakery = new Bakery();
         $form = $this->createForm(BakeryType::class, $bakery);
@@ -56,7 +56,7 @@ class BakeryController extends AbstractController
 
             $bakeryRepository->add($bakery, true);
 
-            return $this->redirectToRoute('app_back_bakery_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_bakery_index', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/bakery/new.html.twig', [

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Bakery{% endblock %}
+{% block title %}Nouvelle Boulangerie{% endblock %}
 
 {% block body %}
-    <h1>Create new Bakery</h1>
+    <h1>Creer une Boulangerie</h1>
 
     {{ include('back/bakery/_form.html.twig') }}
 
-    <a href="{{ path('app_back_bakery_index', {'id': user.id}) }}}}">back to list</a>
+    <a href="{{ path('app_back_bakery_index', {'id': user.id}) }}">Retour a la liste</a>
 {% endblock %}

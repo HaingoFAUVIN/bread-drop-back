@@ -3,6 +3,7 @@
 namespace App\Controller\Back;
 
 use App\Entity\Bakery;
+use App\Entity\User;
 use App\Form\BakeryType;
 use App\Repository\BakeryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +17,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class BakeryController extends AbstractController
 {
     /**
-     * @Route("/", name="app_back_bakery_index", methods={"GET"})
+     * @Route("/utilisateur/{id<\d+>}", name="app_back_bakery_index", methods={"GET"})
      */
-    public function index(BakeryRepository $bakeryRepository): Response
+    public function index(User $user = null, BakeryRepository $bakeryRepository): Response
     {
+        // 404 ?
+        if ($user === null) {
+            throw $this->createNotFoundException('Boulangerie non trouvé');
+        }
+
+        // on va chercher les boulangerie du user donnée
+        $bakeryByUser = $bakeryRepository->findBy(['user' => $user]);
+
         return $this->render('back/bakery/index.html.twig', [
-            'bakeries' => $bakeryRepository->findAll(),
+            'bakeries' => $bakeryByUser,
+            'user' => $user,
         ]);
     }
 

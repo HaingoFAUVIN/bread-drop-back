@@ -14,22 +14,18 @@
                 <th>Phone</th>
                 <th>Picture</th>
                 <th>Distance</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for bakery in bakeries %}
             <tr>
-                <td>{{ bakery.id }}</td>
+                <td>{{ bakery.id}}</td>
                 <td>{{ bakery.name }}</td>
                 <td>{{ bakery.adress }}</td>
                 <td>{{ bakery.phone }}</td>
                 <td>{{ bakery.picture }}</td>
                 <td>{{ bakery.distance }}</td>
-                <td>{{ bakery.createdAt ? bakery.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ bakery.updatedAt ? bakery.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_back_bakery_show', {'id': bakery.id}) }}">show</a>
                     <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">edit</a>

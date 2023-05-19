@@ -61,6 +61,8 @@ security:
         # on peut maintenant utiliser les ROLE pour les routes API
         - { path: ^/api,       roles: PUBLIC_ACCESS }
 
+        - { path: ^/back,      roles: ROLE_MANAGER }
+
 when@test:
     security:
         password_hashers:

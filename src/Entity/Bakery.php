@@ -74,7 +74,7 @@ class Bakery
      * 
      * @Groups({"bakery_read"})
      */
-    private $product;
+    private $products;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
@@ -84,12 +84,12 @@ class Bakery
     /**
      * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
      */
-    private $schedule;
+    private $schedules;
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
-        $this->schedule = new ArrayCollection();
+        $this->products = new ArrayCollection();
+        $this->schedules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,15 +184,16 @@ class Bakery
     /**
      * @return Collection<int, Product>
      */
-    public function getProduct(): Collection
+    public function getProducts(): Collection
     {
-        return $this->product;
+        return $this->products;
     }
 
     public function addProduct(Product $product): self
     {
-        if (!$this->product->contains($product)) {
-            $this->product[] = $product;
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->addBakery($this);
         }
 
         return $this;
@@ -200,7 +201,9 @@ class Bakery
 
     public function removeProduct(Product $product): self
     {
-        $this->product->removeElement($product);
+        if ($this->products->removeElement($product)) {
+            $product->removeBakery($this);
+        }
 
         return $this;
     }
@@ -220,15 +223,15 @@ class Bakery
     /**
      * @return Collection<int, Schedule>
      */
-    public function getSchedule(): Collection
+    public function getSchedules(): Collection
     {
-        return $this->schedule;
+        return $this->schedules;
     }
 
     public function addSchedule(Schedule $schedule): self
     {
-        if (!$this->schedule->contains($schedule)) {
-            $this->schedule[] = $schedule;
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
             $schedule->setBakery($this);
         }
 
@@ -237,7 +240,7 @@ class Bakery
 
     public function removeSchedule(Schedule $schedule): self
     {
-        if ($this->schedule->removeElement($schedule)) {
+        if ($this->schedules->removeElement($schedule)) {
             // set the owning side to null (unless already changed)
             if ($schedule->getBakery() === $this) {
                 $schedule->setBakery(null);

@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @Route("/api/utilisateurs", name="app_api_user_")
@@ -169,7 +170,8 @@ class UserController extends AbstractController
         UserRepository $userRepository,
         Request $request, 
         SerializerInterface $serializerInterface, 
-        ValidatorInterface $validatorInterface): JsonResponse
+        ValidatorInterface $validatorInterface,
+        UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         $jsonContent = $request->getContent();
         // on reçoit aucun JSON
@@ -187,6 +189,15 @@ class UserController extends AbstractController
             User::class,
             // le format du contenu
             'json');
+
+        $password = $user->getPassword();
+
+        // hachage du password (basé" du security.yaml config de la classe $user)
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $password
+        );
+        $user->setPassword($hashedPassword);
 
         // on a un service qui s'occupe de ça : validatorInterface
         $errors = $validatorInterface->validate($user);

@@ -22,36 +22,23 @@ class OrderController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="app_back_order_index", methods={"GET"})
      */
-    public function index(int $id, BakeryRepository $bakeryRepository, ProductRepository $productRepository, OrderRepository $orderRepository): Response
+    public function index($id, BakeryRepository $bakeryRepository, OrderRepository $orderRepository): Response
     {
-        //On récupère les données de la boulangerie
+        //On récupère la boulangerie
         $bakery = $bakeryRepository->find($id);
         // dd($bakery);
 
-        $products = $bakery->getProducts();
-        foreach ($products as $product) {
-            dump($product);
+        if ($bakery === null) {
+            throw
+             $this->createNotFoundException('Boulangerie non trouvée');
         }
-        dd($bakery);
-        // // 404 ?
-        // if ($bakery === null) {
-        //     throw $this->createNotFoundException('Boulangerie non trouvée');
-        // }
 
-        // https://symfony.com/doc/current/doctrine/associations.html#joining-related-records
-        // https://symfony.com/doc/current/doctrine/associations.html#fetching-related-objects
-        // https://symfony.com/doc/current/doctrine/associations.html
-        // on va chercher les produits de la boulangerie
-        // $products = $bakery->getProducts();
-
-
-        //On récupère les commandes
-        // $ordersByUser = $orderRepository->findBy(['bakery' => $bakery]);
-
-        // dd($products);
+        // On récupère les commandes de la boulangerie
+        $orders = $orderRepository->findOrdersByBakery($bakery);
 
         return $this->render('back/order/index.html.twig', [
-            'orders' => $product,
+            // on transmet "nos" commandes 
+            'orders' => $orders,
             'bakery' => $bakery
         ]);
     }

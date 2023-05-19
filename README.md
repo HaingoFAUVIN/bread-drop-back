@@ -9,6 +9,13 @@ Voici quelques captures et contenus fournis, pour entrevoir les fonctionnalités
 - Affiche la liste des commandes à traiter
 - Permet de changer le status d'une commande
 
+["ROLE_MANAGER"]
+manager@manager.com
+
+bin/console security:hash-password
+$2y$13$LRAAiecZam83Be2I2pcaUu2y/9R.IQXD6vrv1hOKHuZv/KNnS/Giy
+
+
 ### 2. Page Fiche de la commande
 
 - Affiche le détail d'une commande

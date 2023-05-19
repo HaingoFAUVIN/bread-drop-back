@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Order;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Bakery;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Order>
@@ -38,6 +39,44 @@ class OrderRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    /**
+     * Liste des commandes d'une boulangerie
+     */
+    public function findOrdersByBakery(Bakery $bakery)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            '
+            SELECT o.id order_id, o.statut order_status, o.delivery order_delivery, o.schedule order_delivery_id
+            -- depuis l\'entité Order
+            FROM App\Entity\Order o
+            -- `order`
+            -- suit la relation de product_order et order
+            JOIN product_order op ON o.id = op.order_id
+            -- suit la relation de product_order et product
+            JOIN product p ON op.product_id = p.id
+            -- suit la relation de bakery et product
+            JOIN bakery b ON p.bakery_id = b.id
+            WHERE b.id = :bakery'
+        )->setParameter('bakery', $bakery);
+
+        return $query->getResult();
+    }
+
+    // public function findAllByMovieJoinedToPersonQb(Movie $movie)
+    // {
+    //     return $this->createQueryBuilder('c')
+    //     // on veut aussi récupérer les personnes !
+    //         ->innerJoin('c.person', 'p')
+    //         ->addSelect('p')
+    //         ->where('c.movie = :movie')
+    //         ->setParameter('movie', $movie)
+    //         ->orderBy('c.creditOrder', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
 //    /**
 //     * @return Order[] Returns an array of Order objects

@@ -73,13 +73,6 @@ class Product
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Bakery::class, mappedBy="product")
-     * 
-     * @Groups({"product_list"})
-     */
-    private $bakeries;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Order::class, inversedBy="products")
      */
     private $orders;
@@ -92,9 +85,13 @@ class Product
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="products")
+     */
+    private $bakery;
+
     public function __construct()
     {
-        $this->bakeries = new ArrayCollection();
         $this->orders = new ArrayCollection();
     }
 
@@ -187,33 +184,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bakery>
-     */
-    public function getBakeries(): Collection
-    {
-        return $this->bakeries;
-    }
-
-    public function addBakery(Bakery $bakery): self
-    {
-        if (!$this->bakeries->contains($bakery)) {
-            $this->bakeries[] = $bakery;
-            $bakery->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBakery(Bakery $bakery): self
-    {
-        if ($this->bakeries->removeElement($bakery)) {
-            $bakery->removeProduct($this);
-        }
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -246,6 +216,18 @@ class Product
     public function removeOrder(Order $order): self
     {
         $this->orders->removeElement($order);
+
+        return $this;
+    }
+
+    public function getBakery(): ?Bakery
+    {
+        return $this->bakery;
+    }
+
+    public function setBakery(?Bakery $bakery): self
+    {
+        $this->bakery = $bakery;
 
         return $this;
     }

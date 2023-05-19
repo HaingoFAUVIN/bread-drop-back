@@ -69,12 +69,7 @@ class Bakery
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="bakeries")
-     * 
-     * @Groups({"bakery_read"})
-     */
-    private $products;
+
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
@@ -86,10 +81,15 @@ class Bakery
      */
     private $schedules;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="bakery")
+     */
+    private $products;
+
     public function __construct()
     {
-        $this->products = new ArrayCollection();
         $this->schedules = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,32 +181,6 @@ class Bakery
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addBakery($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeBakery($this);
-        }
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -244,6 +218,36 @@ class Bakery
             // set the owning side to null (unless already changed)
             if ($schedule->getBakery() === $this) {
                 $schedule->setBakery(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setBakery($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getBakery() === $this) {
+                $product->setBakery(null);
             }
         }
 

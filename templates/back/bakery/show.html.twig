@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bakery{% endblock %}
+{% block title %}Ma boulangerie{% endblock %}
 
 {% block body %}
     <h1>Bakery</h1>
@@ -32,17 +32,10 @@
                 <td>{{ bakery.distance }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
-                <td>{{ bakery.createdAt ? bakery.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ bakery.updatedAt ? bakery.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_back_bakery_index') }}">back to list</a>
+    <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}">Retour a la liste</a>
 
     <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">edit</a>
 

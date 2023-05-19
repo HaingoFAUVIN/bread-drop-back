@@ -34,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_read"})
+     * @Groups({"user_add"})
      */
     private $firstname;
 
@@ -42,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_read"})
+     * @Groups({"user_add"})
      */
     private $lastname;
 

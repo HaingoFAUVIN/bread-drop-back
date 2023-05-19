@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bakery index{% endblock %}
+{% block title %}Liste de mes Boulangeries{% endblock %}
 
 {% block body %}
-    <h1>Bakery index</h1>
+    <h1>Liste de mes Boulangeries</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Adress</th>
-                <th>Phone</th>
-                <th>Picture</th>
-                <th>Distance</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Numéro de téléphone</th>
+                <th>Photo</th>
+                <th>Distance de livraison max</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,8 +27,8 @@
                 <td>{{ bakery.picture }}</td>
                 <td>{{ bakery.distance }}</td>
                 <td>
-                    <a href="{{ path('app_back_bakery_show', {'id': bakery.id}) }}">show</a>
-                    <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">edit</a>
+                    <a href="{{ path('app_back_bakery_show', {'id': bakery.id}) }}">Afficher</a>
+                    <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_back_bakery_new') }}">Create new</a>
+    <a href="{{ path('app_back_bakery_new', {'id': user.id}) }}">Ajouter une boulangerie</a>
 {% endblock %}

@@ -3,32 +3,28 @@
 {% block title %}Ma boulangerie{% endblock %}
 
 {% block body %}
-    <h1>Bakery</h1>
+    <h1>Ma Boulangerie</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ bakery.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <td>{{ bakery.name }}</td>
             </tr>
             <tr>
-                <th>Adress</th>
+                <th>Adresse</th>
                 <td>{{ bakery.adress }}</td>
             </tr>
             <tr>
-                <th>Phone</th>
+                <th>Numéro de Téléphone</th>
                 <td>{{ bakery.phone }}</td>
             </tr>
             <tr>
-                <th>Picture</th>
+                <th>Photo </th>
                 <td>{{ bakery.picture }}</td>
             </tr>
             <tr>
-                <th>Distance</th>
+                <th>Distance de livraiosn</th>
                 <td>{{ bakery.distance }}</td>
             </tr>
             <tr>
@@ -37,7 +33,7 @@
 
     <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}">Retour a la liste</a>
 
-    <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">edit</a>
+    <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">modifier</a>
 
     {{ include('back/bakery/_delete_form.html.twig') }}
 {% endblock %}

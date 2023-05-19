@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Bakery{% endblock %}
+{% block title %}Modifier ma Boulangerie{% endblock %}
 
 {% block body %}
-    <h1>Edit Bakery</h1>
+    <h1>Modifier ma Boulangerie</h1>
 
-    {{ include('back/bakery/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back/bakery/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_back_bakery_index') }}">back to list</a>
+    <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id})}}">Retour a la liste</a>
 
     {{ include('back/bakery/_delete_form.html.twig') }}
 {% endblock %}

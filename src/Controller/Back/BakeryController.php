@@ -38,12 +38,12 @@ class BakeryController extends AbstractController
     /**
      * @Route("/ajouter/{id}", name="app_back_bakery_new", methods={"GET", "POST"})
      */
-    public function create(User $user, Request $request, BakeryRepository $bakeryRepository): Response
+    public function create(User $user =null, Request $request, BakeryRepository $bakeryRepository): Response
     {
-        /* // 404 ?
+        // 404 ?
         if ($user === null) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
-        } */
+        }
 
         $bakery = new Bakery();
         $form = $this->createForm(BakeryType::class, $bakery);
@@ -77,14 +77,15 @@ class BakeryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_back_bakery_edit", methods={"GET", "POST"})
+     * @Route("/modifier/{id}", name="app_back_bakery_edit", methods={"GET", "POST"})
      */
-    public function update(Request $request, Bakery $bakery, BakeryRepository $bakeryRepository): Response
+    public function update( Request $request, Bakery $bakery, BakeryRepository $bakeryRepository): Response
     {
         $form = $this->createForm(BakeryType::class, $bakery);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $bakeryRepository->add($bakery, true);
 
             return $this->redirectToRoute('app_back_bakery_index', [], Response::HTTP_SEE_OTHER);

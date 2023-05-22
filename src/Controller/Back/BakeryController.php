@@ -21,11 +21,6 @@ class BakeryController extends AbstractController
      */
     public function index(User $user = null, BakeryRepository $bakeryRepository): Response
     {
-        // 404 ?
-        if ($user === null) {
-            throw $this->createNotFoundException('Boulangerie non trouvé');
-        }
-
         // on va chercher les boulangerie du user donnée
         $bakeryByUser = $bakeryRepository->findBy(['user' => $user]);
 
@@ -96,17 +91,5 @@ class BakeryController extends AbstractController
             'bakery' => $bakery,
             'form' => $form,
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="app_back_bakery_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Bakery $bakery, BakeryRepository $bakeryRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$bakery->getId(), $request->request->get('_token'))) {
-            $bakeryRepository->remove($bakery, true);
-        }
-
-        return $this->redirectToRoute('app_back_bakery_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -72,11 +72,11 @@ class ScheduleController extends AbstractController
     } */
 
     /**
-     * @Route("/{id}/edit", name="app_schedule_edit", methods={"GET", "POST"})
+     * @Route("/{id}/horaire/modifier", name="app_schedule_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Schedule $schedule, ScheduleRepository $scheduleRepository): Response
     {
-        $form = $this->createForm(Schedule1Type::class, $schedule);
+        $form = $this->createForm(ScheduleType::class, $schedule);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

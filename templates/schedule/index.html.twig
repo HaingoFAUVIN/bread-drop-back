@@ -1,34 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Schedule index{% endblock %}
+{% block title %}Mes Horaires{% endblock %}
 
 {% block body %}
-    <h1>Schedule index</h1>
+    <h1>Mes Horaires</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Day</th>
-                <th>OpenMorning</th>
-                <th>CloseMorning</th>
-                <th>OpenAfternoon</th>
-                <th>CloseAfternoon</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
+                <th>Jour</th>
+                <th>Ouveture du matin</th>
+                <th>Fermeture du matin</th>
+                <th>Ouveture de l'apres midi</th>
+                <th>Fermeture de l'apres midi</th>
             </tr>
         </thead>
         <tbody>
         {% for schedule in schedules %}
             <tr>
-                <td>{{ schedule.id }}</td>
                 <td>{{ schedule.day }}</td>
                 <td>{{ schedule.openMorning }}</td>
                 <td>{{ schedule.closeMorning }}</td>
                 <td>{{ schedule.openAfternoon }}</td>
                 <td>{{ schedule.closeAfternoon }}</td>
                 <td>
+                <td>
+                    <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">Modifier</a>
+                </td>
                 </td>
             </tr>
         {% else %}

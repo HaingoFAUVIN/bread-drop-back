@@ -260,7 +260,6 @@ class AppFixtures extends Fixture
             for ($i = 1; $i <= $sandwitchCount; $i++) {
                 $orderProduct = new OrderProduct();
                 $bakery->addProduct($allSandwitch[$i]);
-                $orderProduct->setQuantity(mt_rand(1, 10));
             }
         }
 
@@ -272,7 +271,6 @@ class AppFixtures extends Fixture
             for ($i = 1; $i <= $patistriesCount; $i++) {
                 $orderProduct = new OrderProduct();
                 $bakery->addProduct($allPastries[$i]);
-                $orderProduct->setQuantity(mt_rand(1, 10));
             }
         }
 
@@ -282,7 +280,6 @@ class AppFixtures extends Fixture
             shuffle($allPastry);
             $patistryCount = mt_rand(0, 4);
             for ($i = 1; $i <= $patistryCount; $i++) {
-                // $orderProduct = new OrderProduct();
                 $bakery->addProduct($allPastry[$i]);
             }
         }
@@ -293,9 +290,7 @@ class AppFixtures extends Fixture
             shuffle($allBread);
             $dreadCount = mt_rand(0, 4);
             for ($i = 1; $i <= $dreadCount; $i++) {
-                // $orderProduct = new OrderProduct();
                 $bakery->addProduct($allBread[$i]);
-                // $orderProduct->setQuantity(mt_rand(1, 10));
             }
         }
 
@@ -305,11 +300,11 @@ class AppFixtures extends Fixture
             shuffle($allSandwitch);
             $sandwitchCount = mt_rand(0, 4);
             for ($i = 1; $i <= $sandwitchCount; $i++) {
-                // $orderProduct = new OrderProduct();
-                $order->addProduct($allSandwitch[$i]);
-                // $order->addOrderProduct($allSandwitch[$i]);#->setQuantity(mt_rand(1, 10));
-                // $orderProduct->setOrder($allOrder[$i]);
-                // $orderProduct->setQuantity(mt_rand(1, 10));
+                $orderProduct = new OrderProduct();
+                // $order->addOrderProduct($allSandwitch[$i]);
+                $orderProduct->setProduct($allSandwitch[$i]);#->setQuantity(mt_rand(1, 10));
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
             }
         }
 
@@ -319,9 +314,7 @@ class AppFixtures extends Fixture
             shuffle($allBread);
             $breadCount = mt_rand(0, 4);
             for ($i = 1; $i <= $breadCount; $i++) {
-                // $orderProduct = new OrderProduct();
-                $order->addProduct($allBread[$i]);
-                // $order->addOrderProduct($allSandwitch[$i]);#->setQuantity(mt_rand(1, 10));
+
             }
         }
 
@@ -331,9 +324,7 @@ class AppFixtures extends Fixture
             shuffle($allPastry);
             $pastryCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastryCount; $i++) {
-                // $orderProduct = new OrderProduct();
-                // $order->addOrderProduct($allPastry[$i]);
-                // $order->addOrderProduct($allSandwitch[$i]);#->setQuantity(mt_rand(1, 10));
+
             }
         }
 
@@ -343,9 +334,7 @@ class AppFixtures extends Fixture
             shuffle($allPastries);
             $pastriesCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastriesCount; $i++) {
-                // $orderProduct = new OrderProduct();
-                $order->addProduct($allPastries[$i]);
-                // $order->addOrderProduct($allSandwitch[$i]); #->setQuantity(mt_rand(1, 10));
+
             }
         }
 

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ScheduleRepository::class)
@@ -28,6 +29,7 @@ class Schedule
      * 
      * @Groups({"schedule_show"})
      * @Groups({"schedule_read"})
+     * @Assert\NotBlank
      */
     private $day;
 
@@ -36,7 +38,7 @@ class Schedule
      * 
      * @Groups({"schedule_show"})
      * @Groups({"schedule_read"})
-     * 
+     * @Assert\NotBlank
      */
     private $openMorning;
 
@@ -45,7 +47,7 @@ class Schedule
      * 
      * @Groups({"schedule_show"})
      * @Groups({"schedule_read"})
-     * 
+     * @Assert\NotBlank
      */
     private $closeMorning;
 
@@ -54,6 +56,7 @@ class Schedule
      * 
      * @Groups({"schedule_show"})
      * @Groups({"schedule_read"})
+     * @Assert\NotBlank
      */
     private $openAfternoon;
 
@@ -62,6 +65,7 @@ class Schedule
      * 
      * @Groups({"schedule_show"})
      * @Groups({"schedule_read"})
+     * @Assert\NotBlank
      */
     private $closeAfternoon;
 
@@ -82,6 +86,12 @@ class Schedule
      * @Groups({"schedule_read"})
      */
     private $bakery;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+    }
 
     public function getId(): ?int
     {

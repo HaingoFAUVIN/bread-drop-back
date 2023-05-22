@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BakeryRepository::class)
@@ -30,7 +31,11 @@ class Bakery
      * 
      * @Groups({"bakery_list"})
      * @Groups({"bakery_show"})
+<<<<<<< HEAD
      * @Groups({"bakery_read"})
+=======
+     * @Assert\NotBlank
+>>>>>>> back-boulangerie
      */
     private $name;
 
@@ -38,12 +43,17 @@ class Bakery
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"bakery_list"})
+<<<<<<< HEAD
      * @Groups({"bakery_read"})
+=======
+     * @Assert\NotBlank
+>>>>>>> back-boulangerie
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=25)
+     * @Assert\NotBlank
      */
     private $phone;
 
@@ -51,6 +61,7 @@ class Bakery
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"bakery_list"})
+     * @Assert\NotBlank
      */
     private $picture;
 
@@ -58,6 +69,7 @@ class Bakery
      * @ORM\Column(type="integer", nullable=true)
      * 
      * @Groups({"bakery_list"})
+     * @Assert\NotBlank
      */
     private $distance;
 
@@ -92,6 +104,8 @@ class Bakery
     {
         $this->product = new ArrayCollection();
         $this->schedule = new ArrayCollection();
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
     public function getId(): ?int

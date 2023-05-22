@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Horaires{% endblock %}
+
+{% block body %}
+    <h1>Mes Horaires</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ schedule.day}}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ schedule.openMorning }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de Téléphone</th>
+                <td>{{ schedule.closeMorning }}</td>
+            </tr>
+            <tr>
+                <th>Photo </th>
+                <td>{{ schedule.openAfternoon}}</td>
+            </tr>
+            <tr>
+                <th>Distance de livraiosn</th>
+                <td>{{ schedule.closeAfternoon }}</td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_schedule_index', {'id': schedule.bakery.id}) }}">Retour a la liste</a>
+
+    <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">modifier</a>
+
+{% endblock %}
+

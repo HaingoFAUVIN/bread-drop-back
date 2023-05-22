@@ -34,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_read"})
+     * @Groups({"user_add"})
      */
     private $firstname;
 
@@ -42,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_read"})
+     * @Groups({"user_add"})
      */
     private $lastname;
 
@@ -119,6 +121,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
 

@@ -57,13 +57,13 @@ class OrderController extends AbstractController
         }
 
         // On récupère les produits de la commande
-        $products = $order->getProducts();
+        // $products = $order->getProducts();
         // dd($products);
 
         return $this->render('back/order/show.html.twig', [
             // on transmet "nos" commandes 
             'order' => $order,
-            'products' => $products
+            // 'products' => $products
         ]);
     }
  

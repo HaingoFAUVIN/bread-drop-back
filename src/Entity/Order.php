@@ -80,14 +80,6 @@ class Order
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="orders")
-     * 
-     * @Groups({"order_list"})
-     * @Groups({"order_read"})
-     */
-    private $products;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
      * 
      * @Groups({"order_list"})
@@ -96,14 +88,16 @@ class Order
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProductOrder::class, mappedBy="purchase")
+     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="order", fetch="EXTRA_LAZY")
+     * 
+     * @Groups({"order_list"})
+     * @Groups({"order_read"})
      */
-    private $productOrders;
+    private $orderProducts;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-        $this->productOrders = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,14 +189,6 @@ class Order
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -215,49 +201,31 @@ class Order
         return $this;
     }
 
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeOrder($this);
-        }
-
-        return $this;
-    }
 
     /**
-     * @return Collection<int, ProductOrder>
+     * @return Collection<int, OrderProduct>
      */
-    public function getProductOrders(): Collection
+    public function getOrderProducts(): Collection
     {
-        return $this->productOrders;
+        return $this->orderProducts;
     }
 
-    public function addProductOrder(ProductOrder $productOrder): self
+    public function addOrderProduct(OrderProduct $orderProduct): self
     {
-        if (!$this->productOrders->contains($productOrder)) {
-            $this->productOrders[] = $productOrder;
-            $productOrder->setPurchase($this);
+        if (!$this->orderProducts->contains($orderProduct)) {
+            $this->orderProducts[] = $orderProduct;
+            $orderProduct->setOrder($this);
         }
 
         return $this;
     }
 
-    public function removeProductOrder(ProductOrder $productOrder): self
+    public function removeOrderProduct(OrderProduct $orderProduct): self
     {
-        if ($this->productOrders->removeElement($productOrder)) {
+        if ($this->orderProducts->removeElement($orderProduct)) {
             // set the owning side to null (unless already changed)
-            if ($productOrder->getPurchase() === $this) {
-                $productOrder->setPurchase(null);
+            if ($orderProduct->getOrder() === $this) {
+                $orderProduct->setOrder(null);
             }
         }
 

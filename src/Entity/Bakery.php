@@ -69,8 +69,6 @@ class Bakery
      */
     private $updatedAt;
 
-
-
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      */

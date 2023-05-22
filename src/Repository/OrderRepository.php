@@ -53,9 +53,9 @@ class OrderRepository extends ServiceEntityRepository
             SELECT DISTINCT o.id id, o.status status, o.delivery delivery, o.schedule schedule
             -- depuis l\'entité Order
             FROM `order` o
-            -- suit la relation de product_order et order
-            JOIN product_order op ON o.id = op.order_id
-            -- suit la relation de product_order et product
+            -- suit la relation de productorder et order
+            JOIN productorder op ON o.id = op.order_id
+            -- suit la relation de productorder et product
             JOIN product p ON op.product_id = p.id
             -- suit la relation de bakery et product
             JOIN bakery b ON p.bakery_id = b.id

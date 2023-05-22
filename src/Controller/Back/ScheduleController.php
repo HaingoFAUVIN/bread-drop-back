@@ -33,21 +33,31 @@ class ScheduleController extends AbstractController
     /**
      * @Route("/{id<\d+>}/horaire/ajouter", name="app_schedule_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, ScheduleRepository $scheduleRepository): Response
+    public function new(Bakery $bakery = null, Request $request, ScheduleRepository $scheduleRepository): Response
     {
+         // 404 ?
+         if ($bakery === null) {
+            throw $this->createNotFoundException('Boulangerie non trouvé');
+        }
+
         $schedule = new Schedule();
-        $form = $this->createForm(Schedule1Type::class, $schedule);
+        $form = $this->createForm(ScheduleType::class, $schedule);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // on associe les horaires à la boulangerie
+            $schedule->setBakery($bakery);
+
             $scheduleRepository->add($schedule, true);
 
-            return $this->redirectToRoute('app_schedule_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_schedule_index', ['id' => $bakery->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('schedule/new.html.twig', [
             'schedule' => $schedule,
             'form' => $form,
+            'bakery' =>$bakery
         ]);
     }
 

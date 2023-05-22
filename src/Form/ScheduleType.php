@@ -20,14 +20,37 @@ class ScheduleType extends AbstractType
                     'placeholder' => 'ex. Lundi',
                 ]
             ])
-            
-            ->add('openMorning')
-            ->add('closeMorning')
-            ->add('openAfternoon')
-            ->add('closeAfternoon')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('bakery')
+
+            ->add('openMorning', TextType::class, [
+                'label' => 'Heure d\'ouverture du matin',
+                'attr' => [
+                    // le placeholder est un attribut HTML
+                    'placeholder' => '07',
+                ]
+            ])
+            ->add('closeMorning', TextType::class, [
+                'label' => 'Heure de fermeture du matin',
+                'attr' => [
+                    // le placeholder est un attribut HTML
+                    'placeholder' => '12',
+                ]
+            ])
+
+            ->add('openAfternoon', TextType::class, [
+                'label' => 'Heure d\'ouverture de l\'apres midi',
+                'attr' => [
+                    // le placeholder est un attribut HTML
+                    'placeholder' => '13',
+                ]
+            ])
+
+            ->add('closeAfternoon', TextType::class, [
+                'label' => 'Heure de fermeture de l\'apres midi',
+                'attr' => [
+                    // le placeholder est un attribut HTML
+                    'placeholder' => '18',
+                ]
+            ])
         ;
     }
 

@@ -4,7 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Bakery;
 use App\Entity\Schedule;
-use App\Form\Schedule1Type;
+use App\Form\ScheduleType;
 use App\Repository\ScheduleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +57,7 @@ class ScheduleController extends AbstractController
         return $this->renderForm('schedule/new.html.twig', [
             'schedule' => $schedule,
             'form' => $form,
-            'bakery' =>$bakery
+            'bakery' => $bakery,
         ]);
     }
 

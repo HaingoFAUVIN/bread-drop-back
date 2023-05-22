@@ -62,19 +62,19 @@ class ScheduleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_schedule_show", methods={"GET"})
+     * @Route("horaire/{id}", name="app_schedule_show", methods={"GET"})
      */
-    /* public function show(Schedule $schedule): Response
+    public function show(Schedule $schedule): Response
     {
         return $this->render('schedule/show.html.twig', [
             'schedule' => $schedule,
         ]);
-    } */
+    }
 
     /**
      * @Route("/{id}/horaire/modifier", name="app_schedule_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Schedule $schedule, ScheduleRepository $scheduleRepository): Response
+    public function edit( Request $request, Schedule $schedule, ScheduleRepository $scheduleRepository): Response
     {
         $form = $this->createForm(ScheduleType::class, $schedule);
         $form->handleRequest($request);
@@ -82,7 +82,7 @@ class ScheduleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $scheduleRepository->add($schedule, true);
 
-            return $this->redirectToRoute('app_schedule_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_schedule_show', ['id' => $schedule->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('schedule/edit.html.twig', [

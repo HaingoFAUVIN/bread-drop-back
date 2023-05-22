@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Schedule{% endblock %}
+{% block title %}Mofication de l'horaire{% endblock %}
 
 {% block body %}
-    <h1>Edit Schedule</h1>
+    <h1>Mofication de l'horaire</h1>
 
     {{ include('schedule/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_schedule_index', {'id': bakery.id}) }}">Retour a liste</a>
+    <a href="{{ path('app_schedule_index', {'id': schedule.bakery.id}) }}">Retour a liste</a>
 
-    {{ include('schedule/_delete_form.html.twig') }}
 {% endblock %}

@@ -30,6 +30,7 @@ class Bakery
      * 
      * @Groups({"bakery_list"})
      * @Groups({"bakery_show"})
+     * @Groups({"bakery_read"})
      */
     private $name;
 
@@ -37,6 +38,7 @@ class Bakery
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"bakery_list"})
+     * @Groups({"bakery_read"})
      */
     private $adress;
 

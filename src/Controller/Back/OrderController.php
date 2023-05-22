@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\User;
 use App\Entity\Bakery;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Repository\OrderRepository;
 use App\Repository\BakeryRepository;
@@ -20,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OrderController extends AbstractController
 {
     /**
-     * @Route("/{id<\d+>}", name="app_back_order_index", methods={"GET"})
+     * @Route("/{id<\d+>}/commandes", name="home", methods={"GET"})
      */
     public function index($id, BakeryRepository $bakeryRepository, OrderRepository $orderRepository): Response
     {
@@ -41,21 +42,30 @@ class OrderController extends AbstractController
             'bakery' => $bakery
         ]);
     }
+    /**
+     * @Route("/commande/{id<\d+>}", name="app_back_order_show", methods={"GET"})
+     */
+    public function show($id, OrderRepository $orderRepository): Response
+    {
+        //On récupère la commande
+        $order = $orderRepository->find($id);
+        // dd($order);
+
+        if ($order === null) {
+            throw
+             $this->createNotFoundException('Commande non trouvée');
+        }
+
+        // On récupère les produits de la commande
+        $products = $order->getProducts();
+        // dd($products);
+
+        return $this->render('back/order/show.html.twig', [
+            // on transmet "nos" commandes 
+            'order' => $order,
+            'products' => $products
+        ]);
+    }
+ 
 }
 
-
-/**
- * @Route("/back/commandes")
- */
-// class OrderController extends AbstractController
-// {
-    /**
-     * @Route("/", name="app_back_order_index", methods={"GET"})
-     */
-//     public function index(OrderRepository $orderRepository): Response
-//     {
-//         return $this->render('back/order/index.html.twig', [
-//             'orders' => $orderRepository->findAll(),
-//         ]);
-//     }
-// }

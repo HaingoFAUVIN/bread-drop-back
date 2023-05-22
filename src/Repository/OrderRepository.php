@@ -65,22 +65,9 @@ class OrderRepository extends ServiceEntityRepository
             $resultSet = $stmt->executeQuery(['bakery' => $bakery]);
             // dd($resultSet);
             
-            // renvoie un tableau e tableaux
+            // renvoie un tableau de tableaux
             return $resultSet->fetchAllAssociative();
     }
-
-    // public function findAllByMovieJoinedToPersonQb(Movie $movie)
-    // {
-    //     return $this->createQueryBuilder('c')
-    //     // on veut aussi récupérer les personnes !
-    //         ->innerJoin('c.person', 'p')
-    //         ->addSelect('p')
-    //         ->where('c.movie = :movie')
-    //         ->setParameter('movie', $movie)
-    //         ->orderBy('c.creditOrder', 'ASC')
-    //         ->getQuery()
-    //         ->getResult();
-    // }
 
 //    /**
 //     * @return Order[] Returns an array of Order objects

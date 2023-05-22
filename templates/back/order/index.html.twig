@@ -1,5 +1,3 @@
-{% extends 'base.html.twig' %}
-
 {% block title %}Liste des commandes{% endblock %}
 
 {% block body %}
@@ -21,10 +19,6 @@
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
-                {# <td>{% for product in order.products %}{{product}}{% endfor %}</td> #}
-                {# |u.truncate(30, '...', false) #}
-                {# <td>Produits</td> #}
-                {# {{dump(order)}} #}
 
                 <td>
                     {% if order.status == '1' %}
@@ -44,8 +38,7 @@
             
                 <td>{{ order.schedule|format_datetime('short', 'short', locale='fr') }}</td>
                 <td>
-                    <a href="#">Afficher</a>
-                    {# {{ path('app_back_order_show', {'id': order.id}) }} #}
+                    <a href="{{ path('app_back_order_show', {'id': order.id}) }}">Afficher</a>
 
                     <a href="#">Archiver</a>
                     {# {{ path('app_back_order_archive', {'id': order.id}) }} #}
@@ -53,10 +46,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">Pas de commandes trouvées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% endblock %}
+
 

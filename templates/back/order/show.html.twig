@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de la commande{% endblock %}
+
+{% block body %}
+    <h1>Fiche de la commande</h1>
+
+    <p>{{ order.id }}</p>
+    {# {{ include('_flash_messages.html.twig') }} #}
+
+    <h1>Liste des produits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                {# <th>Produits</th> #}
+                <th>Nom</th>
+                <th>Quantité</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.name }}</td>
+            </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

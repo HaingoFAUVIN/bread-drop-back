@@ -95,9 +95,15 @@ class Order
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductOrder::class, mappedBy="purchase")
+     */
+    private $productOrders;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->productOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +229,36 @@ class Order
     {
         if ($this->products->removeElement($product)) {
             $product->removeOrder($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductOrder>
+     */
+    public function getProductOrders(): Collection
+    {
+        return $this->productOrders;
+    }
+
+    public function addProductOrder(ProductOrder $productOrder): self
+    {
+        if (!$this->productOrders->contains($productOrder)) {
+            $this->productOrders[] = $productOrder;
+            $productOrder->setPurchase($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductOrder(ProductOrder $productOrder): self
+    {
+        if ($this->productOrders->removeElement($productOrder)) {
+            // set the owning side to null (unless already changed)
+            if ($productOrder->getPurchase() === $this) {
+                $productOrder->setPurchase(null);
+            }
         }
 
         return $this;

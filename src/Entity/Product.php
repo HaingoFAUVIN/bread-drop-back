@@ -90,9 +90,15 @@ class Product
      */
     private $bakery;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductOrder::class, mappedBy="product")
+     */
+    private $productOrders;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->productOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,6 +234,36 @@ class Product
     public function setBakery(?Bakery $bakery): self
     {
         $this->bakery = $bakery;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductOrder>
+     */
+    public function getProductOrders(): Collection
+    {
+        return $this->productOrders;
+    }
+
+    public function addProductOrder(ProductOrder $productOrder): self
+    {
+        if (!$this->productOrders->contains($productOrder)) {
+            $this->productOrders[] = $productOrder;
+            $productOrder->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductOrder(ProductOrder $productOrder): self
+    {
+        if ($this->productOrders->removeElement($productOrder)) {
+            // set the owning side to null (unless already changed)
+            if ($productOrder->getProduct() === $this) {
+                $productOrder->setProduct(null);
+            }
+        }
 
         return $this;
     }

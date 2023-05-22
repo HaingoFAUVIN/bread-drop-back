@@ -50,7 +50,7 @@ class OrderRepository extends ServiceEntityRepository
 
 
         $query =  '
-            SELECT o.id id, o.status status, o.delivery delivery, o.schedule schedule
+            SELECT DISTINCT o.id id, o.status status, o.delivery delivery, o.schedule schedule
             -- depuis l\'entité Order
             FROM `order` o
             -- suit la relation de product_order et order

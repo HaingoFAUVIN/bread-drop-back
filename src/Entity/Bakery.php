@@ -97,6 +97,7 @@ class Bakery
         $this->product = new ArrayCollection();
         $this->schedule = new ArrayCollection();
         $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
     public function getId(): ?int

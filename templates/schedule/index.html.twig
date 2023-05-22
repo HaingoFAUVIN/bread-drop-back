@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Schedule index{% endblock %}
+
+{% block body %}
+    <h1>Schedule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Day</th>
+                <th>OpenMorning</th>
+                <th>CloseMorning</th>
+                <th>OpenAfternoon</th>
+                <th>CloseAfternoon</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for schedule in schedules %}
+            <tr>
+                <td>{{ schedule.id }}</td>
+                <td>{{ schedule.day }}</td>
+                <td>{{ schedule.openMorning }}</td>
+                <td>{{ schedule.closeMorning }}</td>
+                <td>{{ schedule.openAfternoon }}</td>
+                <td>{{ schedule.closeAfternoon }}</td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun horaires trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_schedule_new') }}">Ajouter des horaires</a>
+{% endblock %}

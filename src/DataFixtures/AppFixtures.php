@@ -252,46 +252,49 @@ class AppFixtures extends Fixture
         }
 
         // 7-1 Un produit est associé à une boulangerie : catégorie Sandwitch
-        foreach ($allSandwitch as $sandwitch) {
+        foreach ($allBakeries as $bakery) {
 
             // On mélange les Sandwitch et on en récupère 0 à 4 au hasard
-            shuffle($allBakeries);
-            $bakeriesCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $bakeriesCount; $i++) {
-                $sandwitch->setBakery($allBakeries[$i]);
+            shuffle($allSandwitch);
+            $sandwitchCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $sandwitchCount; $i++) {
+                $bakery->addProduct($allSandwitch[$i]);
+                
             }
         }
 
         // 7-2 BAKERY_PRODUCT : catégorie Pastries
-        foreach ($allPastries as $pastries) {
+        foreach ($allBakeries as $bakery) {
 
-            // On mélange les pastries et on en récupère 0 à 4 au hasard
+            // On mélange les Pastries et on en récupère 0 à 4 au hasard
             shuffle($allPastries);
             $pastriesCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastriesCount; $i++) {
-                $pastries->setBakery($allPastries[$i]);
+                $bakery->addProduct($allPastries[$i]);
+                
             }
         }
+        // 7-3 BAKERY_PRODUCT : catégorie Pastry
+        foreach ($allBakeries as $bakery) {
 
-        // 7-3 BAKERY_PRODUCT : catégorie Patistry
-        foreach ($allPastries as $pastries) {
-
-            // On mélange les pastries et on en récupère 0 à 4 au hasard
-            shuffle($allPastries);
-            $pastriesCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $pastriesCount; $i++) {
-                $pastries->setBakery($allPastries[$i]);
+            // On mélange les Pastry et on en récupère 0 à 4 au hasard
+            shuffle($allPastry);
+            $pastryCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $pastryCount; $i++) {
+                $bakery->addProduct($allPastry[$i]);
+                
             }
         }
         
         // 7-4 BAKERY_PRODUCT : catégorie Bread
-        foreach ($allPastries as $pastries) {
+        foreach ($allBakeries as $bakery) {
 
-            // On mélange les pastries et on en récupère 0 à 4 au hasard
-            shuffle($allPastries);
-            $pastriesCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $pastriesCount; $i++) {
-                $pastries->setBakery($allPastries[$i]);
+            // On mélange les Bread et on en récupère 0 à 4 au hasard
+            shuffle($allBread);
+            $sandwitchCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $sandwitchCount; $i++) {
+                $bakery->addProduct($allBread[$i]);
+                
             }
         }
 
@@ -302,10 +305,11 @@ class AppFixtures extends Fixture
             $sandwitchCount = mt_rand(0, 4);
             for ($i = 1; $i <= $sandwitchCount; $i++) {
                 $orderProduct = new OrderProduct();
-                // $order->addOrderProduct($allSandwitch[$i]);
-                $orderProduct->setProduct($allSandwitch[$i]);#->setQuantity(mt_rand(1, 10));
+                $orderProduct->setProduct($allSandwitch[$i]);
                 $orderProduct->setOrder($allOrder[$i]);
                 $orderProduct->setQuantity(mt_rand(1, 10));
+
+                $manager->persist($orderProduct);
             }
         }
 
@@ -315,7 +319,12 @@ class AppFixtures extends Fixture
             shuffle($allBread);
             $breadCount = mt_rand(0, 4);
             for ($i = 1; $i <= $breadCount; $i++) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allBread[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
 
+                $manager->persist($orderProduct);
             }
         }
 
@@ -325,7 +334,12 @@ class AppFixtures extends Fixture
             shuffle($allPastry);
             $pastryCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastryCount; $i++) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allPastry[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
 
+                $manager->persist($orderProduct);
             }
         }
 
@@ -335,7 +349,12 @@ class AppFixtures extends Fixture
             shuffle($allPastries);
             $pastriesCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastriesCount; $i++) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allPastries[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
 
+                $manager->persist($orderProduct);
             }
         }
 

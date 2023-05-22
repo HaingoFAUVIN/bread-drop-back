@@ -216,19 +216,19 @@ class AppFixtures extends Fixture
         // Création de 10 commandes : table order
         $allOrder = [];
         for ($k = 0; $k < 10; $k++) {
-            $orderProduct = new Order();
-            $orderProduct->setDate($faker->dateTimeBetween('-1week', 'now'));
-            $orderProduct->setUser($allPersons[$k]);
-            $orderProduct->setPrice(mt_rand(5, 50)); //  entre 5 et 50
-            $orderProduct->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
-            $orderProduct->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0
-            $orderProduct->setSchedule($faker->dateTimeBetween('-1week', 'now')); 
-            $orderProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+            $order = new Order();
+            $order->setDate($faker->dateTimeBetween('-1week', 'now'));
+            $order->setUser($allPersons[$k]);
+            $order->setPrice(mt_rand(5, 50)); //  entre 5 et 50
+            $order->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
+            $order->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0
+            $order->setSchedule($faker->dateTimeBetween('-1week', 'now')); 
+            $order->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            $manager->persist($orderProduct);
+            $manager->persist($order);
         
             // On ajoute l'entité à sa liste
-            $allOrder[] = $orderProduct;
+            $allOrder[] = $order;
         }
 
         // 6- SCHEDULE : horaires d'ouverture de 20 boulangeries
@@ -243,7 +243,7 @@ class AppFixtures extends Fixture
                 $bakerySchedule->setCloseAfternoon(mt_rand(19, 20) . "h" ."00");
                 $bakerySchedule->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-                // Associer un une boulangerie à un horaire par jour
+                // Associer une boulangerie à un horaire par jour
                 $bakerySchedule->setBakery($allBakeries[$l]);
 
                 $manager->persist($bakerySchedule);
@@ -251,46 +251,47 @@ class AppFixtures extends Fixture
             }
         }
 
-        // 7-1 BAKERY_PRODUCT : catégorie Sandwitch
-        foreach ($allBakeries as $bakery) {
+        // 7-1 Un produit est associé à une boulangerie : catégorie Sandwitch
+        foreach ($allSandwitch as $sandwitch) {
 
             // On mélange les Sandwitch et on en récupère 0 à 4 au hasard
-            shuffle($allSandwitch);
-            $sandwitchCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $sandwitchCount; $i++) {
-                $orderProduct = new OrderProduct();
-                $bakery->addProduct($allSandwitch[$i]);
+            shuffle($allBakeries);
+            $bakeriesCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $bakeriesCount; $i++) {
+                $sandwitch->setBakery($allBakeries[$i]);
             }
         }
 
         // 7-2 BAKERY_PRODUCT : catégorie Pastries
-        foreach ($allBakeries as $bakery) {
-            // On mélange les Patistries et on en récupère 0 à 4 au hasard
+        foreach ($allPastries as $pastries) {
+
+            // On mélange les pastries et on en récupère 0 à 4 au hasard
             shuffle($allPastries);
-            $patistriesCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $patistriesCount; $i++) {
-                $orderProduct = new OrderProduct();
-                $bakery->addProduct($allPastries[$i]);
+            $pastriesCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $pastriesCount; $i++) {
+                $pastries->setBakery($allPastries[$i]);
             }
         }
 
         // 7-3 BAKERY_PRODUCT : catégorie Patistry
-        foreach ($allBakeries as $bakery) {
-            // On mélange les Patistry et on en récupère 0 à 4 au hasard
-            shuffle($allPastry);
-            $patistryCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $patistryCount; $i++) {
-                $bakery->addProduct($allPastry[$i]);
+        foreach ($allPastries as $pastries) {
+
+            // On mélange les pastries et on en récupère 0 à 4 au hasard
+            shuffle($allPastries);
+            $pastriesCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $pastriesCount; $i++) {
+                $pastries->setBakery($allPastries[$i]);
             }
         }
         
         // 7-4 BAKERY_PRODUCT : catégorie Bread
-        foreach ($allBakeries as $bakery) {
-            // On mélange les Bread et on en récupère 0 à 4 au hasard
-            shuffle($allBread);
-            $dreadCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $dreadCount; $i++) {
-                $bakery->addProduct($allBread[$i]);
+        foreach ($allPastries as $pastries) {
+
+            // On mélange les pastries et on en récupère 0 à 4 au hasard
+            shuffle($allPastries);
+            $pastriesCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $pastriesCount; $i++) {
+                $pastries->setBakery($allPastries[$i]);
             }
         }
 

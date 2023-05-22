@@ -43,26 +43,30 @@ class OrderRepository extends ServiceEntityRepository
     /**
      * Liste des commandes d'une boulangerie
      */
-    public function findOrdersByBakery(Bakery $bakery)
+    public function findOrdersByBakery(int $bakery): array
     {
-        $entityManager = $this->getEntityManager();
+        // https://symfony.com/doc/5.4/doctrine.html#querying-with-the-query-builder
+        $conn  = $this->getEntityManager()->getConnection();
 
-        $query = $entityManager->createQuery(
-            '
-            SELECT o.id order_id, o.statut order_status, o.delivery order_delivery, o.schedule order_delivery_id
+
+        $query =  '
+            SELECT o.id id, o.status status, o.delivery delivery, o.schedule schedule
             -- depuis l\'entité Order
-            FROM App\Entity\Order o
-            -- `order`
+            FROM `order` o
             -- suit la relation de product_order et order
             JOIN product_order op ON o.id = op.order_id
             -- suit la relation de product_order et product
             JOIN product p ON op.product_id = p.id
             -- suit la relation de bakery et product
             JOIN bakery b ON p.bakery_id = b.id
-            WHERE b.id = :bakery'
-        )->setParameter('bakery', $bakery);
+            WHERE b.id = :bakery';
 
-        return $query->getResult();
+            $stmt = $conn->prepare($query);
+            $resultSet = $stmt->executeQuery(['bakery' => $bakery]);
+            // dd($resultSet);
+            
+            // renvoie un tableau e tableaux
+            return $resultSet->fetchAllAssociative();
     }
 
     // public function findAllByMovieJoinedToPersonQb(Movie $movie)

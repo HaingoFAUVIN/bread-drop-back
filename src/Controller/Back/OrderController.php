@@ -26,7 +26,6 @@ class OrderController extends AbstractController
     {
         //On récupère la boulangerie
         $bakery = $bakeryRepository->find($id);
-        // dd($bakery);
 
         if ($bakery === null) {
             throw
@@ -34,7 +33,7 @@ class OrderController extends AbstractController
         }
 
         // On récupère les commandes de la boulangerie
-        $orders = $orderRepository->findOrdersByBakery($bakery);
+        $orders = $orderRepository->findOrdersByBakery($id);
 
         return $this->render('back/order/index.html.twig', [
             // on transmet "nos" commandes 

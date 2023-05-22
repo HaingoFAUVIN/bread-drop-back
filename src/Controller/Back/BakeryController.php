@@ -38,7 +38,7 @@ class BakeryController extends AbstractController
     /**
      * @Route("/ajouter/{id}", name="app_back_bakery_new", methods={"GET", "POST"})
      */
-    public function create(User $user =null, Request $request, BakeryRepository $bakeryRepository): Response
+    public function create(User $user = null, Request $request, BakeryRepository $bakeryRepository): Response
     {
         // 404 ?
         if ($user === null) {
@@ -67,7 +67,7 @@ class BakeryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_back_bakery_show", methods={"GET"})
+     * @Route("/{id<\d+>}", name="app_back_bakery_show", methods={"GET"})
      */
     public function read(Bakery $bakery): Response
     {
@@ -76,11 +76,12 @@ class BakeryController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/modifier/{id}", name="app_back_bakery_edit", methods={"GET", "POST"})
+     /**
+     * @Route("/{id}/modifier", name="app_back_bakery_edit", methods={"GET", "POST"})
      */
     public function update( Request $request, Bakery $bakery, BakeryRepository $bakeryRepository): Response
     {
+
         $form = $this->createForm(BakeryType::class, $bakery);
         $form->handleRequest($request);
 
@@ -88,7 +89,7 @@ class BakeryController extends AbstractController
             
             $bakeryRepository->add($bakery, true);
 
-            return $this->redirectToRoute('app_back_bakery_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_bakery_show', ['id' => $bakery->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/bakery/edit.html.twig', [

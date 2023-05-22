@@ -90,16 +90,4 @@ class ScheduleController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    /**
-     * @Route("/{id}", name="app_schedule_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Schedule $schedule, ScheduleRepository $scheduleRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$schedule->getId(), $request->request->get('_token'))) {
-            $scheduleRepository->remove($schedule, true);
-        }
-
-        return $this->redirectToRoute('app_schedule_index', [], Response::HTTP_SEE_OTHER);
-    }
 }

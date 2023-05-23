@@ -30,4 +30,18 @@
          {% endfor %}
         </tbody>
     </table>
+
+    <p>Date de livraison : {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</p>
+    <p>Prix : {{ order.price }} €</p>
+    <p>Status : {% if order.status == '1' %}
+                    En cours
+                {% else %}
+                    Fini
+                {% endif %} </p>
+    <p>Livraison :  {% if order.status == '1' and order.delivery == '1' %}
+                        A livrer
+                    {% elseif order.status == '1' and order.delivery == '0' %}
+                        A récupérer
+                    {% endif %} </p>
+    
     {% endblock %}

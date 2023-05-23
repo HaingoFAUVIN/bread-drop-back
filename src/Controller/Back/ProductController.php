@@ -100,6 +100,6 @@ class ProductController extends AbstractController
             $productRepository->remove($product, true);
         }
 
-        return $this->redirectToRoute('app_back_product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_back_product_index', ['id' => $product->getBakery()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

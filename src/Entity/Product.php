@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\OrderProductRepository;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -83,7 +84,6 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="products")
-     * @Groups({"product_show"})
      * 
      */
     private $bakery;

@@ -83,11 +83,14 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="products")
+     * @Groups({"product_show"})
+     * 
      */
     private $bakery;
 
     /**
      * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="product")
+     * 
      */
     private $orderProducts;
 

@@ -42,7 +42,8 @@ class OrderController extends AbstractController
                     // je veux les propriétés de ce groupe
                     "order_list",
                     "product_show",
-                    "user_show"
+                    "user_show",
+                    "show_order",
                 ]
             ]
         );
@@ -91,6 +92,7 @@ class OrderController extends AbstractController
                     "product_show",
                     "user_show",
                     "bakery_show",
+                    "show_order",
                 ]
             ]
         );

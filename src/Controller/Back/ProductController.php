@@ -82,7 +82,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_back_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_product_show', ['id' => $product->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/product/edit.html.twig', [
@@ -92,9 +92,9 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_back_product_delete", methods={"POST"})
+     * @Route("/{id<\d+>}/produit", name="app_back_product_delete", methods={"POST"})
      */
-    public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
+    public function delete( Request $request, Product $product, ProductRepository $productRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product, true);

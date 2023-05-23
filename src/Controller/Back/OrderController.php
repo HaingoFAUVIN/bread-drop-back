@@ -57,7 +57,7 @@ class OrderController extends AbstractController
         }
 
         // On récupère les produits de la commande
-        $products = $order->getOrderProducts();
+        $products = $orderRepository->findProductsByOrder($id);
         // dd($products);
 
         return $this->render('back/order/show.html.twig', [

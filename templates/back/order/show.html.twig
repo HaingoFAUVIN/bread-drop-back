@@ -21,12 +21,11 @@
         </thead>
         <tbody>
         {% for product in products %}
-            {{ dump(product)}}
+            {# {{ dump(product)}} #}
             <tr>
                 <td>{{ product.id }}</td>
-                
-                {# <td>{{ product.name }}</td>
-                <td>{{ product.name }}</td> #}
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
             </tr>
          {% endfor %}
         </tbody>

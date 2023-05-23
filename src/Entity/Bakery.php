@@ -81,13 +81,6 @@ class Bakery
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="bakeries")
-     * 
-     * @Groups({"bakery_read"})
-     */
-    private $product;
-
-    /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      */
     private $user;
@@ -95,12 +88,17 @@ class Bakery
     /**
      * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
      */
-    private $schedule;
+    private $schedules;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="bakery")
+     */
+    private $products;
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
-        $this->schedule = new ArrayCollection();
+        $this->products = new ArrayCollection();
+        $this->schedules = new ArrayCollection();
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
     }
@@ -194,29 +192,6 @@ class Bakery
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProduct(): Collection
-    {
-        return $this->product;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->product->contains($product)) {
-            $this->product[] = $product;
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        $this->product->removeElement($product);
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -233,15 +208,15 @@ class Bakery
     /**
      * @return Collection<int, Schedule>
      */
-    public function getSchedule(): Collection
+    public function getSchedules(): Collection
     {
-        return $this->schedule;
+        return $this->schedules;
     }
 
     public function addSchedule(Schedule $schedule): self
     {
-        if (!$this->schedule->contains($schedule)) {
-            $this->schedule[] = $schedule;
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
             $schedule->setBakery($this);
         }
 
@@ -250,10 +225,40 @@ class Bakery
 
     public function removeSchedule(Schedule $schedule): self
     {
-        if ($this->schedule->removeElement($schedule)) {
+        if ($this->schedules->removeElement($schedule)) {
             // set the owning side to null (unless already changed)
             if ($schedule->getBakery() === $this) {
                 $schedule->setBakery(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+            $product->setBakery($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getBakery() === $this) {
+                $product->setBakery(null);
             }
         }
 

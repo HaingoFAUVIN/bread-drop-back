@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Order;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Bakery;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Order>
@@ -37,6 +38,62 @@ class OrderRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Liste des commandes d'une boulangerie
+     */
+    public function findOrdersByBakery(int $bakery): array
+    {
+        // https://symfony.com/doc/5.4/doctrine.html#querying-with-the-query-builder
+        $conn  = $this->getEntityManager()->getConnection();
+
+
+        $query =  '
+            SELECT DISTINCT o.id id, o.status status, o.delivery delivery, o.schedule schedule
+            -- depuis l\'entité Order
+            FROM `order` o
+            -- suit la relation de order_product et order
+            JOIN order_product op ON o.id = op.order_id
+            -- suit la relation de order_product et product
+            JOIN product p ON op.product_id = p.id
+            -- suit la relation de bakery et product
+            JOIN bakery b ON p.bakery_id = b.id
+            WHERE b.id = :bakery';
+
+            $stmt = $conn->prepare($query);
+            $resultSet = $stmt->executeQuery(['bakery' => $bakery]);
+            // dd($resultSet);
+            
+            // renvoie un tableau de tableaux
+            return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * Liste des produits d'une commande
+     */
+    public function findProductsByOrder(int $order): array
+    {
+        // https://symfony.com/doc/5.4/doctrine.html#querying-with-the-query-builder
+        $conn  = $this->getEntityManager()->getConnection();
+
+
+        $query =  '
+            SELECT DISTINCT p.id id,  p.name name, op.quantity quantity
+            -- depuis l\'entité Product
+            FROM `product` p
+            -- suit la relation de order_product et product
+            JOIN order_product op ON op.product_id = p.id
+            -- suit la relation de order_product et order
+            JOIN `order` o ON o.id = op.order_id
+            WHERE o.id = :order ORDER BY name';
+
+            $stmt = $conn->prepare($query);
+            $resultSet = $stmt->executeQuery(['order' => $order]);
+            // dd($resultSet);
+            
+            // renvoie un tableau de tableaux
+            return $resultSet->fetchAllAssociative();
     }
 
 //    /**

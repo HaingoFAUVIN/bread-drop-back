@@ -73,30 +73,28 @@ class Product
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Bakery::class, mappedBy="product")
-     * 
-     * @Groups({"product_list"})
-     * @Groups({"product_show"})
-     */
-    private $bakeries;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Order::class, inversedBy="products")
-     */
-    private $orders;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * 
      * @Groups({"product_show"})
      * @Groups({"product_list"})
+     * @Groups({"product_show"})
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="products")
+     */
+    private $bakery;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="product")
+     */
+    private $orderProducts;
+
+
     public function __construct()
     {
-        $this->bakeries = new ArrayCollection();
-        $this->orders = new ArrayCollection();
+        $this->orderProducts = new ArrayCollection();
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
     }
@@ -190,33 +188,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Bakery>
-     */
-    public function getBakeries(): Collection
-    {
-        return $this->bakeries;
-    }
-
-    public function addBakery(Bakery $bakery): self
-    {
-        if (!$this->bakeries->contains($bakery)) {
-            $this->bakeries[] = $bakery;
-            $bakery->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBakery(Bakery $bakery): self
-    {
-        if ($this->bakeries->removeElement($bakery)) {
-            $bakery->removeProduct($this);
-        }
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -229,27 +200,47 @@ class Product
         return $this;
     }
 
-        /**
-     * @return Collection<int, Order>
-     */
-    public function getOrder(): Collection
+    public function getBakery(): ?Bakery
     {
-        return $this->orders;
+        return $this->bakery;
     }
 
-    public function addOrder(Order $order): self
+    public function setBakery(?Bakery $bakery): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
+        $this->bakery = $bakery;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderProduct>
+     */
+    public function getOrderProducts(): Collection
+    {
+        return $this->orderProducts;
+    }
+
+    public function addOrderProduct(OrderProduct $orderProduct): self
+    {
+        if (!$this->orderProducts->contains($orderProduct)) {
+            $this->orderProducts[] = $orderProduct;
+            $orderProduct->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeOrder(Order $order): self
+    public function removeOrderProduct(OrderProduct $orderProduct): self
     {
-        $this->orders->removeElement($order);
+        if ($this->orderProducts->removeElement($orderProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($orderProduct->getProduct() === $this) {
+                $orderProduct->setProduct(null);
+            }
+        }
 
         return $this;
     }
+
+
 }

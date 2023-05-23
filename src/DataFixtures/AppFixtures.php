@@ -11,6 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\DataFixtures\Provider\BreadDropProvider;
 use App\Entity\Order;
+use App\Entity\OrderProduct;
 use App\Entity\Product;
 use App\Entity\Schedule;
 use Symfony\Component\Validator\Constraints\Length;
@@ -212,22 +213,22 @@ class AppFixtures extends Fixture
         }
 
         // 5- ORDER
-        // Création de 5 commandes : table order
+        // Création de 10 commandes : table order
         $allOrder = [];
-        for ($k = 0; $k < 5; $k++) {
-            $orderProduct = new Order();
-            $orderProduct->setDate($faker->dateTimeBetween('-1week', 'now'));
-            $orderProduct->setUser($allPersons[$k]);
-            $orderProduct->setPrice(mt_rand(5, 100)); //  entre 5 et 100€
-            $orderProduct->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
-            $orderProduct->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0
-            $orderProduct->setSchedule($faker->dateTimeBetween('-1week', 'now')); 
-            $orderProduct->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
+        for ($k = 0; $k < 10; $k++) {
+            $order = new Order();
+            $order->setDate($faker->dateTimeBetween('-1week', 'now'));
+            $order->setUser($allPersons[$k]);
+            $order->setPrice(mt_rand(5, 50)); //  entre 5 et 50
+            $order->setStatus(mt_rand(0, 1)); //  vrai = 1 , faux = 0
+            $order->setDelivery(mt_rand(0, 1)); //  vrai = 1 , faux = 0
+            $order->setSchedule($faker->dateTimeBetween('-1week', 'now')); 
+            $order->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-            $manager->persist($orderProduct);
+            $manager->persist($order);
         
             // On ajoute l'entité à sa liste
-            $allOrder[] = $orderProduct;
+            $allOrder[] = $order;
         }
 
         // 6- SCHEDULE : horaires d'ouverture de 20 boulangeries
@@ -242,7 +243,7 @@ class AppFixtures extends Fixture
                 $bakerySchedule->setCloseAfternoon(mt_rand(19, 20) . "h" ."00");
                 $bakerySchedule->setCreatedAt($faker->dateTimeBetween('-2years', 'now')); // Date de création des 2 dernières années
 
-                // Associer un une boulangerie à un horaire par jour
+                // Associer une boulangerie à un horaire par jour
                 $bakerySchedule->setBakery($allBakeries[$l]);
 
                 $manager->persist($bakerySchedule);
@@ -250,83 +251,110 @@ class AppFixtures extends Fixture
             }
         }
 
-        // 7-1 BAKERY_PRODUCT : catégorie Sandwitch
+        // 7-1 Un produit est associé à une boulangerie : catégorie Sandwitch
         foreach ($allBakeries as $bakery) {
+
             // On mélange les Sandwitch et on en récupère 0 à 4 au hasard
             shuffle($allSandwitch);
             $sandwitchCount = mt_rand(0, 4);
             for ($i = 1; $i <= $sandwitchCount; $i++) {
                 $bakery->addProduct($allSandwitch[$i]);
+                
             }
         }
 
         // 7-2 BAKERY_PRODUCT : catégorie Pastries
         foreach ($allBakeries as $bakery) {
-            // On mélange les Patistries et on en récupère 0 à 4 au hasard
+
+            // On mélange les Pastries et on en récupère 0 à 4 au hasard
             shuffle($allPastries);
-            $patistriesCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $patistriesCount; $i++) {
+            $pastriesCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $pastriesCount; $i++) {
                 $bakery->addProduct($allPastries[$i]);
+                
             }
         }
-
-        // 7-3 BAKERY_PRODUCT : catégorie Patistry
+        // 7-3 BAKERY_PRODUCT : catégorie Pastry
         foreach ($allBakeries as $bakery) {
-            // On mélange les Patistry et on en récupère 0 à 4 au hasard
+
+            // On mélange les Pastry et on en récupère 0 à 4 au hasard
             shuffle($allPastry);
-            $patistryCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $patistryCount; $i++) {
+            $pastryCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $pastryCount; $i++) {
                 $bakery->addProduct($allPastry[$i]);
+                
             }
         }
         
         // 7-4 BAKERY_PRODUCT : catégorie Bread
         foreach ($allBakeries as $bakery) {
+
             // On mélange les Bread et on en récupère 0 à 4 au hasard
             shuffle($allBread);
-            $dreadCount = mt_rand(0, 4);
-            for ($i = 1; $i <= $dreadCount; $i++) {
+            $sandwitchCount = mt_rand(0, 4);
+            for ($i = 1; $i <= $sandwitchCount; $i++) {
                 $bakery->addProduct($allBread[$i]);
+                
             }
         }
 
-        // 8-1 PRODUCT_ORDER : catégorie Sandwitch
+        // 8-1 ORDER_PRODUCT : catégorie Sandwitch
         foreach ($allOrder as $order) {
             // On mélange les Sandwitch et on en récupère 0 à 4 au hasard
             shuffle($allSandwitch);
             $sandwitchCount = mt_rand(0, 4);
             for ($i = 1; $i <= $sandwitchCount; $i++) {
-                $order->addProduct($allSandwitch[$i]);
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allSandwitch[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
+
+                $manager->persist($orderProduct);
             }
         }
 
-        // 8-2 PRODUCT_ORDER : catégorie Bread
+        // 8-2 ORDER_PRODUCT : catégorie Bread
         foreach ($allOrder as $order) {
             // On mélange les Bread et on en récupère 0 à 4 au hasard
             shuffle($allBread);
             $breadCount = mt_rand(0, 4);
             for ($i = 1; $i <= $breadCount; $i++) {
-                $order->addProduct($allBread[$i]);
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allBread[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
+
+                $manager->persist($orderProduct);
             }
         }
 
-        // 8-3 PRODUCT_ORDER : catégorie Pastry
+        // 8-3 ORDER_PRODUCT : catégorie Pastry
         foreach ($allOrder as $order) {
             // On mélange les Pastry et on en récupère 0 à 4 au hasard
             shuffle($allPastry);
             $pastryCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastryCount; $i++) {
-                $order->addProduct($allPastry[$i]);
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allPastry[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
+
+                $manager->persist($orderProduct);
             }
         }
 
-        // 8-4 PRODUCT_ORDER : catégorie Pastries
+        // 8-4 ORDER_PRODUCT : catégorie Pastries
         foreach ($allOrder as $order) {
             // On mélange les Pastries et on en récupère 0 à 4 au hasard
             shuffle($allPastries);
             $pastriesCount = mt_rand(0, 4);
             for ($i = 1; $i <= $pastriesCount; $i++) {
-                $order->addProduct($allPastries[$i]);
+                $orderProduct = new OrderProduct();
+                $orderProduct->setProduct($allPastries[$i]);
+                $orderProduct->setOrder($allOrder[$i]);
+                $orderProduct->setQuantity(mt_rand(1, 10));
+
+                $manager->persist($orderProduct);
             }
         }
 

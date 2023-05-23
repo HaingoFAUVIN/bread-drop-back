@@ -28,3 +28,9 @@ On a corrigé la relation entre Order et User en dev. Tout fonctionne sauf en pr
 La solution :
 https://stackoverflow.com/questions/26187097/doctrine-reflectionexception-property-does-not-exist
 bin/console clear:cache
+
+### Cannot autowire argument $doctrine of "App\Controller\Back\OrderController::index()": it references class "Symfony\Bridge\Doctrine\ManagerRegistry" but no such service exists. Try changing the type-hint to "Doctrine\Persistence\ManagerRegistry" instead.
+
+L'erreur propose d'utiliser "Doctrine\Persistence\ManagerRegistry"
+
+### [Syntax Error] line 0, col 166: Error: Expected Doctrine\ORM\Query\Lexer::T_ALIASED_NAME, got '`'

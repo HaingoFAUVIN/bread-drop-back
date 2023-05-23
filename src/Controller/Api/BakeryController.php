@@ -34,7 +34,9 @@ class BakeryController extends AbstractController
                 "groups" =>
                 [
                     //je veut les propriété de ce groups
-                    "bakery_list", 
+                    "bakery_list",
+                    "product_show", 
+                    "categorie_show"
                 ]
             ] 
         );

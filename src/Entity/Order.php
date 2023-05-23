@@ -70,7 +70,6 @@ class Order
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"order_read"})
      */
     private $createdAt;
 

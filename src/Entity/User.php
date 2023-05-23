@@ -93,12 +93,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_list"})
      * @Groups({"user_read"})
+     * @Groups({"user_add"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"user_add"})
      * @Groups({"user_read"})
      */
     private $createdAt;

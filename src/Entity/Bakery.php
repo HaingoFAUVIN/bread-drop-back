@@ -31,11 +31,8 @@ class Bakery
      * 
      * @Groups({"bakery_list"})
      * @Groups({"bakery_show"})
-<<<<<<< HEAD
      * @Groups({"bakery_read"})
-=======
      * @Assert\NotBlank
->>>>>>> back-boulangerie
      */
     private $name;
 
@@ -43,11 +40,10 @@ class Bakery
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"bakery_list"})
-<<<<<<< HEAD
      * @Groups({"bakery_read"})
-=======
+     * @Groups({"bakery_show"})
+
      * @Assert\NotBlank
->>>>>>> back-boulangerie
      */
     private $adress;
 
@@ -61,6 +57,7 @@ class Bakery
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
      * @Groups({"bakery_list"})
+     * @Groups({"bakery_show"})
      * @Assert\NotBlank
      */
     private $picture;

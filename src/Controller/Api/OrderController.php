@@ -90,6 +90,7 @@ class OrderController extends AbstractController
                     "order_read",
                     "product_show",
                     "user_show",
+                    "bakery_show",
                 ]
             ]
         );

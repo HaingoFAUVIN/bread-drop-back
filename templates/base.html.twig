@@ -36,10 +36,10 @@
                             <a class="nav-link" href="#">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{# {{ path('app_back_bakery_index', {'id': app.user.id}) }} #}"><i class=""></i> Profil</a>
+                            <a class="nav-link" href="{ {{ path('app_back_bakery_index', {'id': app.user.id})}} }"><i class=""></i> Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="bi bi-bookmark"></i> Horaires</a>
+                            <a class="nav-link" href="{ { {{ path('app_schedule_index', {'id': app.user.id}) }} } }"><i class=""></i> Horaires</a>
                         </li>
                     </ul>
 
@@ -67,6 +67,8 @@
                                         Utilisateur
                                         {% endif %}
                                     </h6></li>
+
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a></li>
@@ -77,6 +79,7 @@
                         {# non connecté #}
                     <a href="{{ path('app_login') }}" class="btn btn-danger me-2">Connexion</a>
                     {% endif %}
+
 
         {% block body %}
         {% endblock %}

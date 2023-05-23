@@ -76,6 +76,7 @@ class Product
      * @ORM\ManyToMany(targetEntity=Bakery::class, mappedBy="product")
      * 
      * @Groups({"product_list"})
+     * @Groups({"product_show"})
      */
     private $bakeries;
 

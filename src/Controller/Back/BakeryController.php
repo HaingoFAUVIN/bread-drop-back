@@ -84,7 +84,7 @@ class BakeryController extends AbstractController
             
             $bakeryRepository->add($bakery, true);
 
-            return $this->redirectToRoute('app_back_bakery_show', ['id' => $bakery->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_bakery_index', ['id' => $bakery->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/bakery/edit.html.twig', [

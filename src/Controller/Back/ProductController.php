@@ -82,7 +82,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_back_product_show', ['id' => $product->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_product_index', ['id' => $product->getBakery()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/product/edit.html.twig', [

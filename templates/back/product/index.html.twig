@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+    <h1>Liste des produits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Prix</th>
+                <th>Stock du produit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>
+                    <a href="{{ path('app_back_product_show', {'id': product.id}) }}">Afficher</a>
+                    <a href="{{ path('app_back_product_edit', {'id': product.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Produits non trouvés</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_back_product_new', {'id': bakery.id}) }}">Ajouter un produit</a>
+{% endblock %}

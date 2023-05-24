@@ -82,7 +82,7 @@ class ScheduleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $scheduleRepository->add($schedule, true);
 
-            return $this->redirectToRoute('app_schedule_show', ['id' => $schedule->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_schedule_index', ['id' => $schedule->getBakery()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('schedule/edit.html.twig', [

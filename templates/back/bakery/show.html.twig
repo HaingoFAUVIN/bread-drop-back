@@ -3,10 +3,10 @@
 {% block title %}Ma boulangerie{% endblock %}
 
 {% block body %}
-    
-        <h1>Ma Boulangerie</h1>
+    <div class="container">
+        <h1 class="display-6">Ma boulangerie</h1>
 
-        <table class="table">
+        <table class="table table-stripedb w-auto">
             <tbody>
                 <tr>
                     <th>Nom</th>
@@ -35,5 +35,5 @@
         <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}">Retour à la liste</a>
 
         <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">modifier</a>
-
+    </div>
 {% endblock %}

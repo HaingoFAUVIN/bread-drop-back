@@ -3,9 +3,11 @@
 {% block title %}Ajouter un horaire{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un horaire</h1>
+    <div class="container">
+        <h1 class="display-6">Ajouter un horaire</h1>
 
-    {{ include('schedule/_form.html.twig') }}
+        {{ include('schedule/_form.html.twig') }}
 
-    <a href="{{ path('app_schedule_index', {'id': bakery.id}) }}">retour à la liste</a>
+        <a href="{{ path('app_schedule_index', {'id': bakery.id}) }}">retour à la liste</a>
+    </div>
 {% endblock %}

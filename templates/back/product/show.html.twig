@@ -3,52 +3,54 @@
 {% block title %}Fiche du produit{% endblock %}
 
 {% block body %}
-    <h1 class="display-6" style="margin-left:100px;">
-        Fiche du produit
-        <div class="d-flex align-items-center">
-                <img
-                    src="{{ product.picture }}"
-                    alt=""
-                    style="width:128px;height:128px;"
-                    class="rounded-circle"
-                />
-        </div></h1>
+    <div class="container">
+        <h1 class="display-6">
+            Fiche du produit
+            <div class="d-flex align-items-center">
+                    <img
+                        src="{{ product.picture }}"
+                        alt=""
+                        style="width:128px;height:128px;"
+                        class="rounded-circle"
+                    />
+            </div></h1>
 
-    <table class="table table-stripedb w-auto" style="margin-left:100px;">
-        <tbody>
-        
-            <tr>
-                <th>Nom du produit</th>
-                <td>
-  
-                    <div class="ms-3">
-                        <p class="text-muted mb-0">{{ product.name }}</p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Stock du produit</th>
-                <td>{{ product.stock }}</td>
-            </tr>
-            <tr>
-                <th>Description du produit</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            {# <tr>
-                <th>Photo du produit</th>
-                <td>{{ product.picture }}</td>
-            </tr> #}
-            <tr>
-        </tbody>
-    </table>
+        <table class="table table-stripedb w-auto">
+            <tbody>
+            
+                <tr>
+                    <th>Nom du produit</th>
+                    <td>
+    
+                        <div class="ms-3">
+                            <p class="text-muted mb-0">{{ product.name }}</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ product.price }}</td>
+                </tr>
+                <tr>
+                    <th>Stock du produit</th>
+                    <td>{{ product.stock }}</td>
+                </tr>
+                <tr>
+                    <th>Description du produit</th>
+                    <td>{{ product.description }}</td>
+                </tr>
+                {# <tr>
+                    <th>Photo du produit</th>
+                    <td>{{ product.picture }}</td>
+                </tr> #}
+                <tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_back_product_index', {'id': product.bakery.id}) }}" style="margin-left:100px;">Retour à la liste</a>
+        <a href="{{ path('app_back_product_index', {'id': product.bakery.id}) }}">Retour à la liste</a>
 
-    <a href="{{ path('app_back_product_edit', {'id': product.id}) }}">Modifier</a>
+        <a href="{{ path('app_back_product_edit', {'id': product.id}) }}">Modifier</a>
 
-    {{ include('back/product/_delete_form.html.twig') }}
+        {{ include('back/product/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -7,7 +7,7 @@
         <h1 class="display-6">Liste des produits</h1>
 
         <div class="table-responsive">
-            <table  class="table table-stripedb w-auto" style="margin-left:100px;">
+            <table  class="table table-stripedb w-auto">
                 <thead>
                     <tr>
                         <th>Nom du produit</th>
@@ -35,6 +35,6 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{ path('app_back_product_new', {'id': bakery.id}) }}" style="margin-left:100px;">Ajouter un produit</a>
+        <a href="{{ path('app_back_product_new', {'id': bakery.id}) }}">Ajouter un produit</a>
     </div>
 {% endblock %}

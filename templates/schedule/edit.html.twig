@@ -3,10 +3,11 @@
 {% block title %}Mofication de l'horaire{% endblock %}
 
 {% block body %}
-    <h1>Mofication de l'horaire</h1>
+    <div class="container">
+        <h1 class="display-6">Mofication de l'horaire</h1>
 
-    {{ include('schedule/_form.html.twig', {'button_label': 'Modifier'}) }}
+        {{ include('schedule/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_schedule_index', {'id': schedule.bakery.id}) }}">à liste</a>
-
+        <a href="{{ path('app_schedule_index', {'id': schedule.bakery.id}) }}">à liste</a>
+    </div>
 {% endblock %}

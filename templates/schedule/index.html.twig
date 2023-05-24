@@ -1,42 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes Horaires{% endblock %}
+{% block title %}Mes horaires{% endblock %}
 
 {% block body %}
-    <h1>Mes Horaires</h1>
+    <div class="container">
+        <h1 class="display-6">Mes horaires</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Jour</th>
-                <th>Ouveture du matin</th>
-                <th>Fermeture du matin</th>
-                <th>Ouveture de l'apres midi</th>
-                <th>Fermeture de l'apres midi</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for schedule in schedules %}
-            <tr>
-                <td>{{ schedule.day }}</td>
-                <td>{{ schedule.openMorning }}</td>
-                <td>{{ schedule.closeMorning }}</td>
-                <td>{{ schedule.openAfternoon }}</td>
-                <td>{{ schedule.closeAfternoon }}</td>
-                <td>
-                <td>
-                    <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">Afficher</a>
-                    <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">Modifier</a>
-                </td>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Aucun horaires trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-stripedb w-auto">
+            <thead>
+                <tr>
+                    <th>Jour</th>
+                    <th>Ouveture du matin</th>
+                    <th>Fermeture du matin</th>
+                    <th>Ouveture de l'apres midi</th>
+                    <th>Fermeture de l'apres midi</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.day }}</td>
+                    <td>{{ schedule.openMorning }}</td>
+                    <td>{{ schedule.closeMorning }}</td>
+                    <td>{{ schedule.openAfternoon }}</td>
+                    <td>{{ schedule.closeAfternoon }}</td>
+                    <td>
+                    <td>
+                        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">Afficher</a>
+                        <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">Modifier</a>
+                    </td>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun horaires trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_schedule_new', {'id': bakery.id}) }}">Ajouter des horaires</a>
+        <a href="{{ path('app_schedule_new', {'id': bakery.id}) }}">Ajouter des horaires</a>
+    </div>
 {% endblock %}

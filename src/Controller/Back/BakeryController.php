@@ -21,11 +21,8 @@ class BakeryController extends AbstractController
      */
     public function index(User $user = null, BakeryRepository $bakeryRepository): Response
     {
-        // on va chercher les boulangerie du user donnée
-        $bakeryByUser = $bakeryRepository->findBy(['user' => $user]);
-
+    
         return $this->render('back/bakery/index.html.twig', [
-            'bakeries' => $bakeryByUser,
             'user' => $user,
         ]);
     }

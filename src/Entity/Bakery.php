@@ -81,11 +81,6 @@ class Bakery
     private $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     */
-    private $user;
-
-    /**
      * @ORM\OneToMany(targetEntity=Schedule::class, mappedBy="bakery")
      */
     private $schedules;
@@ -96,6 +91,12 @@ class Bakery
      * @Groups({"bakery_list"})
      */
     private $products;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="bakery", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -194,19 +195,6 @@ class Bakery
         return $this;
     }
 
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Schedule>
      */
@@ -263,6 +251,18 @@ class Bakery
                 $product->setBakery(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

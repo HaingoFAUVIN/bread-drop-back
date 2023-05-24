@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ScheduleController extends AbstractController
 {
     /**
-     * @Route("/{id<\d+>}/horaires", name="app_schedule_index", methods={"GET"})
+     * @Route("/{id}/horaires", name="app_schedule_index", methods={"GET"})
      */
     public function index(Bakery $bakery = null, ScheduleRepository $scheduleRepository): Response
     {
@@ -31,7 +31,7 @@ class ScheduleController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/horaire/ajouter", name="app_schedule_new", methods={"GET", "POST"})
+     * @Route("/{id}/horaire/ajouter", name="app_schedule_new", methods={"GET", "POST"})
      */
     public function new(Bakery $bakery = null, Request $request, ScheduleRepository $scheduleRepository): Response
     {

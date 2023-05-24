@@ -3,9 +3,11 @@
 {% block title %}Nouvelle Boulangerie{% endblock %}
 
 {% block body %}
-    <h1>Creer une Boulangerie</h1>
+    <div class="container">
+        <h1>Créer une boulangerie</h1>
 
-    {{ include('back/bakery/_form.html.twig') }}
+        {{ include('back/bakery/_form.html.twig') }}
 
-    <a href="{{ path('app_back_bakery_index', {'id': user.id}) }}">Retour à la liste</a>
+        <a href="{{ path('app_back_bakery_index', {'id': user.id}) }}">Retour à la liste</a>
+    </div>
 {% endblock %}

@@ -3,41 +3,41 @@
 {% block title %}Fiche de la commande{% endblock %}
 
 {% block body %}
-    <h1  class="display-6" style="margin-left:100px;">Fiche de la commande numéro {{ order.id }}</h1>
+    <div class="container">
+        <h1 class="display-6">Fiche de la commande numéro {{ order.id }}</h1>
 
-    <div class="table-responsive">
-        <table class="table table-stripedb w-auto" style="margin-left:100px;">
-            <thead>
-                <tr>
-                    <th>Produit</th>
-                    <th>Quantité</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for product in products %}
-                {# {{ dump(product)}} #}
-                <tr>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.quantity }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-stripedb w-auto">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-        <p>Date de livraison : {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</p>
-        <p>Prix : {{ order.price }} €</p>
-        <p>Status : {% if order.status == '1' %}
-                        En cours
-                    {% else %}
-                        Fini
-                    {% endif %} </p>
-        <p>Livraison :  {% if order.status == '1' and order.delivery == '1' %}
-                            A livrer
-                        {% elseif order.status == '1' and order.delivery == '0' %}
-                            A récupérer
+            <p>Date de livraison : {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</p>
+            <p>Prix : {{ order.price }} €</p>
+            <p>Status : {% if order.status == '1' %}
+                            En cours
+                        {% else %}
+                            Fini
                         {% endif %} </p>
+            <p>Livraison :  {% if order.status == '1' and order.delivery == '1' %}
+                                A livrer
+                            {% elseif order.status == '1' and order.delivery == '0' %}
+                                A récupérer
+                            {% endif %} </p>
+        </div>
+
+        <a href="#">Retour à la liste</a>
     </div>
-
-    <a href="#">Retour à la liste</a>
-
     {% endblock %}

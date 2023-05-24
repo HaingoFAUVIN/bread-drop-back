@@ -3,10 +3,11 @@
 {% block title %}Modifier ma Boulangerie{% endblock %}
 
 {% block body %}
-    <h1>Modifier ma Boulangerie</h1>
+    <div class="container">
+        <h1>Modifier ma Boulangerie</h1>
 
-    {{ include('back/bakery/_form.html.twig', {'button_label': 'Modifier'}) }}
+        {{ include('back/bakery/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id})}}">Retour à la liste</a>
-
+        <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id})}}">Retour à la liste</a>
+    </div>
 {% endblock %}

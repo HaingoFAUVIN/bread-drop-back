@@ -3,36 +3,37 @@
 {% block title %}Ma boulangerie{% endblock %}
 
 {% block body %}
-    <h1>Ma Boulangerie</h1>
+    
+        <h1>Ma Boulangerie</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ bakery.name }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ bakery.adress }}</td>
-            </tr>
-            <tr>
-                <th>Numéro de Téléphone</th>
-                <td>{{ bakery.phone }}</td>
-            </tr>
-            <tr>
-                <th>Photo </th>
-                <td>{{ bakery.picture }}</td>
-            </tr>
-            <tr>
-                <th>Distance de livraiosn</th>
-                <td>{{ bakery.distance }}</td>
-            </tr>
-            <tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ bakery.name }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ bakery.adress }}</td>
+                </tr>
+                <tr>
+                    <th>Numéro de Téléphone</th>
+                    <td>{{ bakery.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Photo </th>
+                    <td>{{ bakery.picture }}</td>
+                </tr>
+                <tr>
+                    <th>Distance de livraiosn</th>
+                    <td>{{ bakery.distance }}</td>
+                </tr>
+                <tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}">Retour à la liste</a>
+        <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}">Retour à la liste</a>
 
-    <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">modifier</a>
+        <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">modifier</a>
 
 {% endblock %}

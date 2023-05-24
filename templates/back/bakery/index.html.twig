@@ -6,6 +6,7 @@
     <h1>Liste de mes Boulangeries</h1>
 
     <table class="table">
+    {% if user.bakery.id is not null %}
         <thead>
             <tr>
                 <th>Nom</th>
@@ -28,9 +29,10 @@
                     <a href="{{ path('app_back_bakery_edit', {'id': user.bakery.id}) }}">Modifier</a>
                 </td>
             </tr>
-
         </tbody>
+        {% else %}
+            <a href="{{ path('app_back_bakery_new', {'id': user.id}) }}">Ajouter une boulangerie</a>
+        {% endif %}
     </table>
 
-    <a href="{{ path('app_back_bakery_new', {'id': user.id}) }}">Ajouter une boulangerie</a>
 {% endblock %}

@@ -33,4 +33,12 @@ bin/console clear:cache
 
 L'erreur propose d'utiliser "Doctrine\Persistence\ManagerRegistry"
 
-### [Syntax Error] line 0, col 166: Error: Expected Doctrine\ORM\Query\Lexer::T_ALIASED_NAME, got '`'
+### [Syntax Error] Expected Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, got '' at position 42 in property App\Entity\OrderProduct::$product
+
+il y avait un " en trop après class
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product

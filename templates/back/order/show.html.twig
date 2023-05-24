@@ -3,45 +3,39 @@
 {% block title %}Fiche de la commande{% endblock %}
 
 {% block body %}
-    <h1>Fiche de la commande</h1>
+    <h4>Fiche de la commande numéro {{ order.id }}</h1>
 
-    <p>{{ order.id }}</p>
-    {# {{ include('_flash_messages.html.twig') }} #}
 
-    <h1>Liste des produits</h1>
+    <div class="table-responsive">
+        <table class="table table-stripedb">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                {# {{ dump(product)}} #}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                {# <th>Produits</th> #}
-                <th>Nom</th>
-                <th>Quantité</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            {# {{ dump(product)}} #}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.quantity }}</td>
-            </tr>
-         {% endfor %}
-        </tbody>
-    </table>
-
-    <p>Date de livraison : {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</p>
-    <p>Prix : {{ order.price }} €</p>
-    <p>Status : {% if order.status == '1' %}
-                    En cours
-                {% else %}
-                    Fini
-                {% endif %} </p>
-    <p>Livraison :  {% if order.status == '1' and order.delivery == '1' %}
-                        A livrer
-                    {% elseif order.status == '1' and order.delivery == '0' %}
-                        A récupérer
+        <p>Date de livraison : {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</p>
+        <p>Prix : {{ order.price }} €</p>
+        <p>Status : {% if order.status == '1' %}
+                        En cours
+                    {% else %}
+                        Fini
                     {% endif %} </p>
-    
+        <p>Livraison :  {% if order.status == '1' and order.delivery == '1' %}
+                            A livrer
+                        {% elseif order.status == '1' and order.delivery == '0' %}
+                            A récupérer
+                        {% endif %} </p>
+    </div>
     {% endblock %}

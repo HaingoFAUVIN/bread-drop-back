@@ -1,56 +1,61 @@
+{% extends 'base.html.twig' %}
+
 {% block title %}Liste des commandes{% endblock %}
 
 {% block body %}
-    <h1>Liste des commandes</h1>
+    <h3>Liste des commandes</h1>
 
     {# {{ include('_flash_messages.html.twig') }} #}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>N de commande</th>
-                {# <th>Produits</th> #}
-                <th>Statut</th>
-                <th>Livraison</th>
-                <th>Schedule</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for order in orders %}
-            <tr>
-                <td>{{ order.id }}</td>
+    <div class="table-responsive">
+        <table  class="table table-stripedb">
+            <thead>
+                <tr>
+                    <th scope="col">N de commande</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Livraison</th>
+                    <th scope="col">Schedule</th>
+                    <th scope="col">Lien</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for order in orders %}
+                <tr>
+                    <td scope="row">{{ order.id }}</td>
 
-                <td>
-                    {% if order.status == '1' %}
-                        En cours
-                    {% else %}
-                        Fini
-                    {% endif %}
-                </td>
+                    <td scope="row">
+                        {% if order.status == '1' %}
+                            En cours
+                        {% else %}
+                            Fini
+                        {% endif %}
+                    </td>
 
-                <td>
-                    {% if order.status == '1' and order.delivery == '1' %}
-                        A livrer
-                    {% elseif order.status == '1' and order.delivery == '0' %}
-                        A récupérer
-                    {% endif %}
-                </td>
-            
-                <td>{{ order.schedule|format_datetime('short', 'short', locale='fr') }}</td>
-                <td>
-                    <a href="{{ path('app_back_order_show', {'id': order.id}) }}">Afficher</a>
+                    <td scope="row">
+                        {% if order.status == '1' and order.delivery == '1' %}
+                            A livrer
+                        {% elseif order.status == '1' and order.delivery == '0' %}
+                            A récupérer
+                        {% endif %}
+                    </td>
+                
+                    <td scope="row"> {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</td>
+                    <td scope="row">
+                        <a href="{{ path('app_back_order_show', {'id': order.id}) }}">Afficher</a>
 
-                    <a href="#">Archiver</a>
-                    {# {{ path('app_back_order_archive', {'id': order.id}) }} #}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">Pas de commandes trouvées</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        <a href="#">Archiver</a>
+                        {# {{ path('app_back_order_archive', {'id': order.id}) }} #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Pas de commandes trouvées</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
     {% endblock %}
 
 

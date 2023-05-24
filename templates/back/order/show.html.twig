@@ -43,5 +43,7 @@
                     {% elseif order.status == '1' and order.delivery == '0' %}
                         A récupérer
                     {% endif %} </p>
+
+    <a href="{{ path('home', {'id': bakery.id}) }}">Retour à la liste</a>
     
     {% endblock %}

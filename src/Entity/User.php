@@ -26,6 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_add"})
      * @Groups({"user_read"})
      * @Groups({"user_show"})
+     * @Groups({"user_edit"})
      */
     private $id;
 
@@ -35,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * @Groups({"user_read"})
      * @Groups({"user_add"})
+     * @Groups({"user_edit"})
      */
     private $firstname;
 
@@ -44,6 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * @Groups({"user_read"})
      * @Groups({"user_add"})
+     * @Groups({"user_edit"})
      */
     private $lastname;
 
@@ -53,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_add"})
      * @Groups({"user_read"})
+     * @Groups({"user_edit"})
      */
     private $password;
 
@@ -60,6 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="json")
      * 
      * @Groups({"user_add"})
+     * @Groups({"user_read"})
      */
     private $roles = [];
 
@@ -69,6 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * @Groups({"user_add"})
      * @Groups({"user_read"})
+     * @Groups({"user_edit"})
      */
     private $adress;
 
@@ -78,13 +84,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * 
      * @Groups({"user_add"})
-     * @Groups({"user_read"})
+     * @Groups({"user_edit"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="bigint", nullable=true)
      * @Groups({"user_read"})
+     * @Groups({"user_edit"})
      */
     private $phone;
 
@@ -94,19 +101,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * @Groups({"user_read"})
      * @Groups({"user_add"})
+     * @Groups({"user_redit"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"user_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
-     * @Groups({"user_read"})
      */
     private $updatedAt;
 

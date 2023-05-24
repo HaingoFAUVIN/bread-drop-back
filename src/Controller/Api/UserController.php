@@ -65,11 +65,7 @@ class UserController extends AbstractController
                 //les données à renvoyer : la transformation en json est automatique
                 "message d'erreur",
                 //code HTTP : 404,
-                Response::HTTP_NOT_FOUND
-                //pas d'entêtes particulière
-                [],
-                // pas de contexte
-                []     
+                Response::HTTP_NOT_FOUND 
             );
         }
 
@@ -96,7 +92,7 @@ class UserController extends AbstractController
     /**
      * modifie un utilisateur
      * 
-     * @Route("/{id}", name="edit", requirements={"id"="\d+"}, methods={"PUT", "PATCH"})
+     * @Route("/{id}/modifier", name="edit", requirements={"id"="\d+"}, methods={"PUT", "PATCH"})
      */
     public function edit(
         $id,
@@ -155,7 +151,7 @@ class UserController extends AbstractController
                 "groups" => 
                 [
                     // je veux les propriétés de ce groupe
-                    "user_read"
+                    "user_edit"
                 ]
             ]
         );

@@ -143,6 +143,8 @@ class OrderController extends AbstractController
             );
         }
 
+        //Récupérer la dernière commande
+        // $rep->findBy(array(), array('id' => 'desc'),1,0)[0]
         $orderRepository->add($order, true);
 
         return $this->json(

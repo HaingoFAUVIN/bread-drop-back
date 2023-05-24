@@ -11,14 +11,19 @@
                 <thead>
                     <tr>
                         <th>Produit</th>
+                        <th>Prix unitaire</th>
                         <th>Quantité</th>
+                        <th>Prix total</th>
                     </tr>
                 </thead>
                 <tbody>
+                
                 {% for product in products %}
                     <tr>
                         <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
                         <td>{{ product.quantity }}</td>
+                        <td>{{ product.priceSum }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

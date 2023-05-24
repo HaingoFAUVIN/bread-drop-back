@@ -123,6 +123,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $orders;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Bakery::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $bakery;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -306,11 +311,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return  self
 	 */
 	public function setRoles($roles)
-                        	{
-                        		$this->roles = $roles;
-                        
-                        		return $this;
-                        	}
+                                 	{
+                                 		$this->roles = $roles;
+                                 
+                                 		return $this;
+                                 	}
 
     /**
      * @return Collection<int, Order>
@@ -341,4 +346,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getBakery(): ?Bakery
+    {
+        return $this->bakery;
+    }
+
+    public function setBakery(Bakery $bakery): self
+    {
+        // set the owning side of the relation if necessary
+        if ($bakery->getUser() !== $this) {
+            $bakery->setUser($this);
+        }
+
+        $this->bakery = $bakery;
+
+        return $this;
+    }
+
 }

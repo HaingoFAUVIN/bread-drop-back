@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OrderController extends AbstractController
 {
     /**
-     * @Route("/{id<\d+>}/commandes", name="home", methods={"GET"})
+     * @Route("/{id}/commandes", name="home", methods={"GET"})
      */
     public function index($id, BakeryRepository $bakeryRepository, OrderRepository $orderRepository): Response
     {
@@ -37,7 +37,7 @@ class OrderController extends AbstractController
         ]);
     }
     /**
-     * @Route("/commande/{id<\d+>}", name="app_back_order_show", methods={"GET"})
+     * @Route("/commande/{id}", name="app_back_order_show", methods={"GET"})
      */
     public function show($id, Bakery $bakery, OrderRepository $orderRepository): Response
     {

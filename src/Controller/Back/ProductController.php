@@ -31,7 +31,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("{id<\d+>}/ajouter", name="app_back_product_new", methods={"GET", "POST"})
+     * @Route("{id<\d+>}/produit/ajouter", name="app_back_product_new", methods={"GET", "POST"})
      */
     public function new(Bakery $bakery = null, Request $request, ProductRepository $productRepository): Response
     {
@@ -92,7 +92,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/produit", name="app_back_product_delete", methods={"POST"})
+     * @Route("/{id<\d+>}/produit/delete", name="app_back_product_delete", methods={"POST"})
      */
     public function delete( Request $request, Product $product, ProductRepository $productRepository): Response
     {

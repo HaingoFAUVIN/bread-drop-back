@@ -79,7 +79,7 @@ class OrderRepository extends ServiceEntityRepository
 
 
         $query =  '
-            SELECT DISTINCT p.id id,  p.name name, op.quantity quantity
+            SELECT DISTINCT p.id id,  p.name name, p.bakery_id bakery_id, op.quantity quantity
             -- depuis l\'entité Product
             FROM `product` p
             -- suit la relation de order_product et product

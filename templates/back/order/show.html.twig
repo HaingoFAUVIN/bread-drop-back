@@ -3,11 +3,10 @@
 {% block title %}Fiche de la commande{% endblock %}
 
 {% block body %}
-    <h4>Fiche de la commande numéro {{ order.id }}</h1>
-
+    <h1  class="display-6" style="margin-left:100px;">Fiche de la commande numéro {{ order.id }}</h1>
 
     <div class="table-responsive">
-        <table class="table table-stripedb">
+        <table class="table table-stripedb w-auto" style="margin-left:100px;">
             <thead>
                 <tr>
                     <th>Produit</th>
@@ -38,4 +37,7 @@
                             A récupérer
                         {% endif %} </p>
     </div>
+
+    <a href="#">Retour à la liste</a>
+
     {% endblock %}

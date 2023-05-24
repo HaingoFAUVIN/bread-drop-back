@@ -2,15 +2,10 @@
 
 namespace App\Controller\Back;
 
-use App\Entity\User;
+
 use App\Entity\Bakery;
-use App\Entity\Order;
-use App\Entity\Product;
 use App\Repository\OrderRepository;
 use App\Repository\BakeryRepository;
-use App\Repository\ProductRepository;
-// use Symfony\Bridge\Doctrine\ManagerRegistry;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +37,7 @@ class OrderController extends AbstractController
             'bakery' => $bakery
         ]);
     }
+
     /**
      * @Route("/commande/{id<\d+>}", name="app_back_order_show", methods={"GET"})
      */
@@ -49,7 +45,6 @@ class OrderController extends AbstractController
     {
         //On récupère la commande
         $order = $orderRepository->find($id);
-        // dd($order);
 
         if ($order === null) {
             throw

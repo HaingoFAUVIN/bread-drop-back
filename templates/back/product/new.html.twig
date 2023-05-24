@@ -3,9 +3,9 @@
 {% block title %}Ajouter un produit{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un produit</h1>
+    <h1 class="display-6" >Ajouter un produit</h1>
 
     {{ include('back/product/_form.html.twig') }}
 
-    <a href="{{ path('app_back_product_index', {'id': bakery.id}) }}">Retour a la liste</a>
+    <a href="{{ path('app_back_product_index', {'id': bakery.id}) }}">Retour à la liste</a>
 {% endblock %}

@@ -3,35 +3,36 @@
 {% block title %}Liste des produits{% endblock %}
 
 {% block body %}
-    <h1>Liste des produits</h1>
+    <h1 class="display-6" style="margin-left:100px;">Liste des produits</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom du produit</th>
-                <th>Prix</th>
-                <th>Stock du produit</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.stock }}</td>
-                <td>
-                    <a href="{{ path('app_back_product_show', {'id': product.id}) }}">Afficher</a>
-                    <a href="{{ path('app_back_product_edit', {'id': product.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Produits non trouvés</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_back_product_new', {'id': bakery.id}) }}">Ajouter un produit</a>
+    <div class="table-responsive">
+        <table  class="table table-stripedb w-auto" style="margin-left:100px;">
+            <thead>
+                <tr>
+                    <th>Nom du produit</th>
+                    <th>Prix</th>
+                    <th>Stock du produit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>
+                        <a href="{{ path('app_back_product_show', {'id': product.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>
+                        <a href="{{ path('app_back_product_edit', {'id': product.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Produits non trouvés</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ path('app_back_product_new', {'id': bakery.id}) }}" style="margin-left:100px;">Ajouter un produit</a>
 {% endblock %}

@@ -26,8 +26,8 @@
                 <td>{{ user.bakery.picture }}</td>
                 <td>{{ user.bakery.distance }}</td>
                 <td>
-                    <a href="{{ path('app_back_bakery_show', {'id': user.bakery.id}) }}">Afficher</a>
-                    <a href="{{ path('app_back_bakery_edit', {'id': user.bakery.id}) }}">Modifier</a>
+                    <a href="{{ path('app_back_bakery_show', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>
+                    <a href="{{ path('app_back_bakery_edit', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
                 </td>
             </tr>
         </tbody>

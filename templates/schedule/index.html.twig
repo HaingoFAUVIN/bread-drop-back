@@ -26,8 +26,8 @@
                     <td>{{ schedule.openAfternoon }}</td>
                     <td>{{ schedule.closeAfternoon }}</td>
                     <td>
-                        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">Afficher</a>
-                        <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">Modifier</a>
+                        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>
+                        <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
                     </td>
                 </tr>
             {% else %}

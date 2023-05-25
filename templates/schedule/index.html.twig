@@ -12,8 +12,9 @@
                     <th>Jour</th>
                     <th>Ouveture du matin</th>
                     <th>Fermeture du matin</th>
-                    <th>Ouveture de l'apres midi</th>
-                    <th>Fermeture de l'apres midi</th>
+                    <th>Ouveture de l'après-midi</th>
+                    <th>Fermeture de l'après-midi</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,10 +26,8 @@
                     <td>{{ schedule.openAfternoon }}</td>
                     <td>{{ schedule.closeAfternoon }}</td>
                     <td>
-                    <td>
-                        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">Afficher</a>
-                        <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">Modifier</a>
-                    </td>
+                        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>
+                        <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
                     </td>
                 </tr>
             {% else %}
@@ -39,6 +38,6 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_schedule_new', {'id': bakery.id}) }}">Ajouter des horaires</a>
+        <a href="{{ path('app_schedule_new', {'id': bakery.id}) }}"><button type="button" class="btn btn-secondary">Ajouter des horaires</button></a>
     </div>
 {% endblock %}

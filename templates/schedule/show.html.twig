@@ -32,9 +32,9 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_schedule_index', {'id': schedule.bakery.id}) }}">Retour à la liste</a>
+        <a href="{{ path('app_schedule_index', {'id': schedule.bakery.id}) }}"><button type="button" class="btn btn-secondary">Retour à la liste</button></a>
 
-        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}">modifier</a>
+        <a href="{{ path('app_schedule_show', {'id': schedule.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
     </div>
 {% endblock %}
 

@@ -4,7 +4,16 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="display-6">Ma boulangerie</h1>
+        <h1 class="display-6">Ma boulangerie
+            <div class="d-flex align-items-center">
+                <img
+                    src="{{ bakery.picture }}"
+                    alt=""
+                    style="width:128px;height:128px;"
+                    class="rounded-circle"
+                />
+            </div>
+        </h1>
 
         <table class="table table-stripedb w-auto">
             <tbody>
@@ -17,23 +26,19 @@
                     <td>{{ bakery.adress }}</td>
                 </tr>
                 <tr>
-                    <th>Numéro de Téléphone</th>
+                    <th>Numéro de téléphone</th>
                     <td>{{ bakery.phone }}</td>
                 </tr>
                 <tr>
-                    <th>Photo </th>
-                    <td>{{ bakery.picture }}</td>
-                </tr>
-                <tr>
-                    <th>Distance de livraiosn</th>
+                    <th>Distance de livraison</th>
                     <td>{{ bakery.distance }}</td>
                 </tr>
                 <tr>
             </tbody>
         </table>
 
-        <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}">Retour à la liste</a>
+        <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}"><button type="button" class="btn btn-secondary">Retour à la liste</button></a>
 
-        <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}">modifier</a>
+        <a href="{{ path('app_back_bakery_edit', {'id': bakery.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
     </div>
 {% endblock %}

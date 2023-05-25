@@ -38,20 +38,15 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a class="nav-link" href="{# {{ path('home', {'id': app.user.bakery.id}) }} #}">Accueil</a>
-							</li>
+								<a class="nav-link" href="http://projet-07-bread-drop-front.vercel.app/home">Accueil</a>
+							 
 							<li class="nav-item">
-								<a class="nav-link" href="{# {{ path('app_back_bakery_index', {'id': app.user.id}) }} #}">
-									<i class=""></i>
-									Profil</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{# {{ path('app_schedule_index', {'id': app.user.bakery.id}) }} #}">
+								<a class="nav-link" href="{{ path('app_schedule_index', {'id': app.user.bakery.id}) }}">
 									<i class=""></i>
 									Horaires</a>
 							</li>
                             <li class="nav-item">
-								<a class="nav-link" href="{# {{ path('home', {'id': app.user.bakery.id}) }} #}">
+								<a class="nav-link" href="{{ path('home', {'id': app.user.bakery.id}) }} ">
 									<i class=""></i>
 									Commandes</a>
 							</li>
@@ -60,11 +55,14 @@
 									<i class=""></i>
 									Produits</a>
 							</li>
-                            <li class="nav-item">
-								<a class="nav-link" href="{# {{ path('app_logout', {'id': app.user.id}) }} #}">
-									<i class=""></i>
-									Déconnexion</a>
 							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('app_back_bakery_index', {'id': app.user.id}) }}">
+									<i class=""></i>
+									Profil</a>
+							</li>
+				
 						</ul>
 
 					</div>

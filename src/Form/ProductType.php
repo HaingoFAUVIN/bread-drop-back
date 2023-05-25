@@ -58,6 +58,7 @@ class ProductType extends AbstractType
             ])
 
             ->add('category', EntityType::class, [
+                'label' => "Categorie",
                 // l'entité associé à ce champ
                 'class' => Category::class,
                 // la propriété de l'entité à afficher dans le choix

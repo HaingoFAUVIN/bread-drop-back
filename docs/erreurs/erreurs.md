@@ -42,3 +42,6 @@ il y avait un " en trop après class
      * @ORM\JoinColumn(nullable=false)
      */
     private $product
+
+### Argument 1 passed to App\Entity\OrderProduct::setProduct() must be an instance of App\Entity\Product or null, int given, called in /var/www/html/Photon/APO/projet-07-bread-drop-back/src/Controller/Api/OrderController.php on line 167
+

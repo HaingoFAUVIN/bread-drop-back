@@ -164,7 +164,7 @@ class OrderController extends AbstractController
         foreach ($products as $product){
             // dd($product);
             $orderProduct = new OrderProduct();
-            $orderProduct->setProduct($product->getId());
+            $orderProduct->setProduct(['product' => $product]);
             $orderProduct->setOrder($lastOrder->getId());
             $orderProduct->setQuantity($product->getQuantity());
 

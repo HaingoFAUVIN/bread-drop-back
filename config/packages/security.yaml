@@ -38,7 +38,7 @@ security:
             provider: app_user_provider
 
             # la classe qui va servir à nous identifier depuis le formulaire de login
-            custom_authenticator: App\Security\LoginApiAuthenticator
+            # custom_authenticator: App\Security\LoginApiAuthenticator
             
             logout:
                 path: app_logout

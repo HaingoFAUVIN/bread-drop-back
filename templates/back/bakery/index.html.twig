@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste de mes boulangeries{% endblock %}
+{% block title %}Ma boulangerie{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1 class="display-6">Liste de mes boulangeries</h1>
+        <h1 class="display-6">Ma boulangerie</h1>
 
     <table class="table">
     {% if user.bakery.id is not null %}
@@ -15,7 +15,7 @@
                 <th>Numéro de téléphone</th>
                 <th>Photo</th>
                 <th>Distance de livraison max</th>
-                <th>actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>

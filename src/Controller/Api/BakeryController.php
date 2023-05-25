@@ -56,7 +56,7 @@ class BakeryController extends AbstractController
         {   //renvoi du json
             return $this->json(
                 //les données à renvoyer : la transformation en json est automatique
-                "Boulangerie non trouvé",
+                "Boulangerie non trouvée",
                 // 2. code HTTP : 404
                 Response::HTTP_NOT_FOUND
             );

@@ -12,7 +12,6 @@
                         <th>Nom</th>
                         <th>Adresse</th>
                         <th>Numéro de téléphone</th>
-                        <th>Photo</th>
                         <th>Distance de livraison max</th>
                         <th>Action</th>
                     </tr>
@@ -22,7 +21,6 @@
                         <td>{{ user.bakery.name }}</td>
                         <td>{{ user.bakery.adress }}</td>
                         <td>{{ user.bakery.phone }}</td>
-                        <td>{{ user.bakery.picture }}</td>
                         <td>{{ user.bakery.distance }}</td>
                         <td>
                             <a href="{{ path('app_back_bakery_show', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>

@@ -5,35 +5,34 @@
 {% block body %}
     <div class="container">
         <h1 class="display-6">Ma boulangerie</h1>
-
-    <table class="table">
-    {% if user.bakery.id is not null %}
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Numéro de téléphone</th>
-                <th>Photo</th>
-                <th>Distance de livraison max</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ user.bakery.name }}</td>
-                <td>{{ user.bakery.adress }}</td>
-                <td>{{ user.bakery.phone }}</td>
-                <td>{{ user.bakery.picture }}</td>
-                <td>{{ user.bakery.distance }}</td>
-                <td>
-                    <a href="{{ path('app_back_bakery_show', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>
-                    <a href="{{ path('app_back_bakery_edit', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
-                </td>
-            </tr>
-        </tbody>
-        {% else %}
-            <a href="{{ path('app_back_bakery_new', {'id': user.id}) }}">Ajouter une boulangerie</a>
-        {% endif %}
-    </table>
-
+        <table class="table table-stripedb w-auto">
+            {% if user.bakery.id is not null %}
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Photo</th>
+                        <th>Distance de livraison max</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user.bakery.name }}</td>
+                        <td>{{ user.bakery.adress }}</td>
+                        <td>{{ user.bakery.phone }}</td>
+                        <td>{{ user.bakery.picture }}</td>
+                        <td>{{ user.bakery.distance }}</td>
+                        <td>
+                            <a href="{{ path('app_back_bakery_show', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Afficher</button></a>
+                            <a href="{{ path('app_back_bakery_edit', {'id': user.bakery.id}) }}"><button type="button" class="btn btn-secondary">Modifier</button></a>
+                        </td>
+                    </tr>
+                </tbody>
+            {% else %}
+                <a href="{{ path('app_back_bakery_new', {'id': user.id}) }}">Ajouter une boulangerie</a>
+            {% endif %}
+        </table>
+     </div>
 {% endblock %}

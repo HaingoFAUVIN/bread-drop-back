@@ -19,7 +19,7 @@ class OrderProduct
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\ManyToOne(targetEntity=Product::class,cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({"show_order"})
@@ -29,7 +29,7 @@ class OrderProduct
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Order::class)
+     * @ORM\ManyToOne(targetEntity=Order::class,cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      *
      * @Groups({"add_order"})

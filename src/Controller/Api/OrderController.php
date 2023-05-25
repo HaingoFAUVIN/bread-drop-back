@@ -3,16 +3,20 @@
 namespace App\Controller\Api;
 
 use App\Entity\Order;
+use App\Entity\OrderProduct;
 use App\Repository\OrderRepository;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrderProductRepository;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/api/commandes", name="app_api_order_")
@@ -104,6 +108,7 @@ class OrderController extends AbstractController
      * @Route("", name="add", methods={"POST"})
      */
     public function add(
+        EntityManagerInterface $entityManager,
         OrderRepository $orderRepository,
         Request $request, 
         SerializerInterface $serializerInterface, 
@@ -126,6 +131,8 @@ class OrderController extends AbstractController
             // le format du contenu
             'json');
 
+        // dd($order);
+
         // on a un service qui s'occupe de ça : validatorInterface
         $errors = $validatorInterface->validate($order);
         // on regarde si on a des erreurs dans le tableau d'erreurs en sortie de la validation
@@ -143,9 +150,29 @@ class OrderController extends AbstractController
             );
         }
 
-        //Récupérer la dernière commande
-        // $rep->findBy(array(), array('id' => 'desc'),1,0)[0]
         $orderRepository->add($order, true);
+
+        //Récupérer la dernière commande
+        $lastOrder = $orderRepository->findBy(array(), array('id' => 'desc'),1,0)[0];
+        // dd($lastOrder);
+
+        //Récupérer la liste des produits commandés
+        $products = $lastOrder->getOrderProducts();
+        // dd($products);
+
+        //Ajouter les produits dans la table OrderProduct
+        foreach ($products as $product){
+            // dd($product);
+            $orderProduct = new OrderProduct();
+            $orderProduct->setProduct($product->getId());
+            $orderProduct->setOrder($lastOrder->getId());
+            $orderProduct->setQuantity($product->getQuantity());
+
+            $entityManager->persist($orderProduct);
+
+        };
+        
+        $entityManager->flush();
 
         return $this->json(
             //les données à renvoyer : la transformation en json est automatique

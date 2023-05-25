@@ -4,7 +4,16 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="display-6">Ma boulangerie</h1>
+        <h1 class="display-6">Ma boulangerie
+            <div class="d-flex align-items-center">
+                <img
+                    src="{{ bakery.picture }}"
+                    alt=""
+                    style="width:128px;height:128px;"
+                    class="rounded-circle"
+                />
+            </div>
+        </h1>
 
         <table class="table table-stripedb w-auto">
             <tbody>

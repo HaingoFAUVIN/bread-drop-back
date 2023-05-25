@@ -89,6 +89,7 @@ class Bakery
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="bakery")
      * 
      * @Groups({"bakery_list"})
+     * @Groups({"bakery_read"})
      */
     private $products;
 

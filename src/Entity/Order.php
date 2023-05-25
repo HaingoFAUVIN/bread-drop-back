@@ -32,6 +32,7 @@ class Order
      * @Groups({"order_show"})
      * @Groups({"order_list"})
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      * 
      */
     private $date;
@@ -42,6 +43,7 @@ class Order
      * @Groups({"order_show"})
      * @Groups({"order_list"})
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      * 
      */
     private $price;
@@ -49,6 +51,7 @@ class Order
     /**
      * @ORM\Column(type="boolean")
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      */
     private $status;
 
@@ -56,6 +59,7 @@ class Order
      * @ORM\Column(type="boolean")
      * @Groups({"order_list"})
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      */
     private $delivery;
 
@@ -65,6 +69,7 @@ class Order
      * @Groups({"order_show"})
      * @Groups({"order_list"})
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      */
     private $schedule;
 
@@ -83,6 +88,7 @@ class Order
      * 
      * @Groups({"order_list"})
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      */
     private $user;
 
@@ -91,6 +97,7 @@ class Order
      * 
      * @Groups({"order_list"})
      * @Groups({"order_read"})
+     * @Groups({"order_add"})
      */
     private $orderProducts;
 

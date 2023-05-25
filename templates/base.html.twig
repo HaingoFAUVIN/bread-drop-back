@@ -25,10 +25,6 @@
 	</head>
 	<body>
 
-		{# le user est-il connecté ? #}
-		{# {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} #}
-			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			{# connecté #}
 			<!-- Nav -->
 				<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <div class="container-fluid">
 					<a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none header-logo">
@@ -74,11 +70,6 @@
 				</div>
 			</nav>
 						
-							
-		{% else %}
-			{# non connecté #}
-			<a href="{{ path('app_login') }}" class="btn btn-danger me-2">Connexion</a>
-		{% endif %}
 
 		{% block body %}{% endblock %}
 

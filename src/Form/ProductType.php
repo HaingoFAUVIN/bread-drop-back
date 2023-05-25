@@ -65,7 +65,7 @@ class ProductType extends AbstractType
                 // les categorie sont un tableau donc array !
                 'multiple' => false,
                 // on ne veut pas de checkboxes
-                'expanded' => false,
+                'expanded' => true,
             ])
         ;
     }

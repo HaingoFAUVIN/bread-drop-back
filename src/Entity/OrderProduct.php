@@ -23,6 +23,7 @@ class OrderProduct
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({"show_order"})
+     * @Groups({"add_order"})
      * 
      */
     private $product;
@@ -30,14 +31,15 @@ class OrderProduct
     /**
      * @ORM\ManyToOne(targetEntity=Order::class)
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
+     * @Groups({"add_order"})
      */
     private $order;
 
     /**
      * @ORM\Column(type="integer")
      * 
-     * @Groups({"show_order"})
+     * @Groups({"add_order"})
      */
     private $quantity;
 

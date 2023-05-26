@@ -85,6 +85,8 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="products")
      * 
+     * @Groups({"product_show"})
+     * 
      */
     private $bakery;
 

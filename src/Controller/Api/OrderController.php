@@ -3,19 +3,13 @@
 namespace App\Controller\Api;
 
 use App\Entity\Order;
-use App\Entity\OrderProduct;
 use App\Repository\OrderRepository;
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\OrderProductRepository;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -108,7 +102,6 @@ class OrderController extends AbstractController
      * @Route("", name="add", methods={"POST"})
      */
     public function add(
-        EntityManagerInterface $entityManager,
         OrderRepository $orderRepository,
         Request $request, 
         SerializerInterface $serializerInterface, 
@@ -151,28 +144,6 @@ class OrderController extends AbstractController
         }
 
         $orderRepository->add($order, true);
-
-        //Récupérer la dernière commande
-        $lastOrder = $orderRepository->findBy(array(), array('id' => 'desc'),1,0)[0];
-        // dd($lastOrder);
-
-        //Récupérer la liste des produits commandés
-        $products = $lastOrder->getOrderProducts();
-        // dd($products);
-
-        //Ajouter les produits dans la table OrderProduct
-        foreach ($products as $product){
-            // dd($product);
-            $orderProduct = new OrderProduct();
-            $orderProduct->setProduct(['product' => $product]);
-            $orderProduct->setOrder($lastOrder->getId());
-            $orderProduct->setQuantity($product->getQuantity());
-
-            $entityManager->persist($orderProduct);
-
-        };
-        
-        $entityManager->flush();
 
         return $this->json(
             //les données à renvoyer : la transformation en json est automatique

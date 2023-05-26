@@ -99,7 +99,7 @@ class Order
      * @Groups({"order_read"})
      * @Groups({"order_add"})
      */
-    private $orderProducts;
+    private $orderProducts; // Ajout de cascade={"persist"} qui permet de mettre à jour automatiquement le produit commandé avec l'id de l'order et la quatité
 
     public function __construct()
     {

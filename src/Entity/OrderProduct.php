@@ -18,6 +18,7 @@ class OrderProduct
      */
     private $id;
 
+
     /**
      * @ORM\ManyToOne(targetEntity=Product::class,cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
@@ -26,7 +27,7 @@ class OrderProduct
      * @Groups({"add_order"})
      * 
      */
-    private $product;
+    private $product; // Ajout de cascade={"persist"} qui permet d'insérer automatiquement le produit commandé
 
     /**
      * @ORM\ManyToOne(targetEntity=Order::class)

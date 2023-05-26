@@ -43,6 +43,6 @@
                             {% endif %} </p>
         </div>
 
-       <a href="{{ path('home', {'id': bakery.id}) }}"><button type="button" class="btn btn-secondary">Retour à la liste</button></a>
+       <a href="{{ path('home', {'id': app.user.bakery.id}) }} "><button type="button" class="btn btn-secondary">Retour à la liste</button></a>
     </div>
     {% endblock %}

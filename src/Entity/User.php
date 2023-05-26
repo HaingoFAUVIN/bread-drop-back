@@ -56,7 +56,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @Groups({"user_add"})
      * @Groups({"user_read"})
-     * @Groups({"user_edit"})
      */
     private $password;
 

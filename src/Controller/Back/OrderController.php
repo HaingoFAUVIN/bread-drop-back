@@ -40,7 +40,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/commande/{id}", name="app_back_order_show", methods={"GET"})
      */
-    public function show($id, Bakery $bakery, OrderRepository $orderRepository): Response
+    public function show($id, Bakery $bakery = null, OrderRepository $orderRepository): Response
     {
         //On récupère la commande
         $order = $orderRepository->find($id);

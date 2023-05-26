@@ -101,7 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list"})
      * @Groups({"user_read"})
      * @Groups({"user_add"})
-     * @Groups({"user_redit"})
+     * @Groups({"user_edit"})
      */
     private $picture;
 

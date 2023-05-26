@@ -99,7 +99,8 @@ class UserController extends AbstractController
         Request $request,
         UserRepository $userRepository,
         SerializerInterface $serializerInterface,
-        ValidatorInterface $validatorInterface
+        ValidatorInterface $validatorInterface,
+        UserPasswordHasherInterface $passwordHasher
         ): JsonResponse
     {
         //on récupère en BDD l'objet à modifier
@@ -124,6 +125,15 @@ class UserController extends AbstractController
             // il remplit l'objet qu'on lui fournit 
             [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
         // ici la fusion entre l'objet BDD et l'objet JSON a été faites
+
+        $password = $user->getPassword();
+
+        // hachage du password (basé" du security.yaml config de la classe $user)
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $password
+        );
+        $user->setPassword($hashedPassword);
 
         // on valide que les informations sont valides
         // ! Si on veux modifier qu'une seule propriété

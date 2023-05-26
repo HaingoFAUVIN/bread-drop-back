@@ -86,6 +86,7 @@ class Product
      * @ORM\ManyToOne(targetEntity=Bakery::class, inversedBy="products")
      * 
      * @Groups({"order_add"})
+     * @Groups({"bakery_order"})
      */
     private $bakery;
 

@@ -38,14 +38,13 @@
 							<li class="nav-item">
 								<a class="nav-link" href="http://projet-07-bread-drop-front.vercel.app/home">Accueil</a>
 							</li>
-						
+						{% if app.user.bakery.id is not null %}
 							 <li class="nav-item">
 								<a class="nav-link" href="{{ path('app_back_bakery_index', {'id': app.user.id}) }}">
 									<i class=""></i>
 									Profil</a>
 							</li>
 							
-					
 							<li class="nav-item">
 								<a class="nav-link" href="{{ path('app_schedule_index', {'id': app.user.bakery.id}) }}">
 									<i class=""></i>
@@ -61,7 +60,7 @@
 									<i class=""></i>
 									Produits</a>
 							</li>
-							
+							{% endif %}
 							
 							
 						</ul>

@@ -15,27 +15,27 @@
             </div>
         </h1>
 
-        <table class="table table-stripedb w-auto">
-            <tbody>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ bakery.name }}</td>
-                </tr>
-                <tr>
-                    <th>Adresse</th>
-                    <td>{{ bakery.adress }}</td>
-                </tr>
-                <tr>
-                    <th>Numéro de téléphone</th>
-                    <td>{{ bakery.phone }}</td>
-                </tr>
-                <tr>
-                    <th>Distance de livraison</th>
-                    <td>{{ bakery.distance }}</td>
-                </tr>
-                <tr>
-            </tbody>
-        </table>
+            <table class="table table-stripedb w-auto">
+                <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ bakery.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresse</th>
+                        <td>{{ bakery.adress }}</td>
+                    </tr>
+                    <tr>
+                        <th>Numéro de téléphone</th>
+                        <td>{{ bakery.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Distance de livraison</th>
+                        <td>{{ bakery.distance }}</td>
+                    </tr>
+                    <tr>
+                </tbody>
+            </table>
 
         <a href="{{ path('app_back_bakery_index', {'id': bakery.user.id}) }}"><button type="button" class="btn btn-secondary">Retour à la liste</button></a>
 

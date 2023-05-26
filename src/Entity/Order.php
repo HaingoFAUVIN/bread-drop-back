@@ -93,13 +93,13 @@ class Order
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="order", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="order", fetch="EXTRA_LAZY",cascade={"persist"}))
      * 
      * @Groups({"order_list"})
      * @Groups({"order_read"})
      * @Groups({"order_add"})
      */
-    private $orderProducts;
+    private $orderProducts; // Ajout de cascade={"persist"} qui permet de mettre à jour automatiquement le produit commandé avec l'id de l'order et la quatité
 
     public function __construct()
     {

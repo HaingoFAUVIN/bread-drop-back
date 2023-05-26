@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/api/commandes", name="app_api_order_")
@@ -126,6 +124,8 @@ class OrderController extends AbstractController
             // le format du contenu
             'json');
 
+        // dd($order);
+
         // on a un service qui s'occupe de ça : validatorInterface
         $errors = $validatorInterface->validate($order);
         // on regarde si on a des erreurs dans le tableau d'erreurs en sortie de la validation
@@ -143,8 +143,6 @@ class OrderController extends AbstractController
             );
         }
 
-        //Récupérer la dernière commande
-        // $rep->findBy(array(), array('id' => 'desc'),1,0)[0]
         $orderRepository->add($order, true);
 
         return $this->json(

@@ -14,9 +14,6 @@ use App\Entity\Order;
 use App\Entity\OrderProduct;
 use App\Entity\Product;
 use App\Entity\Schedule;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\Unique;
-use Doctrine\DBAL\Connection;
 
 class AppFixtures extends Fixture
 {

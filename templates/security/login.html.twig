@@ -4,7 +4,26 @@
 {% endblock %}
 
 {% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="http://projet-07-bread-drop-front.vercel.app/home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none header-logo">
+                <img src="{{ asset('/images/bread-drop.png') }}" height="80" alt="Logo BreadDrop">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://projet-07-bread-drop-front.vercel.app/home">Accueil</a>
+                    </li>
+            </div>
+        </div>
+    </nav>
+
 	<div class="container">
+
 		<form method="post">
 			{% if error %}
 				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,23 +34,6 @@
 			            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconexion</a>
 			        </div>
 			    {% endif %} #}
-
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-				<div class="container-fluid">
-					<a href="http://projet-07-bread-drop-front.vercel.app/home" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none header-logo">
-						<img src="{{ asset('/images/bread-drop.png') }}" height="80" alt="Logo BreadDrop">
-					</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link" href="http://projet-07-bread-drop-front.vercel.app/home">Accueil</a>
-							</li>
-					</div>
-				</div>
-			</nav>
 
 				<h1 class="h3 mb-3 font-weight-normal">Connexion à l'espace admin</h1>
 				<label for="inputEmail">Email</label>
@@ -53,7 +55,7 @@
 				        </div>
 				    #}
 
-				<button class="btn btn-lg btn-primary" type="submit">
+				<button class="btn btn-lg btn-secondary" type="submit">
 					Connexion
 				</button>
 			</form>

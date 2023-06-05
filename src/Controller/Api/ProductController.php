@@ -36,7 +36,8 @@ class ProductController extends AbstractController
                     //je veut les propriété de ses groupes
                     "product_list", 
                     "categorie_show", 
-                    "bakery_show_id"
+                    "bakery_show_id",
+                    "product_bakery"
                 ]
             ] 
         );

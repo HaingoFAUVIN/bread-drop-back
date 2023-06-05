@@ -87,6 +87,7 @@ class Product
      * 
      * @Groups({"order_add"})
      * @Groups({"bakery_order"})
+     * @Groups({"product_list"})
      */
     private $bakery;
 

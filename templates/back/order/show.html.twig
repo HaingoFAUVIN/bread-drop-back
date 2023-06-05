@@ -31,7 +31,7 @@
 
             <p>Date de livraison : {{ order.schedule|format_datetime('short', 'short', locale='fr') }}</p>
             <p>Prix : {{ order.price }} €</p>
-            <p>Status : {% if order.status == '1' %}
+            <p>Statut : {% if order.status == '1' %}
                             En cours
                         {% else %}
                             Fini
